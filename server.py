@@ -289,9 +289,9 @@ class StepsHandler(SimpleHTTPRequestHandler):
             self.path = '/quiz.html'
             return super().do_GET()
 
-        # Optional route /classic -> original marketscene replica index.html
+        # Optional route /classic -> original marketscene replica classic.html
         if path in ['/classic', '/classic/']:
-            self.path = '/index.html'
+            self.path = '/classic.html'
             return super().do_GET()
 
         # API: Lookup Card by Phone -> GET /api/card?phone=010...

@@ -10,6 +10,7 @@
     <title>Find Your Perfect Drink | STEPS Specialty Coffee Bar</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/cloud-storage.js"></script>
     <style>
         /* ========================================================
            STEPS SPECIALTY COFFEE BAR - PURE WHITE LUXURY FUNNEL
@@ -1075,7 +1076,7 @@
     <div class="quiz-shell">
         <!-- Top Navigation -->
         <header class="quiz-header">
-            <a href="/" class="quiz-logo-wrap" title="STEPS Specialty Coffee Bar">
+            <a href="index.html" class="quiz-logo-wrap" title="STEPS Specialty Coffee Bar">
                 <img class="quiz-logo" src="assets/images/steps-logo-brown.webp" alt="STEPS Specialty Coffee Bar">
             </a>
 
@@ -1097,7 +1098,7 @@
                 </div>
             </div>
 
-            <a href="/card" class="btn-header-pass">
+            <a href="card.html" class="btn-header-pass">
                 <span>My Pass</span> 💳
             </a>
         </header>
@@ -1148,7 +1149,7 @@
                                 Start the 3-Question Quiz <span>→</span>
                             </button>
                             <p class="landing-member-link">
-                                Already registered? <a href="/card">Open Your Digital Pass →</a>
+                                Already registered? <a href="card.html">Open Your Digital Pass →</a>
                             </p>
                         </div>
                     </div>
@@ -1673,7 +1674,7 @@
 
         const showAlreadyRegisteredModal = (cleanPhone) => {
             if (!modal) {
-                window.location.href = `/card?phone=${encodeURIComponent(cleanPhone)}`;
+                window.location.href = `card.html?phone=${encodeURIComponent(cleanPhone)}`;
                 return;
             }
 
@@ -1689,7 +1690,7 @@
             btnModalOpenNow.onclick = () => {
                 clearInterval(countdownInterval);
                 clearTimeout(modalTimer);
-                window.location.href = `/card?phone=${encodeURIComponent(cleanPhone)}`;
+                window.location.href = `card.html?phone=${encodeURIComponent(cleanPhone)}`;
             };
 
             countdownInterval = setInterval(() => {
@@ -1702,7 +1703,7 @@
             }, 1000);
 
             modalTimer = setTimeout(() => {
-                window.location.href = `/card?phone=${encodeURIComponent(cleanPhone)}`;
+                window.location.href = `card.html?phone=${encodeURIComponent(cleanPhone)}`;
             }, 3000);
         };
 
@@ -1764,9 +1765,9 @@
                     return;
                 }
 
-                // New card created -> direct immediately to /card
+                // New card created -> direct immediately to card.html
                 submitBtn.textContent = 'Card Unlocked! Opening Pass...';
-                window.location.href = `/card?phone=${encodeURIComponent(cleanPhone)}`;
+                window.location.href = `card.html?phone=${encodeURIComponent(cleanPhone)}`;
 
             } catch (err) {
                 errorMsg.textContent = 'Connection error. Please try again.';

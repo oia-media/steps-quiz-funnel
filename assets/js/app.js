@@ -279,7 +279,7 @@
             case 'reset':
             case 'done':
                 if (memberData && memberData.mobile) {
-                    window.location.href = `/card?phone=${encodeURIComponent(memberData.mobile)}`;
+                    window.location.href = `card.html?phone=${encodeURIComponent(memberData.mobile)}`;
                 } else {
                     resetQuiz();
                 }
@@ -429,7 +429,7 @@
             if (data.alreadyRegistered) {
                 // Show pop-up modal with highlighted title and 3-second direct
                 const modal = document.querySelector('#already-registered-modal');
-                const targetUrl = `/card?phone=${encodeURIComponent(cleanedMobile)}`;
+                const targetUrl = `card.html?phone=${encodeURIComponent(cleanedMobile)}`;
                 if (modal) {
                     modal.hidden = false;
                     const countdownEl = document.querySelector('#modal-countdown');
@@ -479,7 +479,7 @@
             // Normal new registration -> Direct straight to dedicated /card pass!
             submitButton.innerHTML = 'Pass Ready! Opening...';
             setTimeout(() => {
-                window.location.href = `/card?phone=${encodeURIComponent(cleanedMobile)}`;
+                window.location.href = `card.html?phone=${encodeURIComponent(cleanedMobile)}`;
             }, 600);
             return;
         } catch (error) {
@@ -572,7 +572,7 @@
         if (barcodeDisplay) barcodeDisplay.textContent = member.passId;
 
         if (openCardBtn && member.mobile) {
-            openCardBtn.href = `/card?phone=${encodeURIComponent(member.mobile)}`;
+            openCardBtn.href = `card.html?phone=${encodeURIComponent(member.mobile)}`;
             try {
                 localStorage.setItem('steps_saved_phone', member.mobile);
             } catch (_) {}

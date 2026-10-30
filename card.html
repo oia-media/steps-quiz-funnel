@@ -10,6 +10,7 @@
     <title>My Digital Loyalty Card | STEPS Specialty Coffee Bar</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/cloud-storage.js"></script>
     <style>
         /* ========================================================
            STEPS SPECIALTY COFFEE BAR - PURE WHITE VIP LOYALTY CARD
@@ -560,7 +561,7 @@
 
     <!-- Top Header -->
     <header class="card-page-header">
-        <a href="/" title="Back to STEPS Coffee Bar">
+        <a href="index.html" title="Back to STEPS Coffee Bar">
             <img class="card-page-logo" src="assets/images/steps-logo-brown.webp" alt="STEPS Coffee">
         </a>
         <span class="card-nav-link" style="color: #dfba73; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">
@@ -592,7 +593,7 @@
             </button>
         </form>
 
-        <a href="/" class="lookup-quiz-link">
+        <a href="index.html" class="lookup-quiz-link">
             Don't have a card yet? <span>Take the 3-question quiz</span>
         </a>
     </div>
@@ -1115,7 +1116,9 @@
 
         // Share Pass handler
         document.querySelector('#btn-share-pass').addEventListener('click', async () => {
-            const url = `${window.location.origin}/card?phone=${activePhone}`;
+            const shareUrl = new URL(window.location.href);
+            shareUrl.searchParams.set('phone', activePhone);
+            const url = shareUrl.toString();
             if (navigator.share) {
                 try {
                     await navigator.share({

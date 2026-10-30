@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#ffffff">
     <title>Barista POS & Loyalty Admin | STEPS Coffee</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <script src="assets/js/cloud-storage.js"></script>
     <style>
         :root {
             --bg: #ffffff;
@@ -2884,8 +2885,8 @@
             </div>
         </div>
         <div class="admin-top-actions">
-            <a href="/card" target="_blank" class="nav-btn">💳 Customer Pass View</a>
-            <a href="/quiz" target="_blank" class="nav-btn">☕ Open Quiz Funnel</a>
+            <a href="card.html" target="_blank" class="nav-btn">💳 Customer Pass View</a>
+            <a href="index.html" target="_blank" class="nav-btn">☕ Open Quiz Funnel</a>
         </div>
     </header>
 
@@ -3789,7 +3790,7 @@
                 membersList.innerHTML = `
                     <div class="empty-state">
                         <p style="font-size: 1.2rem; color: #fff; margin-bottom: .4rem;">No matching members found.</p>
-                        <p>Adjust your search, date range, or status filter, or take the quiz on <a href="/quiz" target="_blank" style="color: var(--gold);">/quiz</a>.</p>
+                        <p>Adjust your search, date range, or status filter, or take the quiz on <a href="index.html" target="_blank" style="color: var(--gold);">/quiz</a>.</p>
                     </div>
                 `;
                 return;
@@ -4074,7 +4075,7 @@
                                 ⏱️ Activity Timeline ▾
                             </button>
                         </div>
-                        <button class="btn-view-card" onclick="window.open('/card?phone=${encodeURIComponent(m.phone || '')}', '_blank')">
+                        <button class="btn-view-card" onclick="window.open('card.html?phone=${encodeURIComponent(m.phone || '')}', '_blank')">
                             Open Customer Live Pass Screen →
                         </button>
                     </div>
