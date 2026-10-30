@@ -1,0 +1,4951 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    <title>Barista POS & Loyalty Admin | STEPS Coffee</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --surface: #ffffff;
+            --surface-hover: #faf7f2;
+            --surface-card: #ffffff;
+            --border: #ece4da;
+            --gold: #b38838;
+            --gold-light: #dfba73;
+            --gold-gradient: linear-gradient(135deg, #dfba73 0%, #c5a059 50%, #9e7a36 100%);
+            --text: #1e140f;
+            --text-muted: #6f6259;
+            --green: #2b7a4b;
+            --red: #c93b2b;
+            --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --serif: Georgia, "Times New Roman", serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .admin-header {
+            max-width: 1200px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .admin-brand img {
+            height: 36px;
+            width: auto;
+            max-width: 120px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .admin-brand h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            font-family: var(--serif);
+        }
+
+        .admin-brand p {
+            font-size: .8rem;
+            color: var(--text-muted);
+        }
+
+        .admin-top-actions {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .5rem 1rem;
+            border-radius: 8px;
+            border: 1.5px solid var(--border);
+            background: #faf7f2;
+            color: var(--text);
+            text-decoration: none;
+            font-size: .85rem;
+            font-weight: 600;
+            transition: all 180ms ease;
+        }
+
+        .nav-btn:hover {
+            background: #f1ebe3;
+            border-color: var(--gold);
+        }
+
+        /* Mode Tab Navigation */
+        .admin-tabs-nav {
+            max-width: 1200px;
+            margin: 0 auto 1.75rem;
+            display: flex;
+            gap: .75rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: .85rem;
+        }
+
+        .tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .65rem;
+            padding: .75rem 1.4rem;
+            border-radius: 12px;
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            color: var(--text-muted);
+            font-size: .95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 200ms ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--text);
+            border-color: var(--gold);
+            background: #faf7f2;
+        }
+
+        .tab-btn.is-active {
+            background: #241711;
+            border-color: #241711;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(36, 23, 17, 0.15);
+        }
+
+        .tab-pill-badge {
+            padding: .15rem .55rem;
+            border-radius: 99px;
+            font-size: .75rem;
+            font-weight: 800;
+            background: rgba(0, 0, 0, 0.06);
+            color: var(--text);
+        }
+
+        .tab-btn.is-active .tab-pill-badge {
+            background: var(--gold);
+            color: #ffffff;
+        }
+
+        /* Stats Bar */
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto 1.75rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem 1.4rem;
+        }
+
+        .stat-card .label {
+            font-size: .78rem;
+            font-weight: 600;
+            letter-spacing: .08em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-family: var(--serif);
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-top: .35rem;
+        }
+
+        /* Search Section */
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 46px;
+            padding: .65rem 2.85rem .65rem 2.85rem;
+            background: #faf8f5;
+            border: 1px solid #ebe4dc;
+            border-radius: 11px;
+            color: var(--text);
+            font-size: .95rem;
+            font-family: inherit;
+            transition: all 200ms ease;
+            box-sizing: border-box;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            background: #ffffff;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(223, 186, 115, 0.2);
+        }
+
+        .search-box input::placeholder {
+            color: #9e8e82;
+            font-size: .92rem;
+        }
+
+        .search-icon-wrap {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8c7b70;
+            pointer-events: none;
+        }
+
+        .search-clear-btn {
+            position: absolute;
+            top: 50%;
+            right: .85rem;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: none;
+            background: #ece4da;
+            color: #6f6259;
+            font-size: .75rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: all 150ms ease;
+        }
+
+        .search-clear-btn:hover {
+            background: var(--espresso);
+            color: #ffffff;
+        }
+
+        /* Members List */
+        .members-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .member-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: grid;
+            gap: 1.25rem;
+            transition: border-color 200ms ease;
+        }
+
+        .member-card:hover {
+            border-color: rgba(223, 186, 115, 0.4);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .member-header-left {
+            display: flex;
+            align-items: flex-start;
+            gap: .75rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .customer-chk-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: .35rem;
+            flex-shrink: 0;
+        }
+
+        .customer-chk {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--gold);
+        }
+
+        .member-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface-hover);
+            border: 1px solid var(--border);
+            display: grid;
+            place-items: center;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+
+        .member-name-block {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .member-name-row {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            flex-wrap: wrap;
+        }
+
+        .member-name-block h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .member-name-row {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            flex-wrap: wrap;
+        }
+
+        .member-name-block h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+            letter-spacing: -.01em;
+        }
+
+        .badge-status-pill {
+            font-size: .75rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            padding: .2rem .55rem;
+            border-radius: 99px;
+            letter-spacing: .02em;
+        }
+
+        .badge-status-pill.active {
+            background: #eef9f2;
+            color: #1e7e34;
+            border: 1px solid #c3e6cb;
+        }
+
+        .badge-status-pill.pending {
+            background: #fff8eb;
+            color: #b38838;
+            border: 1px solid #f2dfba;
+        }
+
+        .badge-status-pill.banned {
+            background: #fff2f0;
+            color: #c53020;
+            border: 1px solid #ffccc7;
+        }
+
+        .member-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: .45rem;
+            margin-top: .45rem;
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            font-size: .76rem;
+            padding: .22rem .55rem;
+            border-radius: 6px;
+            background: #faf7f2;
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .meta-pill.phone {
+            color: #93712b;
+            font-weight: 700;
+            background: #fdfaf3;
+            border-color: rgba(197, 160, 89, 0.4);
+        }
+
+        .meta-pill.pass code {
+            font-family: monospace;
+            font-weight: 700;
+            color: var(--text);
+            background: #ffffff;
+            padding: .05rem .35rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .meta-pill.quiz-date {
+            color: var(--text-muted);
+        }
+
+        .meta-pill.active-date {
+            background: #eef9f2;
+            border-color: #c3e6cb;
+            color: #1e7e34;
+            font-weight: 600;
+        }
+
+        .member-header-right {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            flex-shrink: 0;
+        }
+
+        .badge-drink {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .3rem .75rem;
+            border-radius: 99px;
+            background: rgba(223, 186, 115, 0.12);
+            border: 1px solid rgba(223, 186, 115, 0.3);
+            font-size: .82rem;
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+
+        /* Stamps Management Matrix */
+        .stamps-barista-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: .85rem;
+        }
+
+        .stamp-control-box {
+            background: #faf7f2;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            transition: all 180ms ease;
+        }
+
+        .stamp-control-box.is-available {
+            border-color: var(--gold);
+            background: #fffdfa;
+        }
+
+        .stamp-control-box.is-redeemed {
+            opacity: .65;
+            background: #f5f0e8;
+        }
+
+        .stamp-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .5rem;
+        }
+
+        .stamp-title-text {
+            font-size: .86rem;
+            font-weight: 700;
+            color: var(--text);
+            font-family: var(--serif);
+        }
+
+        .stamp-status-badge {
+            font-size: .64rem;
+            font-weight: 800;
+            padding: .15rem .45rem;
+            border-radius: 99px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+
+        .badge-available {
+            background: rgba(223, 186, 115, 0.2);
+            color: var(--gold);
+            border: 1px solid rgba(223, 186, 115, 0.4);
+        }
+
+        .badge-locked {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+
+        .badge-redeemed {
+            background: rgba(224, 91, 73, 0.2);
+            color: #ff7e67;
+            border: 1px solid rgba(224, 91, 73, 0.35);
+        }
+
+        .stamp-desc-text {
+            font-size: .74rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* Action Buttons */
+        .stamp-actions-row {
+            display: flex;
+            gap: .4rem;
+            margin-top: auto;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: .45rem .5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: .75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 150ms ease, transform 150ms ease;
+        }
+
+        .btn-action:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+        .btn-redeem {
+            background: var(--red);
+            color: #fff;
+        }
+
+        .btn-unlock {
+            background: var(--gold);
+            color: #170e0a;
+        }
+
+        .btn-reset {
+            background: #f1eae0;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        /* Member Footer Quick Bar */
+        .member-footer-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: .8rem;
+            padding-top: .5rem;
+        }
+
+        .btn-quick-stamp {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .6rem 1.1rem;
+            border-radius: 10px;
+            background: var(--gold);
+            color: #170e0a;
+            font-size: .85rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-view-card {
+            font-size: .84rem;
+            color: var(--gold);
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 150ms ease;
+        }
+
+        .btn-view-card:hover {
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        /* Filters Panel — High-End Boutique Analytics Toolbar */
+        .filters-panel {
+            max-width: 1200px;
+            margin: 0 auto 1.5rem;
+            background: #ffffff;
+            border: 1px solid #ebe5dc;
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
+            box-shadow: 0 4px 20px rgba(36, 23, 17, 0.04);
+            transition: box-shadow 200ms ease;
+        }
+
+        .filter-controls-row {
+            display: grid;
+            grid-template-columns: minmax(170px, 1fr) minmax(180px, 1fr) minmax(260px, 1.4fr) auto;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+
+        .filter-field label {
+            font-size: .72rem;
+            font-weight: 700;
+            color: #8c7b70;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            min-height: 1rem;
+        }
+
+        .filter-field label .label-icon {
+            font-size: .78rem;
+            opacity: 0.9;
+        }
+
+        .filter-reset-spacer {
+            visibility: hidden;
+            user-select: none;
+        }
+
+        .filter-select {
+            height: 42px;
+            padding: 0 2.2rem 0 .95rem;
+            border-radius: 10px;
+            border: 1px solid #e7dfd4;
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238c7b70' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right .85rem center;
+            appearance: none;
+            -webkit-appearance: none;
+            color: var(--text);
+            font-size: .88rem;
+            font-weight: 500;
+            font-family: inherit;
+            outline: none;
+            transition: all 180ms ease;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .filter-select:hover {
+            border-color: #d8cdbe;
+            background-color: #faf8f5;
+        }
+
+        .filter-select:focus {
+            border-color: var(--gold);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.16);
+        }
+
+        .btn-clear-filters {
+            height: 42px;
+            padding: 0 1.15rem;
+            border-radius: 10px;
+            border: 1px solid #e7dfd4;
+            background: #faf8f5;
+            color: #8c7b70;
+            font-size: .84rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 180ms ease;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .btn-clear-filters:hover {
+            color: var(--text);
+            background: #f1ece4;
+            border-color: #c5a059;
+            transform: translateY(-1px);
+        }
+
+        .btn-clear-filters.has-active-filters {
+            background: #fdf6ea;
+            border-color: #dfba73;
+            color: #8c6a2e;
+            font-weight: 700;
+        }
+
+        .filter-summary-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding-top: .85rem;
+            border-top: 1px solid #f0eae1;
+        }
+
+        .active-chips-wrap {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            flex-wrap: wrap;
+        }
+
+        .summary-bar-label {
+            font-size: .74rem;
+            font-weight: 700;
+            color: #8c7b70;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        .filter-chip-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .25rem .65rem;
+            border-radius: 99px;
+            font-size: .78rem;
+            font-weight: 500;
+            background: #f8f5f0;
+            color: #5c4e44;
+            border: 1px solid #ebe4db;
+            transition: all 150ms ease;
+        }
+
+        .filter-chip-pill.is-active {
+            background: #fdf6ea;
+            border-color: #dfba73;
+            color: #8c6a2e;
+            font-weight: 600;
+        }
+
+        .filter-count-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            padding: .3rem .8rem;
+            background: #f8f6f2;
+            border: 1px solid #ebe4dc;
+            border-radius: 99px;
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-left: auto;
+        }
+
+        .count-pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #2e7d32;
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+
+        /* ========================================================
+           META ADS / OIA STYLE PERFORMANCE CALENDAR PICKER
+           ======================================================== */
+        .perf-calendar-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .perf-calendar-trigger {
+            width: 100%;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .65rem;
+            padding: 0 .85rem;
+            background: #ffffff;
+            border: 1px solid #e7dfd4;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: .88rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 180ms ease;
+            text-align: left;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            user-select: none;
+            box-sizing: border-box;
+        }
+
+        .perf-calendar-trigger:hover, .perf-calendar-trigger.is-open {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(223, 186, 115, 0.2);
+        }
+
+        .perf-cal-trigger-left {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .perf-cal-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .perf-cal-label {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
+        }
+
+        .perf-cal-trigger-right {
+            display: flex;
+            align-items: center;
+            gap: .45rem;
+            flex-shrink: 0;
+        }
+
+        .perf-cal-chevron {
+            font-size: .75rem;
+            color: var(--text-muted);
+            transition: transform 200ms ease;
+            flex-shrink: 0;
+        }
+
+        .perf-calendar-trigger.is-open .perf-cal-chevron {
+            transform: rotate(180deg);
+        }
+
+        .perf-cal-reset-btn {
+            border: 1px solid rgba(201, 59, 43, 0.25);
+            background: #fff2f0;
+            color: var(--red);
+            padding: .15rem .55rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: .25rem;
+            font-size: .72rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 150ms ease;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .perf-cal-reset-btn:hover {
+            background: var(--red);
+            color: #ffffff;
+            border-color: var(--red);
+        }
+
+        /* Floating Solid Popover Panel */
+        .perf-calendar-popover {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            z-index: 1000;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: 0 20px 48px rgba(36, 23, 17, 0.16), 0 4px 12px rgba(0,0,0,0.06);
+            display: flex;
+            overflow: hidden;
+            animation: popoverFadeIn 180ms ease-out;
+        }
+
+        @keyframes popoverFadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Sidebar Presets */
+        .perf-cal-sidebar {
+            width: 160px;
+            flex-shrink: 0;
+            background: #faf7f2;
+            border-right: 1px solid var(--border);
+            padding: .85rem;
+            display: flex;
+            flex-direction: column;
+            gap: .3rem;
+        }
+
+        .perf-cal-sidebar-title {
+            font-size: .72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--text-muted);
+            margin-bottom: .4rem;
+            padding: 0 .4rem;
+        }
+
+        .perf-preset-btn {
+            text-align: left;
+            padding: .5rem .75rem;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background: transparent;
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 140ms ease;
+        }
+
+        .perf-preset-btn:hover {
+            background: #f1eae0;
+            color: #170e0a;
+        }
+
+        .perf-preset-btn.is-active {
+            background: #241711;
+            color: #ffffff;
+            font-weight: 600;
+            border-color: #241711;
+        }
+
+        /* Calendar Main Area */
+        .perf-cal-main {
+            padding: 1.1rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: #ffffff;
+        }
+
+        .perf-cal-months-nav {
+            display: flex;
+            align-items: flex-start;
+            gap: .75rem;
+            position: relative;
+        }
+
+        .perf-nav-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            color: var(--text);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 140ms ease;
+            margin-top: .3rem;
+            flex-shrink: 0;
+        }
+
+        .perf-nav-btn:hover {
+            border-color: var(--gold);
+            background: #faf7f2;
+        }
+
+        .perf-months-container {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .perf-month-block {
+            width: 228px;
+        }
+
+        .perf-month-title {
+            text-align: center;
+            font-family: var(--serif);
+            font-size: .95rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: .85rem;
+        }
+
+        .perf-weekdays-row {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-size: .72rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: .4rem;
+        }
+
+        .perf-days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            row-gap: 2px;
+        }
+
+        .perf-day-cell {
+            aspect-ratio: 1;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--text);
+            border-radius: 0;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 100ms ease;
+            position: relative;
+        }
+
+        .perf-day-cell:hover:not(.disabled) {
+            background: #f5eedf;
+        }
+
+        .perf-day-cell.other-month {
+            visibility: hidden;
+        }
+
+        .perf-day-cell.disabled {
+            opacity: .28;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .perf-day-cell.today-marker::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .perf-day-cell.range-start {
+            background: var(--gold) !important;
+            color: #ffffff !important;
+            font-weight: 700;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .perf-day-cell.range-end {
+            background: var(--gold) !important;
+            color: #ffffff !important;
+            font-weight: 700;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .perf-day-cell.range-single {
+            background: var(--gold) !important;
+            color: #ffffff !important;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        .perf-day-cell.range-mid {
+            background: rgba(223, 186, 115, 0.22);
+            color: #241711;
+        }
+
+        /* Footer Summary & Controls */
+        .perf-cal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-top: .85rem;
+            border-top: 1px solid var(--border);
+            margin-top: .25rem;
+        }
+
+        .perf-cal-summary {
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .perf-cal-actions {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .perf-btn-cancel {
+            padding: .45rem .85rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .perf-btn-cancel:hover {
+            background: #faf7f2;
+            color: var(--text);
+        }
+
+        .perf-btn-apply {
+            padding: .45rem 1.15rem;
+            border-radius: 8px;
+            border: none;
+            background: #241711;
+            color: #ffffff;
+            font-size: .78rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(36, 23, 17, 0.2);
+            transition: background 150ms ease;
+        }
+
+        .perf-btn-apply:hover {
+            background: var(--gold);
+            color: #170e0a;
+        }
+
+        /* ========================================================
+           TIMESTAMPS & ACTIVITY TIMELINE DRAWER STYLES
+           ======================================================== */
+        .stamp-time-tags-group {
+            display: flex;
+            flex-direction: column;
+            gap: .3rem;
+            margin: .3rem 0 .35rem;
+            width: 100%;
+        }
+
+        .stamp-time-tag {
+            font-size: .72rem;
+            font-weight: 600;
+            padding: .25rem .5rem;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            width: 100%;
+            box-sizing: border-box;
+            line-height: 1.35;
+        }
+
+        .stamp-time-tag.redeemed {
+            background: rgba(224, 91, 73, 0.12);
+            color: var(--red);
+            border: 1px solid rgba(224, 91, 73, 0.3);
+        }
+
+        .stamp-time-tag.available,
+        .stamp-time-tag.unlocked {
+            background: rgba(223, 186, 115, 0.18);
+            color: #93712b;
+            border: 1px solid rgba(223, 186, 115, 0.4);
+        }
+
+        .stamp-time-tag.locked {
+            background: #ede6dd;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .btn-toggle-timeline {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            background: #faf7f2;
+            border: 1px solid var(--border);
+            padding: .45rem .85rem;
+            border-radius: 8px;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+
+        .btn-toggle-timeline:hover {
+            background: #f1eae0;
+            border-color: var(--gold);
+        }
+
+        .member-timeline-drawer {
+            display: none;
+            background: #faf7f2;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: .75rem;
+            grid-column: 1 / -1;
+            animation: fadeIn 200ms ease;
+        }
+
+        .member-timeline-drawer.is-open {
+            display: block;
+        }
+
+        .timeline-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: .85rem;
+            padding-bottom: .5rem;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .timeline-track {
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-node {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: .2rem;
+        }
+
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -1.2rem;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 0 1px var(--border);
+        }
+
+        .timeline-node.done::before {
+            background: var(--green);
+        }
+
+        .timeline-node.pending::before {
+            background: var(--border);
+        }
+
+        .timeline-title {
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .timeline-time {
+            font-size: .74rem;
+            color: var(--text-muted);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .perf-calendar-popover {
+                flex-direction: column;
+                width: 95vw;
+                left: 50%;
+                transform: translateX(-50%);
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+            .perf-cal-sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: .3rem;
+            }
+            .perf-cal-sidebar-title {
+                grid-column: 1 / -1;
+            }
+            .perf-months-container {
+                flex-direction: column;
+            }
+        }
+
+        /* Member Card Enhancements: Banned & Date */
+        .member-card.is-banned {
+            background: #fffafa;
+            border-color: rgba(224, 91, 73, 0.4);
+            box-shadow: 0 4px 14px rgba(224, 91, 73, 0.08);
+        }
+
+        .member-created-date {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            font-size: .78rem;
+            color: var(--text-muted);
+            background: #faf7f2;
+            padding: .25rem .55rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-weight: 500;
+        }
+
+        .badge-banned-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .3rem .65rem;
+            border-radius: 99px;
+            background: rgba(224, 91, 73, 0.15);
+            color: var(--red);
+            border: 1px solid rgba(224, 91, 73, 0.4);
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        /* Customer Management Action Dropdown Styles */
+        .customer-actions-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn-customer-dropdown-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .4rem .85rem;
+            background: #faf7f2;
+            border: 1.5px solid var(--border);
+            border-radius: 99px;
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 180ms ease;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+
+        .btn-customer-dropdown-trigger:hover,
+        .btn-customer-dropdown-trigger.is-active {
+            border-color: var(--gold);
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(197, 160, 89, 0.2);
+            color: var(--gold);
+        }
+
+        .dropdown-chevron {
+            font-size: .75rem;
+            transition: transform 180ms ease;
+        }
+
+        .btn-customer-dropdown-trigger.is-active .dropdown-chevron {
+            transform: rotate(180deg);
+        }
+
+        .customer-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            min-width: 235px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(36, 23, 17, 0.16), 0 2px 6px rgba(0, 0, 0, 0.04);
+            padding: .35rem;
+            z-index: 150;
+            animation: dropdownFadeIn 140ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .customer-dropdown-menu.is-open {
+            display: block;
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            padding: .5rem .7rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: background 120ms ease, color 120ms ease;
+            box-sizing: border-box;
+            color: var(--text);
+        }
+
+        .dropdown-item:hover {
+            background: #faf7f2;
+        }
+
+        .dropdown-item-icon {
+            font-size: .95rem;
+            flex-shrink: 0;
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-item-content {
+            display: flex;
+            flex-direction: column;
+            gap: .1rem;
+            min-width: 0;
+        }
+
+        .dropdown-item-title {
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.25;
+        }
+
+        .dropdown-item-desc {
+            font-size: .67rem;
+            color: var(--text-muted);
+            line-height: 1.2;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--border);
+            margin: .3rem 0;
+        }
+
+        .dropdown-item.item-ban:hover {
+            background: #fff2f0;
+        }
+        .dropdown-item.item-ban:hover .dropdown-item-title {
+            color: #cf1322;
+        }
+
+        .dropdown-item.item-unban:hover {
+            background: #f6ffed;
+        }
+        .dropdown-item.item-unban:hover .dropdown-item-title {
+            color: #389e0d;
+        }
+
+        .dropdown-item.item-delete:hover {
+            background: #fff1f0;
+        }
+        .dropdown-item.item-delete:hover .dropdown-item-title {
+            color: var(--red);
+        }
+
+        /* Legacy customer actions fallback */
+        .member-admin-actions {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-customer-action {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .4rem .75rem;
+            border-radius: 8px;
+            font-size: .76rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 150ms ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-customer-action.btn-ban {
+            background: #fff2f0;
+            color: #c53020;
+            border-color: #ffccc7;
+        }
+        .btn-customer-action.btn-ban:hover {
+            background: #c53020;
+            color: #ffffff;
+            border-color: #c53020;
+        }
+
+        .btn-customer-action.btn-unban {
+            background: #f6ffed;
+            color: #389e0d;
+            border-color: #b7eb8f;
+        }
+        .btn-customer-action.btn-unban:hover {
+            background: #389e0d;
+            color: #ffffff;
+            border-color: #389e0d;
+        }
+
+        .btn-customer-action.btn-delete {
+            background: #fafafa;
+            color: #595959;
+            border-color: #d9d9d9;
+        }
+        .btn-customer-action.btn-delete:hover {
+            background: #241711;
+            color: #ffffff;
+            border-color: #241711;
+        }
+
+        .btn-customer-action.btn-update-offers {
+            background: #f0f7ff;
+            color: #0958d9;
+            border-color: #91caff;
+        }
+        .btn-customer-action.btn-update-offers:hover {
+            background: #0958d9;
+            color: #ffffff;
+            border-color: #0958d9;
+        }
+
+        .btn-customer-action.btn-history {
+            background: #fffbe6;
+            color: #ad6800;
+            border-color: #ffe58f;
+        }
+        .btn-customer-action.btn-history:hover {
+            background: #ad6800;
+            color: #ffffff;
+            border-color: #ad6800;
+        }
+
+        .badge-history-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            padding: .2rem .55rem;
+            border-radius: 999px;
+            background: #fffbe6;
+            color: #ad6800;
+            border: 1px solid #ffe58f;
+            font-size: .72rem;
+            font-weight: 700;
+        }
+
+        .customer-chk-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: .3rem;
+        }
+        .customer-chk {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--gold);
+        }
+
+        /* Floating Bulk Actions Bar */
+        .bulk-actions-floating-bar {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #241711;
+            color: #ffffff;
+            padding: .75rem 1.4rem;
+            border-radius: 999px;
+            box-shadow: 0 14px 35px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            animation: slideUpFloat 200ms ease forwards;
+        }
+        @keyframes slideUpFloat {
+            from { transform: translate(-50%, 20px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+        .bulk-count-badge {
+            background: var(--gold);
+            color: #241711;
+            padding: .2rem .6rem;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: .8rem;
+        }
+        .btn-bulk-upgrade {
+            background: var(--gold);
+            color: #241711;
+            border: none;
+            padding: .5rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: .84rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            transition: all 150ms ease;
+        }
+        .btn-bulk-upgrade:hover {
+            background: #ffffff;
+        }
+        .btn-bulk-cancel {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.8);
+            padding: .5rem .85rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: .8rem;
+            cursor: pointer;
+        }
+        .btn-bulk-cancel:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        /* History Modal Styling */
+        .history-modal-box {
+            max-width: 650px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 0;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .history-modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid #ebe5df;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fdfbf9;
+        }
+        .history-modal-header h3 {
+            margin: 0;
+            font-size: 1.15rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .history-modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .history-section-title {
+            font-size: .82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: var(--gold);
+            margin-bottom: .6rem;
+            display: flex;
+            align-items: center;
+            gap: .4rem;
+        }
+        .history-version-card {
+            background: #fdfcfb;
+            border: 1px solid #ece4dc;
+            border-radius: 12px;
+            padding: 1.1rem;
+            position: relative;
+        }
+        .history-version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: .75rem;
+            flex-wrap: wrap;
+            gap: .4rem;
+        }
+        .history-version-tag {
+            background: #241711;
+            color: #fff;
+            padding: .2rem .55rem;
+            border-radius: 6px;
+            font-size: .72rem;
+            font-weight: 700;
+        }
+        .history-stamps-grid {
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+        }
+        .history-stamp-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: .5rem .75rem;
+            border-radius: 8px;
+            border: 1px solid #ece5dd;
+            font-size: .8rem;
+        }
+        .history-stamp-left {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .history-stamp-icon {
+            font-size: 1.1rem;
+        }
+
+        /* Confirmation Modal */
+        .confirm-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 10, 8, 0.65);
+            backdrop-filter: blur(4px);
+            display: grid;
+            place-items: center;
+            z-index: 1000;
+            padding: 1rem;
+            animation: fadeIn 180ms ease;
+        }
+
+        .confirm-modal-box {
+            background: #ffffff;
+            border: 1.5px solid var(--border);
+            border-radius: 18px;
+            padding: 2rem;
+            max-width: 460px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            animation: scaleUp 200ms ease;
+        }
+
+        .confirm-modal-icon {
+            font-size: 2.6rem;
+            margin-bottom: .8rem;
+        }
+
+        .confirm-modal-box h3 {
+            font-size: 1.35rem;
+            color: var(--text);
+            font-family: var(--serif);
+            margin-bottom: .6rem;
+        }
+
+        .confirm-modal-box p {
+            font-size: .88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 1.6rem;
+        }
+
+        .confirm-modal-actions {
+            display: flex;
+            gap: .75rem;
+            justify-content: center;
+        }
+
+        .btn-modal-cancel {
+            flex: 1;
+            padding: .75rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #faf7f2;
+            color: var(--text);
+            font-size: .9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-modal-cancel:hover {
+            background: #f1eae0;
+        }
+
+        .btn-modal-danger {
+            flex: 1;
+            padding: .75rem 1.2rem;
+            border-radius: 10px;
+            border: none;
+            background: var(--red);
+            color: #ffffff;
+            font-size: .9rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(224, 91, 73, 0.3);
+        }
+
+        .btn-modal-danger:hover {
+            opacity: .92;
+        }
+
+        /* ========================================================
+           BASE OFFERS & QUIZ CAMPAIGN SETTINGS PANEL
+           ======================================================== */
+        .offers-panel-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1.75rem;
+        }
+
+        .offers-hero-header {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .offers-hero-title h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: .35rem;
+        }
+
+        .offers-hero-title p {
+            color: var(--text-muted);
+            font-size: .88rem;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        .offers-action-buttons {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-add-offer {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .75rem 1.4rem;
+            border-radius: 12px;
+            background: var(--gold-gradient);
+            color: #120c09;
+            font-size: .92rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(197, 160, 89, 0.3);
+            transition: all 200ms ease;
+        }
+
+        .btn-add-offer:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.45);
+        }
+
+        .btn-reset-offers {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .75rem 1.15rem;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            font-size: .86rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 180ms ease;
+        }
+
+        .btn-reset-offers:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 2-Column Grid: Editor Cards + Live Customer Pass Preview */
+        .offers-layout-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 1.75rem;
+            align-items: start;
+        }
+
+        .offers-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .offer-edit-card {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.35rem 1.4rem;
+            transition: border-color 200ms ease, box-shadow 200ms ease;
+            position: relative;
+        }
+
+        .offer-edit-card:hover {
+            border-color: rgba(223, 186, 115, 0.45);
+        }
+
+        .offer-edit-card.is-welcome {
+            border-color: rgba(197, 160, 89, 0.7);
+            background: #fffdfa;
+        }
+
+        .offer-card-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: .75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .offer-index-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            font-size: .76rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--gold);
+        }
+
+        .offer-index-tag.welcome {
+            color: #79f2af;
+        }
+
+        .btn-remove-offer {
+            background: transparent;
+            border: 1px solid rgba(224, 91, 73, 0.3);
+            color: #ff7e67;
+            padding: .3rem .65rem;
+            border-radius: 8px;
+            font-size: .75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 180ms ease;
+        }
+
+        .btn-remove-offer:hover:not(:disabled) {
+            background: rgba(224, 91, 73, 0.15);
+            border-color: #ff7e67;
+        }
+
+        .btn-remove-offer:disabled {
+            opacity: .3;
+            cursor: not-allowed;
+            border-color: var(--border);
+            color: var(--text-muted);
+        }
+
+        /* Form Controls inside Offer Card */
+        .offer-fields-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .offer-field-group {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+
+        .offer-field-group label {
+            font-size: .74rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .offer-icon-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .4rem;
+        }
+
+        .offer-icon-halo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(223, 186, 115, 0.15);
+            border: 1.5px solid var(--gold);
+            display: grid;
+            place-items: center;
+            font-size: 1.6rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .offer-icon-input {
+            width: 54px;
+            height: 38px;
+            text-align: center;
+            background: #ffffff;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1.15rem;
+        }
+
+        .offer-text-input {
+            width: 100%;
+            height: 42px;
+            padding: .5rem .85rem;
+            background: #ffffff;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: .92rem;
+            transition: border-color 180ms ease;
+        }
+
+        .offer-text-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2);
+        }
+
+        .offer-text-input:disabled,
+        .offer-icon-input:disabled,
+        .offer-text-input.is-locked,
+        .offer-icon-input.is-locked {
+            background: #f4eee3 !important;
+            color: #726359 !important;
+            cursor: not-allowed;
+            border-color: rgba(36, 23, 17, 0.15) !important;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        .badge-offer-locked {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            background: #fff8eb;
+            color: #b38838;
+            border: 1px solid #f2dfba;
+            padding: .35rem .75rem;
+            border-radius: 99px;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .02em;
+        }
+
+        .offer-locked-notice {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            background: #ffffff;
+            border: 1.5px dashed rgba(197, 160, 89, 0.5);
+            border-radius: 12px;
+            padding: .75rem 1rem;
+            margin-top: .85rem;
+            font-size: .8rem;
+            color: #554841;
+            line-height: 1.45;
+        }
+
+        .offer-locked-notice .locked-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .offer-locked-notice strong {
+            color: var(--text);
+        }
+
+        /* Quick Emoji Palette */
+        .emoji-picker-bar {
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            flex-wrap: wrap;
+            margin-top: .75rem;
+            padding-top: .75rem;
+            border-top: 1px dashed var(--border);
+        }
+
+        .emoji-picker-label {
+            font-size: .7rem;
+            color: var(--text-muted);
+            margin-right: .3rem;
+        }
+
+        .btn-quick-emoji {
+            background: #faf7f2;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+
+        .btn-quick-emoji:hover {
+            transform: scale(1.15);
+            background: #f1ebe3;
+            border-color: var(--gold);
+        }
+
+        /* Sticky Save Bar */
+        .offers-save-bar {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            box-shadow: 0 6px 24px rgba(46, 32, 25, 0.08);
+        }
+
+        .save-options-check {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            font-size: .88rem;
+            color: var(--text);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .save-options-check input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+
+        .btn-save-offers {
+            display: inline-flex;
+            align-items: center;
+            gap: .65rem;
+            padding: .85rem 2rem;
+            border-radius: 12px;
+            background: var(--gold-gradient);
+            color: #120c09;
+            font-size: 1rem;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.35);
+            transition: all 200ms ease;
+        }
+
+        .btn-save-offers:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(197, 160, 89, 0.5);
+        }
+
+        /* Live Customer Pass Mockup Preview */
+        .preview-sticky-wrap {
+            position: sticky;
+            top: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: .65rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .preview-header strong {
+            font-size: .82rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .preview-device-frame {
+            background: #17100b;
+            border: 1.5px solid rgba(223, 186, 115, 0.35);
+            border-radius: 20px;
+            padding: 1.15rem 1rem;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+        }
+
+        .preview-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: .85rem;
+            padding-bottom: .6rem;
+            border-bottom: 1px solid rgba(223, 186, 115, 0.18);
+        }
+
+        .preview-card-header img {
+            width: 70px;
+            filter: brightness(0) invert(1);
+        }
+
+        .preview-badge-status {
+            font-size: .62rem;
+            font-weight: 800;
+            padding: .15rem .5rem;
+            border-radius: 99px;
+            background: rgba(223, 186, 115, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(223, 186, 115, 0.35);
+        }
+
+        .preview-stamps-list {
+            display: flex;
+            flex-direction: column;
+            gap: .45rem;
+        }
+
+        .preview-stamp-row {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            padding: .5rem .75rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .preview-stamp-row.is-ready {
+            background: rgba(223, 186, 115, 0.12);
+            border-color: rgba(223, 186, 115, 0.45);
+        }
+
+        .preview-stamp-icon {
+            font-size: 1.15rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(223, 186, 115, 0.15);
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+        }
+
+        .preview-stamp-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .preview-stamp-info strong {
+            display: block;
+            font-size: .78rem;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .preview-stamp-info small {
+            display: block;
+            font-size: .66rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .preview-stamp-tag {
+            font-size: .56rem;
+            font-weight: 800;
+            padding: .15rem .45rem;
+            border-radius: 99px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            white-space: nowrap;
+        }
+
+        .preview-stamp-tag.ready {
+            background: var(--gold);
+            color: #120c09;
+        }
+
+        .preview-stamp-tag.locked {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+        }
+
+        /* Toast Alert */
+        .admin-toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #241711;
+            color: #ffffff;
+            padding: .8rem 1.4rem;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+            display: none;
+            z-index: 99999;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 1rem;
+            color: var(--text-muted);
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px dashed var(--border);
+        }
+
+        /* Mobile Viewport Optimizations */
+        @media (max-width: 900px) {
+            .offers-layout-grid {
+                grid-template-columns: 1fr;
+            }
+            .preview-sticky-wrap {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: .75rem .65rem 4rem;
+                width: 100%;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: .85rem;
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+            .admin-brand {
+                gap: .75rem;
+                width: 100%;
+            }
+            .admin-brand img {
+                height: 32px;
+            }
+            .admin-brand h1 {
+                font-size: 1.15rem;
+            }
+            .admin-brand p {
+                font-size: .78rem;
+            }
+            .admin-top-actions {
+                width: 100%;
+                display: flex;
+                gap: .5rem;
+            }
+            .nav-btn {
+                flex: 1;
+                text-align: center;
+                justify-content: center;
+                padding: .65rem .4rem;
+                font-size: .78rem;
+                white-space: nowrap;
+            }
+            .admin-tabs-nav {
+                flex-direction: column;
+                gap: .5rem;
+                margin-bottom: 1.25rem;
+                width: 100%;
+            }
+            .tab-btn {
+                width: 100%;
+                justify-content: space-between;
+                padding: .8rem .95rem;
+                font-size: .88rem;
+                border-radius: 10px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: .55rem;
+                margin-bottom: 1.25rem;
+                width: 100%;
+            }
+            .stat-card {
+                padding: .75rem .8rem;
+                border-radius: 12px;
+                box-sizing: border-box;
+            }
+            .stat-card .label {
+                font-size: .68rem;
+                letter-spacing: .02em;
+            }
+            .stat-card .value {
+                font-size: 1.55rem;
+                margin-top: .2rem;
+            }
+            .search-container {
+                margin-bottom: 1.25rem;
+                width: 100%;
+            }
+            .search-box input {
+                height: 48px;
+                font-size: 16px !important;
+                border-radius: 12px;
+                padding: .6rem 1rem .6rem 2.8rem;
+            }
+            .search-icon {
+                left: .95rem;
+            }
+
+            /* Filters Panel Mobile */
+            .filters-panel {
+                padding: 1rem .85rem;
+                border-radius: 14px;
+                gap: .85rem;
+                width: 100%;
+                box-sizing: border-box;
+                margin-bottom: 1.25rem;
+            }
+            .filter-controls-row {
+                grid-template-columns: 1fr;
+                gap: .75rem;
+                width: 100%;
+            }
+            .filter-field,
+            .filter-field.status-field,
+            .filter-field.drink-field,
+            .filter-field.perf-calendar-field,
+            .filter-field.reset-field {
+                width: 100% !important;
+                min-width: 0 !important;
+            }
+            .filter-reset-spacer {
+                display: none !important;
+            }
+            .filter-select,
+            .perf-calendar-trigger {
+                width: 100% !important;
+                height: 44px !important;
+                box-sizing: border-box !important;
+            }
+            .btn-clear-filters {
+                width: 100%;
+                height: 44px;
+                justify-content: center;
+                text-align: center;
+                font-size: .85rem;
+            }
+            .filter-summary-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: .65rem;
+                width: 100%;
+            }
+            .filter-count-badge {
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+            .preset-label {
+                width: 100%;
+                margin-bottom: .2rem;
+            }
+            .date-preset-pill {
+                padding: .35rem .65rem;
+                font-size: .75rem;
+            }
+            .filter-counter {
+                width: 100%;
+                margin-left: 0;
+                margin-top: .25rem;
+                text-align: right;
+                font-size: .78rem;
+            }
+
+            /* Members Cards Mobile */
+            .members-container {
+                gap: 1rem;
+                width: 100%;
+            }
+            .member-card {
+                padding: 1rem .85rem;
+                border-radius: 14px;
+                gap: 1rem;
+                width: 100%;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+            .member-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: .85rem;
+                width: 100%;
+                padding-bottom: .85rem;
+            }
+            .member-header-left {
+                width: 100%;
+                display: flex;
+                align-items: flex-start;
+                gap: .65rem;
+            }
+            .customer-chk-wrap {
+                padding-top: .3rem;
+                padding-right: 0;
+            }
+            .member-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 1.25rem;
+                flex-shrink: 0;
+            }
+            .member-name-block {
+                min-width: 0;
+                flex: 1;
+            }
+            .member-name-block h2 {
+                font-size: 1.15rem;
+            }
+            .member-meta {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: .35rem;
+                margin-top: .4rem;
+                width: 100%;
+            }
+            .meta-pill {
+                font-size: .74rem;
+                padding: .2rem .45rem;
+                border-radius: 6px;
+            }
+
+            .member-header-right {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: .65rem;
+            }
+            .badge-drink {
+                flex: 1;
+                min-width: 0;
+                justify-content: center;
+                text-align: center;
+                padding: .45rem .65rem;
+                font-size: .8rem;
+                border-radius: 8px;
+                box-sizing: border-box;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .btn-customer-dropdown-trigger {
+                flex-shrink: 0;
+                padding: .45rem .85rem;
+                font-size: .82rem;
+            }
+            .customer-dropdown-menu {
+                right: 0;
+                min-width: 230px;
+            }
+
+            /* Single Column Stamps Grid on Mobile */
+            .stamps-barista-grid {
+                grid-template-columns: 1fr;
+                gap: .75rem;
+                width: 100%;
+            }
+            .stamp-control-box {
+                padding: .95rem 1rem;
+                border-radius: 14px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .stamp-title-text {
+                font-size: .92rem;
+                line-height: 1.35;
+            }
+            .stamp-desc-text {
+                font-size: .8rem;
+                line-height: 1.4;
+                margin: .2rem 0;
+            }
+            .stamp-time-tags-group {
+                gap: .35rem;
+                margin: .3rem 0 .5rem;
+                width: 100%;
+            }
+            .stamp-time-tag {
+                font-size: .78rem;
+                padding: .35rem .6rem;
+                border-radius: 6px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .stamp-actions-row {
+                display: flex;
+                gap: .5rem;
+                width: 100%;
+                margin-top: .4rem;
+            }
+            .btn-action {
+                min-height: 44px;
+                font-size: .85rem;
+                font-weight: 700;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Member Footer Actions Mobile */
+            .member-footer-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: .75rem;
+                width: 100%;
+                padding-top: .75rem;
+                border-top: 1px solid var(--border);
+            }
+            .member-footer-actions > div {
+                display: flex;
+                flex-direction: column;
+                gap: .5rem;
+                width: 100%;
+            }
+            .btn-quick-stamp {
+                width: 100%;
+                justify-content: center;
+                min-height: 48px;
+                font-size: .92rem;
+                border-radius: 12px;
+            }
+            .btn-toggle-timeline {
+                width: 100%;
+                justify-content: center;
+                min-height: 42px;
+                font-size: .84rem;
+                border-radius: 10px;
+            }
+            .btn-view-card {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+                padding: .75rem 1rem;
+                font-size: .86rem;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                background: #faf7f2;
+                text-decoration: none;
+                display: block;
+                box-sizing: border-box;
+            }
+
+            /* Timeline Drawer Mobile */
+            .member-timeline-drawer {
+                padding: .95rem .85rem;
+                border-radius: 12px;
+            }
+            .timeline-drawer-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: .25rem;
+                padding-bottom: .6rem;
+                margin-bottom: .85rem;
+            }
+            .timeline-track {
+                padding-left: 1.25rem;
+            }
+            .timeline-node {
+                padding-bottom: 1rem;
+            }
+            .timeline-title {
+                font-size: .82rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: .25rem;
+            }
+            .timeline-time {
+                font-size: .72rem;
+                margin-top: .25rem;
+            }
+
+            /* Base Offers View Mobile */
+            .offers-hero-header {
+                padding: 1.15rem 1rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            .offers-hero-title h2 {
+                font-size: 1.25rem;
+            }
+            .offers-hero-title p {
+                font-size: .82rem;
+            }
+            .offers-action-buttons {
+                width: 100%;
+                flex-direction: column;
+                gap: .5rem;
+            }
+            .btn-add-offer, .btn-reset-offers {
+                width: 100%;
+                justify-content: center;
+            }
+            .offer-edit-card {
+                padding: 1rem .85rem;
+                border-radius: 14px;
+            }
+            .offer-fields-row {
+                grid-template-columns: 1fr;
+                gap: .85rem;
+            }
+            .offer-icon-wrapper {
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+            }
+            .offers-save-bar {
+                padding: 1rem .85rem;
+            }
+            .btn-save-offers {
+                width: 100%;
+                justify-content: center;
+                min-height: 50px;
+            }
+
+            /* Floating / Modals Mobile */
+            .bulk-actions-floating-bar {
+                width: calc(100vw - 20px) !important;
+                max-width: calc(100vw - 20px) !important;
+                bottom: 12px !important;
+                padding: .65rem .85rem !important;
+                border-radius: 14px !important;
+                justify-content: space-between !important;
+                gap: .5rem !important;
+                box-sizing: border-box !important;
+            }
+            .confirm-modal-box {
+                padding: 1.35rem 1.15rem;
+                border-radius: 16px;
+                max-width: calc(100vw - 32px);
+                box-sizing: border-box;
+            }
+            .history-modal-box {
+                max-width: calc(100vw - 20px);
+                max-height: 90vh;
+                border-radius: 14px;
+                box-sizing: border-box;
+            }
+            .history-modal-header {
+                padding: 1rem;
+            }
+            .history-modal-body {
+                padding: 1rem;
+                gap: 1rem;
+            }
+            .admin-toast {
+                left: 1rem;
+                right: 1rem;
+                bottom: 1.5rem;
+                text-align: center;
+                max-width: calc(100vw - 2rem);
+            }
+        }
+
+        /* Small Phone Screen Tweaks (<= 480px) */
+        @media (max-width: 480px) {
+            body {
+                padding: .75rem .5rem 4rem;
+            }
+            .stat-card .value {
+                font-size: 1.4rem;
+            }
+            .member-card {
+                padding: .85rem .75rem;
+            }
+            .btn-customer-action {
+                font-size: .74rem;
+                padding: .4rem .2rem;
+            }
+            .btn-action {
+                min-height: 42px;
+                font-size: .82rem;
+            }
+            .search-box input {
+                height: 46px;
+            }
+            .perf-cal-sidebar {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="admin-brand">
+            <img src="assets/images/steps-logo-brown.webp" alt="STEPS">
+            <div>
+                <h1>STEPS Barista & POS Loyalty Portal</h1>
+                <p>Manage customer cards, verify mobile numbers & configure quiz base offers</p>
+            </div>
+        </div>
+        <div class="admin-top-actions">
+            <a href="/card" target="_blank" class="nav-btn">💳 Customer Pass View</a>
+            <a href="/quiz" target="_blank" class="nav-btn">☕ Open Quiz Funnel</a>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs: Customer Cards POS vs Quiz Base Offers -->
+    <nav class="admin-tabs-nav">
+        <button class="tab-btn is-active" id="tab-btn-pos" type="button">
+            <span>👥 Customer Cards & POS Counter</span>
+            <span class="tab-pill-badge" id="tab-members-count">0</span>
+        </button>
+        <button class="tab-btn" id="tab-btn-offers" type="button">
+            <span>⚙️ Quiz Base Offers & Stamps</span>
+            <span class="tab-pill-badge" id="tab-offers-count">5</span>
+        </button>
+    </nav>
+
+    <!-- ========================================================
+         VIEW 1: CUSTOMER CARDS & BARISTA POS COUNTER
+         ======================================================== -->
+    <div id="view-pos">
+        <!-- Stats Bar -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="label">Total Members</div>
+                <div class="value" id="stat-members">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Free Coffees Ready</div>
+                <div class="value" id="stat-available" style="color: var(--green);">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Free Coffees Redeemed</div>
+                <div class="value" id="stat-redeemed" style="color: var(--red);">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Store Location</div>
+                <div class="value" style="font-size: 1.4rem; margin-top: .6rem; color: #fff;">Cairo, EG</div>
+            </div>
+        </section>
+
+        <!-- Filters Panel: Search, Status Dropdown & Calendar Date Range -->
+        <section class="filters-panel">
+            <div class="search-box">
+                <span class="search-icon-wrap" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+                <input type="text" id="admin-search-input" placeholder="Search by Phone (e.g. 010...), Customer Name, or Pass ID..." autocomplete="off">
+                <button type="button" class="search-clear-btn" id="search-clear-btn" title="Clear search">✕</button>
+            </div>
+
+            <div class="filter-controls-row">
+                <!-- Status Filter Dropdown -->
+                <div class="filter-field status-field">
+                    <label for="filter-status">
+                        <span class="label-icon">⚡</span>
+                        <span>Customer Status</span>
+                    </label>
+                    <select id="filter-status" class="filter-select">
+                        <option value="all">All Statuses</option>
+                        <option value="active">⚡ Active VIP Pass</option>
+                        <option value="pending">⏳ Not Activated (Pending)</option>
+                        <option value="banned">⛔ Banned Customers</option>
+                        <option value="ready">🎁 Perks Ready to Redeem</option>
+                    </select>
+                </div>
+
+                <!-- First Coffee Type / Quiz Match Filter Dropdown -->
+                <div class="filter-field drink-field">
+                    <label for="filter-drink">
+                        <span class="label-icon">☕</span>
+                        <span>First Coffee Type</span>
+                    </label>
+                    <select id="filter-drink" class="filter-select">
+                        <option value="all">All Coffee / Drinks</option>
+                        <option value="iced_spanish_latte">☕ Iced Spanish Latte</option>
+                        <option value="strawberry_matcha">🍵 Strawberry Matcha</option>
+                        <option value="passionfruit_mojito">🍹 Passionfruit Mojito</option>
+                        <option value="mocha_frappe">🥤 Mocha Frappe</option>
+                    </select>
+                </div>
+
+                <!-- Meta Ads / OIA Style Performance Calendar Picker -->
+                <div class="filter-field perf-calendar-field">
+                    <label>
+                        <span class="label-icon">📅</span>
+                        <span>Activity & Quiz Date Range</span>
+                    </label>
+                    <div class="perf-calendar-wrapper" id="perf-calendar-wrapper">
+                        <!-- Capsule Trigger Button -->
+                        <div class="perf-calendar-trigger" id="perf-calendar-trigger" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+                            <div class="perf-cal-trigger-left">
+                                <svg class="perf-cal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <span class="perf-cal-label" id="perf-calendar-label">All Time (Maximum)</span>
+                            </div>
+                            <div class="perf-cal-trigger-right">
+                                <span class="perf-cal-reset-btn" id="perf-calendar-reset" title="Clear date range filter" style="display: none;">✕ Clear</span>
+                                <span class="perf-cal-chevron" id="perf-calendar-chevron">▾</span>
+                            </div>
+                        </div>
+
+                        <!-- Hidden compatibility inputs for date filtering -->
+                        <input type="hidden" id="filter-date-from" value="">
+                        <input type="hidden" id="filter-date-to" value="">
+
+                        <!-- Floating Popover Panel -->
+                        <div class="perf-calendar-popover" id="perf-calendar-popover" style="display: none;">
+                            <!-- Sidebar Presets -->
+                            <div class="perf-cal-sidebar">
+                                <div class="perf-cal-sidebar-title">Date Presets</div>
+                                <button type="button" class="perf-preset-btn is-active" data-preset="maximum">All Time</button>
+                                <button type="button" class="perf-preset-btn" data-preset="today">Today</button>
+                                <button type="button" class="perf-preset-btn" data-preset="yesterday">Yesterday</button>
+                                <button type="button" class="perf-preset-btn" data-preset="last7">Last 7 Days</button>
+                                <button type="button" class="perf-preset-btn" data-preset="last30">Last 30 Days</button>
+                                <button type="button" class="perf-preset-btn" data-preset="thisMonth">This Month</button>
+                                <button type="button" class="perf-preset-btn" data-preset="lastMonth">Last Month</button>
+                            </div>
+
+                            <!-- Dual-Month Interactive View -->
+                            <div class="perf-cal-main">
+                                <div class="perf-cal-months-nav">
+                                    <button type="button" class="perf-nav-btn" id="perf-cal-prev" title="Previous Month">‹</button>
+                                    <div class="perf-months-container" id="perf-months-container"></div>
+                                    <button type="button" class="perf-nav-btn" id="perf-cal-next" title="Next Month">›</button>
+                                </div>
+                                <div class="perf-cal-footer">
+                                    <div class="perf-cal-summary" id="perf-cal-summary">Showing all activity dates</div>
+                                    <div class="perf-cal-actions">
+                                        <button type="button" class="perf-btn-cancel" id="perf-cal-cancel">Cancel</button>
+                                        <button type="button" class="perf-btn-apply" id="perf-cal-apply">Apply Range</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clear / Reset Filter Button with aligned label spacer -->
+                <div class="filter-field reset-field">
+                    <label class="filter-reset-spacer" aria-hidden="true">&nbsp;</label>
+                    <button type="button" class="btn-clear-filters" id="btn-clear-filters" title="Reset all filters to default">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                        </svg>
+                        <span>Reset Filters</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sleek Filter Summary Bar & Counter -->
+            <div class="filter-summary-bar">
+                <div class="active-chips-wrap">
+                    <span class="summary-bar-label">Active Filters:</span>
+                    <div id="active-filter-chips" style="display: inline-flex; gap: .45rem; flex-wrap: wrap;"></div>
+                    <span class="active-filter-summary" id="active-filter-summary" style="display: none;">All Members • All Drinks • All Time</span>
+                </div>
+                <div class="filter-count-badge" id="filter-count-badge">
+                    <span class="count-pulse-dot"></span>
+                    <span id="filter-counter-label">Showing all members</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Members List -->
+        <main class="members-container" id="members-list">
+            <div class="empty-state">Loading registered members...</div>
+        </main>
+    </div>
+
+    <!-- ========================================================
+         VIEW 2: QUIZ BASE OFFERS & STAMPS MANAGER
+         ======================================================== -->
+    <div id="view-offers" style="display: none;">
+        <div class="offers-panel-wrap">
+            <!-- Header Card with Actions -->
+            <div class="offers-hero-header">
+                <div class="offers-hero-title">
+                    <h2>⚙️ Base Offers & Quiz Campaign Manager</h2>
+                    <p>Customize the loyalty rewards unlocked via the quiz. Control <strong>how many offers exist</strong>, their <strong>titles</strong>, <strong>descriptions</strong>, and pick <strong>custom icons</strong>.</p>
+                </div>
+                <div class="offers-action-buttons">
+                    <button class="btn-add-offer" id="btn-add-offer-slot" type="button">
+                        <span>+ Add New Offer</span>
+                    </button>
+                    <button class="btn-reset-offers" id="btn-reset-default-offers" type="button">
+                        <span>↺ Reset to 5 STEPS Standards</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Two-Column Layout: Editable Offers Form + Live Customer Phone Mockup -->
+            <div class="offers-layout-grid">
+                <!-- Left: Editable Offers List -->
+                <div class="offers-cards-list" id="offers-editor-container">
+                    <!-- Injected dynamically by renderOffersEditor() -->
+                </div>
+
+                <!-- Right: Live Customer Pass Preview -->
+                <div class="preview-sticky-wrap">
+                    <div class="preview-header">
+                        <strong>📱 Live Customer Pass Preview</strong>
+                        <span style="font-size: .75rem; color: var(--text-muted);" id="preview-offers-count">5 Rewards</span>
+                    </div>
+
+                    <div class="preview-device-frame">
+                        <div class="preview-card-header">
+                            <img src="assets/images/steps-logo-brown.webp" alt="STEPS">
+                            <span class="preview-badge-status">● Live Pass View</span>
+                        </div>
+
+                        <div class="preview-stamps-list" id="preview-stamps-target">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sticky Save Bar -->
+            <div class="offers-save-bar">
+                <div class="save-bar-notice" style="font-size: .82rem; color: #5a4b41; display: flex; align-items: center; gap: .5rem; line-height: 1.4;">
+                    <span>ℹ️ <strong>Campaign Mode:</strong> Saving changes configures the active campaign for <strong>all new customers</strong> completing the quiz. Existing customers keep their original offers until individually upgraded.</span>
+                </div>
+
+                <button class="btn-save-offers" id="btn-save-offers-action" type="button">
+                    <span>💾 Save Base Offers & Publish</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Customer Confirmation Modal -->
+    <div class="confirm-modal-backdrop" id="delete-confirm-modal" style="display: none;">
+        <div class="confirm-modal-box">
+            <div class="confirm-modal-icon">🗑️</div>
+            <h3 id="delete-modal-title">Delete Customer Record?</h3>
+            <p id="delete-modal-desc">
+                Are you sure you want to remove this customer from the active member list?
+                <br><br>
+                <strong style="color: var(--text);">If this customer returns and enters their number again, their previous digital pass, earned stamps, and loyalty data will be safely restored for them.</strong>
+            </p>
+            <div class="confirm-modal-actions">
+                <button type="button" class="btn-modal-cancel" id="btn-cancel-delete">Cancel</button>
+                <button type="button" class="btn-modal-danger" id="btn-confirm-delete">Yes, Delete Customer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Customer Offers Confirmation Modal -->
+    <div class="confirm-modal-backdrop" id="update-offers-modal" style="display: none;">
+        <div class="confirm-modal-box">
+            <div class="confirm-modal-icon">🔄</div>
+            <h3 id="update-modal-title">Upgrade Customer Offers?</h3>
+            <p id="update-modal-desc">
+                Are you sure you want to upgrade this customer to the current campaign offers?
+                <br><br>
+                <strong>What will happen:</strong>
+                <br>
+                1. Their current offers and stamps will be permanently preserved in their <strong>Offers History</strong>.
+                <br>
+                2. Their pass will be upgraded to the active campaign rewards, keeping their personalized quiz free drink on Deal #1.
+            </p>
+            <div class="confirm-modal-actions">
+                <button type="button" class="btn-modal-cancel" id="btn-cancel-update-offers">Cancel</button>
+                <button type="button" class="btn-modal-danger" id="btn-confirm-update-offers" style="background: #0958d9;">Yes, Upgrade Offers</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Offers History Audit Modal -->
+    <div class="confirm-modal-backdrop" id="offers-history-modal" style="display: none;">
+        <div class="history-modal-box">
+            <div class="history-modal-header">
+                <h3><span>📜</span> <span id="history-customer-title">Customer Offers History</span></h3>
+                <button type="button" class="btn-modal-cancel" id="btn-close-history" style="padding: .4rem .8rem; font-size: .8rem;">✕ Close</button>
+            </div>
+            <div class="history-modal-body" id="history-modal-content">
+                <!-- Dynamically injected -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Bulk Selection Action Bar -->
+    <div class="bulk-actions-floating-bar" id="bulk-actions-bar" style="display: none;">
+        <span class="bulk-count-badge" id="bulk-selected-count">0 Selected</span>
+        <span style="font-size: .85rem; font-weight: 600;">Customers Selected</span>
+        <button type="button" class="btn-bulk-upgrade" id="btn-bulk-upgrade-action">
+            <span>🔄 Upgrade to Current Campaign Offers</span>
+        </button>
+        <button type="button" class="btn-bulk-cancel" id="btn-bulk-deselect">
+            Deselect All
+        </button>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div class="admin-toast" id="admin-toast" style="display: none;">
+        <span id="admin-toast-text">Action completed successfully</span>
+    </div>
+
+    <script>
+    (() => {
+        'use strict';
+
+        const escapeHtml = (str) => {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        };
+
+        // Tabs
+        const tabBtnPos = document.querySelector('#tab-btn-pos');
+        const tabBtnOffers = document.querySelector('#tab-btn-offers');
+        const viewPos = document.querySelector('#view-pos');
+        const viewOffers = document.querySelector('#view-offers');
+
+        // POS Elements
+        const searchInput = document.querySelector('#admin-search-input');
+        const membersList = document.querySelector('#members-list');
+        const statMembers = document.querySelector('#stat-members');
+        const statAvailable = document.querySelector('#stat-available');
+        const statRedeemed = document.querySelector('#stat-redeemed');
+        const tabMembersCount = document.querySelector('#tab-members-count');
+        const tabOffersCount = document.querySelector('#tab-offers-count');
+        const toast = document.querySelector('#admin-toast');
+
+        // Filter Elements
+        const filterStatusSelect = document.querySelector('#filter-status');
+        const filterDrinkSelect = document.querySelector('#filter-drink');
+        const filterDateFrom = document.querySelector('#filter-date-from');
+        const filterDateTo = document.querySelector('#filter-date-to');
+        const btnClearFilters = document.querySelector('#btn-clear-filters');
+        const filterCounterLabel = document.querySelector('#filter-counter-label');
+        const activeFilterSummary = document.querySelector('#active-filter-summary');
+        const datePresetPills = document.querySelectorAll('.date-preset-pill');
+
+        // Meta Ads / OIA Style Performance Calendar Selectors
+        const perfCalendarWrapper = document.querySelector('#perf-calendar-wrapper');
+        const perfCalendarTrigger = document.querySelector('#perf-calendar-trigger');
+        const perfCalendarLabel = document.querySelector('#perf-calendar-label');
+        const perfCalendarReset = document.querySelector('#perf-calendar-reset');
+        const perfCalendarPopover = document.querySelector('#perf-calendar-popover');
+        const perfMonthsContainer = document.querySelector('#perf-months-container');
+        const perfCalPrev = document.querySelector('#perf-cal-prev');
+        const perfCalNext = document.querySelector('#perf-cal-next');
+        const perfCalSummary = document.querySelector('#perf-cal-summary');
+        const perfCalCancel = document.querySelector('#perf-cal-cancel');
+        const perfCalApply = document.querySelector('#perf-cal-apply');
+        const perfPresetBtns = document.querySelectorAll('.perf-preset-btn');
+
+        // Customer Delete Modal Elements
+        const deleteModal = document.querySelector('#delete-confirm-modal');
+        const btnCancelDelete = document.querySelector('#btn-cancel-delete');
+        const btnConfirmDelete = document.querySelector('#btn-confirm-delete');
+
+        // Offers Elements
+        const offersContainer = document.querySelector('#offers-editor-container');
+        const previewTarget = document.querySelector('#preview-stamps-target');
+        const previewCountLabel = document.querySelector('#preview-offers-count');
+        const btnAddOffer = document.querySelector('#btn-add-offer-slot');
+        const btnResetOffers = document.querySelector('#btn-reset-default-offers');
+        const btnSaveOffers = document.querySelector('#btn-save-offers-action');
+        // Modals & Action Elements
+        const updateOffersModal = document.querySelector('#update-offers-modal');
+        const btnCancelUpdateOffers = document.querySelector('#btn-cancel-update-offers');
+        const btnConfirmUpdateOffers = document.querySelector('#btn-confirm-update-offers');
+        const updateModalTitle = document.querySelector('#update-modal-title');
+        const updateModalDesc = document.querySelector('#update-modal-desc');
+
+        const historyModal = document.querySelector('#offers-history-modal');
+        const btnCloseHistory = document.querySelector('#btn-close-history');
+        const historyModalContent = document.querySelector('#history-modal-content');
+        const historyCustomerTitle = document.querySelector('#history-customer-title');
+
+        const bulkActionsBar = document.querySelector('#bulk-actions-bar');
+        const bulkSelectedCount = document.querySelector('#bulk-selected-count');
+        const btnBulkUpgradeAction = document.querySelector('#btn-bulk-upgrade-action');
+        const btnBulkDeselect = document.querySelector('#btn-bulk-deselect');
+
+        let members = [];
+        let currentOffers = [];
+
+        // Popular Cafe Emojis for 1-Click Selection
+        const POPULAR_EMOJIS = ['☕', '🥐', '🥛', '🎁', '🌟', '🍰', '🍪', '🥪', '🥤', '🧋', '🍩', '🍵', '🍓', '🍋', '🍫', '🧁', '🍦', '🎟️', '👑', '✨'];
+
+        const DEFAULT_STANDARD_OFFERS = [
+            { index: 1, title: 'Free Coffee', desc: '1st Order Welcome Perk', icon: '☕' },
+            { index: 2, title: '20% Off Pastry', desc: 'Fresh Bakery Item', icon: '🥐' },
+            { index: 3, title: 'Free Size Upgrade', desc: 'Coffee or Specialty Drink', icon: '🥛' },
+            { index: 4, title: 'Buy 1 Get 1 Free', desc: 'Signature Drinks', icon: '🎁' },
+            { index: 5, title: 'Free Drink + VIP Status', desc: 'Grand Loyalty Reward', icon: '🌟' }
+        ];
+
+        const showToast = (msg) => {
+            const toastText = document.querySelector('#admin-toast-text');
+            if (toastText) toastText.textContent = msg;
+            if (toast) {
+                toast.style.display = 'block';
+                setTimeout(() => { toast.style.display = 'none'; }, 2800);
+            }
+        };
+
+        // Tab Switching Logic
+        tabBtnPos.addEventListener('click', () => {
+            tabBtnPos.classList.add('is-active');
+            tabBtnOffers.classList.remove('is-active');
+            viewPos.style.display = 'block';
+            viewOffers.style.display = 'none';
+        });
+
+        tabBtnOffers.addEventListener('click', () => {
+            tabBtnOffers.classList.add('is-active');
+            tabBtnPos.classList.remove('is-active');
+            viewPos.style.display = 'none';
+            viewOffers.style.display = 'block';
+            renderOffersEditor();
+            renderLivePreview();
+        });
+
+        // ========================================================
+        // 1. BASE OFFERS MANAGEMENT ENGINE
+        // ========================================================
+        const fetchBaseOffers = async () => {
+            try {
+                const res = await fetch('/api/admin/offers');
+                const data = await res.json();
+                if (data.success && Array.isArray(data.offers)) {
+                    currentOffers = data.offers;
+                    tabOffersCount.textContent = currentOffers.length;
+                    renderOffersEditor();
+                    renderLivePreview();
+                }
+            } catch (err) {
+                console.error('Failed to load base offers:', err);
+            }
+        };
+
+        const renderOffersEditor = () => {
+            if (!offersContainer) return;
+            offersContainer.innerHTML = '';
+            tabOffersCount.textContent = currentOffers.length;
+
+            currentOffers.forEach((off, idx) => {
+                const orderNum = idx + 1;
+                off.index = orderNum; // Enforce clean 1-based ordering
+
+                const isWelcome = (orderNum === 1);
+                const card = document.createElement('div');
+                card.className = `offer-edit-card ${isWelcome ? 'is-welcome' : ''}`;
+
+                if (isWelcome) {
+                    card.innerHTML = `
+                        <div class="offer-card-top-row">
+                            <span class="offer-index-tag welcome">
+                                ⭐ Offer #1 — Free Drink (Auto-personalizes to customer's quiz match: e.g. Free Passionfruit Mojito)
+                            </span>
+                            <span class="badge-offer-locked" title="First deal is fixed as the 100% Free Drink won from the quiz">
+                                🔒 Not Editable (Quiz Free Drink)
+                            </span>
+                        </div>
+
+                        <div class="offer-fields-row">
+                            <div class="offer-field-group offer-icon-wrapper">
+                                <label>Icon</label>
+                                <div class="offer-icon-halo" id="icon-halo-${idx}" title="Personalized per guest based on their quiz drink match">
+                                    ${off.icon || '☕'}
+                                </div>
+                                <input class="offer-icon-input is-locked" type="text" value="${off.icon || '☕'}" disabled readonly title="Auto-assigned per guest from quiz match">
+                            </div>
+
+                            <div class="offer-field-group">
+                                <label>Offer Title (Auto-Assigned from Quiz Match)</label>
+                                <input class="offer-text-input is-locked" type="text" value="Free [Customer Quiz Matched Drink]" disabled readonly title="Automatically personalizes to customer's quiz match">
+                            </div>
+
+                            <div class="offer-field-group">
+                                <label>Description / Subtitle (Auto-Assigned)</label>
+                                <input class="offer-text-input is-locked" type="text" value="Your Quiz Signature Match • 100% Free Drink" disabled readonly title="Fixed subtitle for the quiz welcome reward">
+                            </div>
+                        </div>
+
+                        <div class="offer-locked-notice">
+                            <span class="locked-icon">🔒</span>
+                            <span class="locked-text"><strong>Fixed Funnel Reward:</strong> Offer #1 is automatically reserved for the guest's 100% Free Drink won from the quiz. The drink title (e.g. <em>Free Passionfruit Mojito</em>), description, and icon dynamically personalize for each customer upon quiz completion and cannot be edited.</span>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <div class="offer-card-top-row">
+                            <span class="offer-index-tag">
+                                Offer #${orderNum} — Visit #${orderNum} Milestone Perk
+                            </span>
+                            <button class="btn-remove-offer" type="button" data-action="delete" data-index="${idx}" ${currentOffers.length <= 1 ? 'disabled title="At least one offer is required"' : ''}>
+                                🗑️ Delete Offer
+                            </button>
+                        </div>
+
+                        <div class="offer-fields-row">
+                            <div class="offer-field-group offer-icon-wrapper">
+                                <label>Icon</label>
+                                <div class="offer-icon-halo" id="icon-halo-${idx}">
+                                    ${off.icon || '☕'}
+                                </div>
+                                <input class="offer-icon-input" type="text" maxlength="4" value="${off.icon || '☕'}" data-index="${idx}" data-field="icon">
+                            </div>
+
+                            <div class="offer-field-group">
+                                <label>Offer Title</label>
+                                <input class="offer-text-input" type="text" maxlength="80" value="${escapeHtml(off.title || '')}" placeholder="e.g. 20% Off Pastry" data-index="${idx}" data-field="title">
+                            </div>
+
+                            <div class="offer-field-group">
+                                <label>Description / Subtitle</label>
+                                <input class="offer-text-input" type="text" maxlength="120" value="${escapeHtml(off.desc || '')}" placeholder="e.g. Fresh Bakery Item" data-index="${idx}" data-field="desc">
+                            </div>
+                        </div>
+
+                        <div class="emoji-picker-bar">
+                            <span class="emoji-picker-label">Quick Pick:</span>
+                            ${POPULAR_EMOJIS.map(e => `
+                                <button class="btn-quick-emoji" type="button" data-emoji="${e}" data-index="${idx}">${e}</button>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+
+                offersContainer.appendChild(card);
+            });
+
+            bindOffersInputListeners();
+        };
+
+        const bindOffersInputListeners = () => {
+            // Delete buttons
+            offersContainer.querySelectorAll('[data-action="delete"]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = Number(btn.dataset.index);
+                    if (currentOffers.length <= 1) {
+                        alert('At least one offer is required for the loyalty card!');
+                        return;
+                    }
+                    currentOffers.splice(idx, 1);
+                    renderOffersEditor();
+                    renderLivePreview();
+                });
+            });
+
+            // Text & Icon inputs with real-time sync to preview
+            offersContainer.querySelectorAll('input[data-field]').forEach(input => {
+                input.addEventListener('input', () => {
+                    const idx = Number(input.dataset.index);
+                    const field = input.dataset.field;
+                    const val = input.value.trim();
+
+                    if (currentOffers[idx]) {
+                        currentOffers[idx][field] = val;
+                        if (field === 'icon') {
+                            const halo = document.querySelector(`#icon-halo-${idx}`);
+                            if (halo) halo.textContent = val || '☕';
+                        }
+                        renderLivePreview();
+                    }
+                });
+            });
+
+            // Quick Emoji Buttons
+            offersContainer.querySelectorAll('.btn-quick-emoji').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const idx = Number(btn.dataset.index);
+                    const emoji = btn.dataset.emoji;
+                    if (currentOffers[idx]) {
+                        currentOffers[idx].icon = emoji;
+                        const iconInput = offersContainer.querySelector(`input[data-field="icon"][data-index="${idx}"]`);
+                        if (iconInput) iconInput.value = emoji;
+                        const halo = document.querySelector(`#icon-halo-${idx}`);
+                        if (halo) halo.textContent = emoji;
+                        renderLivePreview();
+                    }
+                });
+            });
+        };
+
+        // Live Preview Renderer
+        const renderLivePreview = () => {
+            if (!previewTarget) return;
+            previewTarget.innerHTML = '';
+            previewCountLabel.textContent = `${currentOffers.length} Rewards`;
+
+            currentOffers.forEach((off, idx) => {
+                const orderNum = idx + 1;
+                const isFirst = (orderNum === 1);
+
+                const row = document.createElement('div');
+                row.className = `preview-stamp-row ${isFirst ? 'is-ready' : ''}`;
+
+                const displayTitle = isFirst ? 'Free [Quiz Drink Match]' : (off.title || 'Untitled Perk');
+                const displayDesc = isFirst ? 'Your Quiz Signature Match • 100% Free Drink' : (off.desc || 'Milestone Reward');
+
+                row.innerHTML = `
+                    <div class="preview-stamp-icon">
+                        ${escapeHtml(off.icon || '☕')}
+                    </div>
+                    <div class="preview-stamp-info">
+                        <strong>#${orderNum} ${escapeHtml(displayTitle)}</strong>
+                        <small>${escapeHtml(displayDesc)}</small>
+                    </div>
+                    <span class="preview-stamp-tag ${isFirst ? 'ready' : 'locked'}">
+                        ${isFirst ? '● Ready' : (idx === currentOffers.length - 1 ? 'VIP Grand' : `Visit #${orderNum}`)}
+                    </span>
+                `;
+
+                previewTarget.appendChild(row);
+            });
+        };
+
+        // Add New Offer Button
+        btnAddOffer.addEventListener('click', () => {
+            const newIndex = currentOffers.length + 1;
+            currentOffers.push({
+                index: newIndex,
+                title: `Special Reward #${newIndex}`,
+                desc: `Visit #${newIndex} Customer Perk`,
+                icon: '🎁'
+            });
+            renderOffersEditor();
+            renderLivePreview();
+            showToast(`Offer #${newIndex} added to campaign track.`);
+        });
+
+        // Reset to Defaults Button
+        btnResetOffers.addEventListener('click', () => {
+            if (!confirm('Reset base offers back to STEPS 5 standard coffee & bakery perks?')) return;
+            currentOffers = JSON.parse(JSON.stringify(DEFAULT_STANDARD_OFFERS));
+            renderOffersEditor();
+            renderLivePreview();
+            showToast('Reset to 5 standard STEPS offers.');
+        });
+
+        // Save All Base Offers to Server
+        btnSaveOffers.addEventListener('click', async () => {
+            // Validation
+            for (let i = 0; i < currentOffers.length; i++) {
+                const off = currentOffers[i];
+                if (i === 0) {
+                    if (!off.title || off.title.trim().length === 0) {
+                        off.title = 'Free Quiz Signature Drink';
+                    }
+                    if (!off.desc || off.desc.trim().length === 0) {
+                        off.desc = 'Your Quiz Signature Match • 100% Free Drink';
+                    }
+                    if (!off.icon) {
+                        off.icon = '☕';
+                    }
+                } else if (!off.title || off.title.trim().length === 0) {
+                    alert(`Please provide a title for Offer #${i + 1}`);
+                    return;
+                }
+            }
+
+            btnSaveOffers.disabled = true;
+            btnSaveOffers.innerHTML = 'Saving Base Offers... ☕';
+
+            try {
+                const res = await fetch('/api/admin/offers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        offers: currentOffers
+                    })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    showToast(`🎉 ${data.message}`);
+                    fetchBaseOffers();
+                    fetchMembers(searchInput ? searchInput.value.trim() : ''); // refresh members in case titles were synced
+                } else {
+                    alert(data.message || 'Error saving offers');
+                }
+            } catch (err) {
+                alert('Connection error while saving base offers.');
+            } finally {
+                btnSaveOffers.disabled = false;
+                btnSaveOffers.innerHTML = '<span>💾 Save Base Offers & Publish</span>';
+            }
+        });
+
+        // ========================================================
+        // 2. CUSTOMER MEMBERS & POS COUNTER ENGINE
+        // ========================================================
+        // Date Formatter: Displays exact quiz submission date & time
+        const formatMemberDate = (iso) => {
+            if (!iso) return 'Date unknown';
+            try {
+                const d = new Date(iso);
+                if (isNaN(d.getTime())) return iso;
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                const day = d.getDate();
+                const month = months[d.getMonth()];
+                const year = d.getFullYear();
+                let hours = d.getHours();
+                const minutes = String(d.getMinutes()).padStart(2, '0');
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12 || 12;
+                return `${day} ${month} ${year} • ${hours}:${minutes} ${ampm}`;
+            } catch (_) {
+                return iso;
+            }
+        };
+
+        // Format Date to YYYY-MM-DD for date inputs
+        const formatDateForInput = (d) => {
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        const fetchMembers = async (query = '') => {
+            try {
+                const res = await fetch(`/api/admin/cards?q=${encodeURIComponent(query)}`);
+                const data = await res.json();
+                if (data.success) {
+                    members = data.cards || [];
+                    tabMembersCount.textContent = members.length;
+                    applyFiltersAndRender();
+                }
+            } catch (err) {
+                membersList.innerHTML = `<div class="empty-state">Could not connect to server.</div>`;
+            }
+        };
+
+        // Unified Filter Engine (Search + Status + First Coffee Type + Date Range Calendar)
+        const applyFiltersAndRender = () => {
+            const query = (searchInput?.value || '').trim().toLowerCase();
+            const status = filterStatusSelect?.value || 'all';
+            const drink = filterDrinkSelect?.value || 'all';
+            const fromDate = filterDateFrom?.value || '';
+            const toDate = filterDateTo?.value || '';
+
+            const filtered = members.filter((m) => {
+                // Text search (phone, name, passId)
+                if (query) {
+                    const matchPhone = (m.phone || '').toLowerCase().includes(query);
+                    const matchName = (m.name || '').toLowerCase().includes(query);
+                    const matchPass = (m.passId || '').toLowerCase().includes(query);
+                    if (!matchPhone && !matchName && !matchPass) return false;
+                }
+
+                // Date Range Filter on customer's createdAt
+                const createdIso = m.createdAt || '';
+                const createdDate = createdIso.slice(0, 10); // YYYY-MM-DD
+                if (fromDate && createdDate && createdDate < fromDate) return false;
+                if (toDate && createdDate && createdDate > toDate) return false;
+
+                // Status Filter
+                const isBanned = Boolean(m.isBanned);
+                const isActive = Boolean(m.cardActive);
+                const s1Ready = m.stamps?.['1']?.status === 'available';
+
+                if (status === 'banned') return isBanned;
+                if (status === 'active') return isActive && !isBanned;
+                if (status === 'pending') return !isActive && !isBanned;
+                if (status === 'ready') return s1Ready && !isBanned;
+
+                // First Coffee Type / Quiz Match Filter
+                if (drink !== 'all') {
+                    const cardDrink = m.matchedDrink || '';
+                    if (cardDrink !== drink) return false;
+                }
+
+                return true;
+            });
+
+            if (filterCounterLabel) {
+                if (filtered.length === members.length) {
+                    filterCounterLabel.textContent = `Showing all ${members.length} members`;
+                } else {
+                    filterCounterLabel.textContent = `Showing ${filtered.length} of ${members.length} members`;
+                }
+            }
+
+            const activeFilterChips = document.querySelector('#active-filter-chips');
+            const hasActiveFilters = Boolean(
+                status !== 'all' || 
+                drink !== 'all' || 
+                (calPreset !== 'maximum' || fromDate || toDate) || 
+                query
+            );
+
+            if (btnClearFilters) {
+                if (hasActiveFilters) {
+                    btnClearFilters.classList.add('has-active-filters');
+                } else {
+                    btnClearFilters.classList.remove('has-active-filters');
+                }
+            }
+
+            if (activeFilterChips) {
+                let chipsHtml = '';
+                // Status Chip
+                if (status === 'all') {
+                    chipsHtml += `<span class="filter-chip-pill">● All Statuses</span>`;
+                } else {
+                    const statusLabels = {
+                        'active': '⚡ Active VIP',
+                        'pending': '⏳ Pending Activation',
+                        'banned': '⛔ Banned',
+                        'ready': '🎁 Ready'
+                    };
+                    chipsHtml += `<span class="filter-chip-pill is-active">${escapeHtml(statusLabels[status] || status)}</span>`;
+                }
+
+                // Drink Chip
+                if (drink === 'all') {
+                    chipsHtml += `<span class="filter-chip-pill">☕ All Drinks</span>`;
+                } else {
+                    const drinkLabels = {
+                        'iced_spanish_latte': '☕ Spanish Latte',
+                        'strawberry_matcha': '🍵 Strawberry Matcha',
+                        'passionfruit_mojito': '🍹 Passionfruit Mojito',
+                        'mocha_frappe': '🥤 Mocha Frappe'
+                    };
+                    chipsHtml += `<span class="filter-chip-pill is-active">${escapeHtml(drinkLabels[drink] || drink)}</span>`;
+                }
+
+                // Date Chip
+                if (calPreset === 'maximum' && !fromDate && !toDate) {
+                    chipsHtml += `<span class="filter-chip-pill">📅 All Time</span>`;
+                } else {
+                    chipsHtml += `<span class="filter-chip-pill is-active">📅 ${escapeHtml(perfCalendarLabel?.textContent || 'Selected Range')}</span>`;
+                }
+
+                // Query Chip
+                if (query) {
+                    chipsHtml += `<span class="filter-chip-pill is-active">🔍 "${escapeHtml(query)}"</span>`;
+                }
+
+                activeFilterChips.innerHTML = chipsHtml;
+            }
+
+            if (activeFilterSummary) {
+                const parts = [];
+                if (status !== 'all') {
+                    const statusLabels = {
+                        'active': '⚡ Active VIP',
+                        'pending': '⏳ Pending Activation',
+                        'banned': '⛔ Banned',
+                        'ready': '🎁 Ready'
+                    };
+                    parts.push(statusLabels[status] || status);
+                }
+                if (drink !== 'all') {
+                    const drinkLabels = {
+                        'iced_spanish_latte': '☕ Spanish Latte',
+                        'strawberry_matcha': '🍵 Strawberry Matcha',
+                        'passionfruit_mojito': '🍹 Passionfruit Mojito',
+                        'mocha_frappe': '🥤 Mocha Frappe'
+                    };
+                    parts.push(drinkLabels[drink] || drink);
+                }
+                if (calPreset !== 'maximum' || fromDate || toDate) {
+                    parts.push(`Date: ${perfCalendarLabel?.textContent || 'Selected Range'}`);
+                }
+                if (query) {
+                    parts.push(`"${query}"`);
+                }
+                activeFilterSummary.textContent = parts.length ? parts.join(' • ') : 'All Members • All Drinks • All Time';
+            }
+
+            renderStats(members);
+            renderMembers(filtered);
+        };
+
+        const renderStats = (list) => {
+            statMembers.textContent = list.length;
+            let availableCount = 0;
+            let redeemedCount = 0;
+
+            list.forEach((m) => {
+                const s1 = m.stamps?.['1'];
+                if (s1?.status === 'available' && !m.isBanned) availableCount++;
+                if (s1?.status === 'redeemed' && !m.isBanned) redeemedCount++;
+            });
+
+            statAvailable.textContent = availableCount;
+            statRedeemed.textContent = redeemedCount;
+        };
+
+        const renderMembers = (list) => {
+            if (!list.length) {
+                membersList.innerHTML = `
+                    <div class="empty-state">
+                        <p style="font-size: 1.2rem; color: #fff; margin-bottom: .4rem;">No matching members found.</p>
+                        <p>Adjust your search, date range, or status filter, or take the quiz on <a href="/quiz" target="_blank" style="color: var(--gold);">/quiz</a>.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            membersList.innerHTML = '';
+
+            list.forEach((m) => {
+                const card = document.createElement('article');
+                card.className = `member-card ${m.isBanned ? 'is-banned' : ''}`;
+
+                const isBanned = Boolean(m.isBanned);
+                const quizFinishedFormatted = formatMemberDate(m.quizFinishedAt || m.createdAt);
+                const activatedAtFormatted = m.cardActive ? formatMemberDate(m.activatedAt || m.createdAt) : null;
+
+                // Dynamically iterate over all stamps present on the card
+                const stampKeys = Object.keys(m.stamps || {}).sort((a, b) => Number(a) - Number(b));
+
+                const drinkIcons = {
+                    'iced_spanish_latte': '☕',
+                    'strawberry_matcha': '🍵',
+                    'passionfruit_mojito': '🍹',
+                    'mocha_frappe': '🥤'
+                };
+
+                let stampsHtml = '';
+                let timelineStampsHtml = '';
+
+                stampKeys.forEach((key) => {
+                    const idx = Number(key);
+                    const s = m.stamps?.[key] || {};
+                    const status = s.status || 'locked';
+
+                    let titleDisplay = s.title || 'Reward';
+                    let descDisplay = s.desc || '';
+                    let iconDisplay = s.icon || '☕';
+
+                    if (idx === 1 && m.matchedDrinkName) {
+                        titleDisplay = `Free ${m.matchedDrinkName}`;
+                        descDisplay = 'Your Quiz Signature Match • 100% Free Drink';
+                        if (m.matchedDrink && drinkIcons[m.matchedDrink]) {
+                            iconDisplay = drinkIcons[m.matchedDrink];
+                        }
+                    }
+
+                    let boxClass = 'stamp-control-box';
+                    let badgeClass = 'badge-locked';
+                    let badgeLabel = 'Locked';
+
+                    if (status === 'redeemed') {
+                        boxClass += ' is-redeemed';
+                        badgeClass = 'badge-redeemed';
+                        badgeLabel = 'Redeemed';
+                    } else if (status === 'available') {
+                        boxClass += ' is-available';
+                        badgeClass = 'badge-available';
+                        badgeLabel = 'Ready';
+                    }
+
+                    const unlockedTime = s.unlockedAt ? formatMemberDate(s.unlockedAt) : null;
+                    const redeemedTime = s.redeemedAt ? formatMemberDate(s.redeemedAt) : null;
+                    const unlockDisplay = unlockedTime || (idx === 1 ? quizFinishedFormatted : (formatMemberDate(m.createdAt || m.quizFinishedAt) || redeemedTime));
+                    const redeemDisplay = redeemedTime || unlockDisplay || quizFinishedFormatted;
+
+                    let stampTagHtml = '';
+                    if (status === 'redeemed') {
+                        stampTagHtml = `
+                            <div class="stamp-time-tags-group">
+                                <div class="stamp-time-tag unlocked" title="Exact date unlocked">⚡ Unlocked: ${escapeHtml(unlockDisplay)}</div>
+                                <div class="stamp-time-tag redeemed" title="Exact date redeemed">✓ Redeemed: ${escapeHtml(redeemDisplay)}</div>
+                            </div>
+                        `;
+                    } else if (status === 'available') {
+                        stampTagHtml = `
+                            <div class="stamp-time-tags-group">
+                                <div class="stamp-time-tag available" title="Exact date unlocked">⚡ Unlocked: ${escapeHtml(unlockDisplay)}</div>
+                            </div>
+                        `;
+                    } else {
+                        stampTagHtml = `
+                            <div class="stamp-time-tags-group">
+                                <div class="stamp-time-tag locked">🔒 Locked (Visit #${idx})</div>
+                            </div>
+                        `;
+                    }
+
+                    stampsHtml += `
+                        <div class="${boxClass}">
+                            <div class="stamp-header-row">
+                                <span class="stamp-title-text">${escapeHtml(iconDisplay)} #${idx} ${escapeHtml(titleDisplay)}</span>
+                                <span class="stamp-status-badge ${badgeClass}">${badgeLabel}</span>
+                            </div>
+                            <p class="stamp-desc-text">${escapeHtml(descDisplay)}</p>
+                            ${stampTagHtml}
+                            <div class="stamp-actions-row">
+                                ${status === 'available' ? `
+                                    <button class="btn-action btn-redeem" onclick="updateStamp('${escapeHtml(m.phone)}', ${idx}, 'redeem')">✓ Redeem</button>
+                                ` : ''}
+                                ${status === 'locked' ? `
+                                    <button class="btn-action btn-unlock" onclick="updateStamp('${escapeHtml(m.phone)}', ${idx}, 'unlock')">⚡ Unlock</button>
+                                ` : ''}
+                                ${status === 'redeemed' ? `
+                                    <button class="btn-action btn-reset" onclick="updateStamp('${escapeHtml(m.phone)}', ${idx}, 'unlock')">↺ Re-open</button>
+                                ` : `
+                                    <button class="btn-action btn-reset" onclick="updateStamp('${escapeHtml(m.phone)}', ${idx}, 'reset')">🔒 Lock</button>
+                                `}
+                            </div>
+                        </div>
+                    `;
+
+                    // Build timeline event
+                    if (status === 'redeemed') {
+                        timelineStampsHtml += `
+                            <div class="timeline-node done">
+                                <div class="timeline-title">
+                                    <span>🎁 Stamp #${idx} — ${escapeHtml(titleDisplay)}</span>
+                                    <span class="stamp-status-badge badge-redeemed" style="font-size: .65rem; padding: .1rem .4rem;">REDEEMED</span>
+                                </div>
+                                <div class="timeline-time">
+                                    Unlocked: <span>${escapeHtml(unlockDisplay)}</span> • Redeemed at Bar: <strong>${escapeHtml(redeemDisplay)}</strong>
+                                </div>
+                            </div>
+                        `;
+                    } else if (status === 'available') {
+                        timelineStampsHtml += `
+                            <div class="timeline-node done">
+                                <div class="timeline-title">
+                                    <span>⚡ Stamp #${idx} — ${escapeHtml(titleDisplay)}</span>
+                                    <span class="stamp-status-badge badge-available" style="font-size: .65rem; padding: .1rem .4rem;">READY TO REDEEM</span>
+                                </div>
+                                <div class="timeline-time">
+                                    Unlocked at: <strong>${escapeHtml(unlockedTime || quizFinishedFormatted)}</strong> • Waiting for guest visit
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        timelineStampsHtml += `
+                            <div class="timeline-node pending">
+                                <div class="timeline-title">
+                                    <span>🔒 Stamp #${idx} — ${escapeHtml(titleDisplay)}</span>
+                                    <span class="stamp-status-badge badge-locked" style="font-size: .65rem; padding: .1rem .4rem;">LOCKED</span>
+                                </div>
+                                <div class="timeline-time">
+                                    Requires visit #${idx} to unlock
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                card.innerHTML = `
+                    <div class="member-header">
+                        <div class="member-header-left">
+                            <div class="customer-chk-wrap">
+                                <input type="checkbox" class="customer-chk" value="${escapeHtml(m.phone)}" onchange="updateSelectedCount()">
+                            </div>
+                            <div class="member-avatar">${escapeHtml(drinkIcons[m.matchedDrink] || '☕')}</div>
+                            <div class="member-name-block">
+                                <div class="member-name-row">
+                                    <h2>${escapeHtml(m.name || 'Valued Guest')}</h2>
+                                    ${isBanned ? `
+                                        <span class="badge-status-pill banned">⛔ Banned</span>
+                                    ` : `
+                                        <span class="badge-status-pill ${m.cardActive ? 'active' : 'pending'}">
+                                            ● ${m.cardActive ? 'Active VIP' : 'Pending Activation'}
+                                        </span>
+                                    `}
+                                    ${(m.offersHistory && m.offersHistory.length > 0) ? `<span class="badge-history-pill">📜 v${m.offersHistory.length + 1}</span>` : ''}
+                                </div>
+                                <div class="member-meta">
+                                    <span class="meta-pill phone">📱 ${escapeHtml(m.phone || '')}</span>
+                                    <span class="meta-pill pass">Pass: <code>${escapeHtml(m.passId || '')}</code></span>
+                                    <span class="meta-pill quiz-date" title="Quiz Completed Date">🏁 Quiz: ${escapeHtml(quizFinishedFormatted)}</span>
+                                    ${m.cardActive ? `
+                                        <span class="meta-pill active-date" title="Pass Activation Date">⚡ Activated: ${escapeHtml(activatedAtFormatted)}</span>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-header-right">
+                            <div class="badge-drink" title="Quiz signature drink recommendation">
+                                <span>${escapeHtml(drinkIcons[m.matchedDrink] || '☕')} Matched:</span>
+                                <strong>${escapeHtml(m.matchedDrinkName || 'Signature Coffee')}</strong>
+                            </div>
+
+                            <div class="customer-actions-dropdown">
+                                <button class="btn-customer-dropdown-trigger" type="button" onclick="toggleCustomerDropdown('${escapeHtml(m.phone)}', event)" aria-haspopup="true" aria-expanded="false" title="Customer management actions">
+                                    <span>⚙️ Actions</span>
+                                    <span class="dropdown-chevron">▾</span>
+                                </button>
+                                <div class="customer-dropdown-menu" id="dropdown-menu-${escapeHtml(m.phone)}">
+                                    <button class="dropdown-item" type="button" onclick="promptUpdateCustomerOffers('${escapeHtml(m.phone)}', '${escapeHtml(m.name || 'Customer')}'); closeAllCustomerDropdowns();">
+                                        <span class="dropdown-item-icon">🔄</span>
+                                        <div class="dropdown-item-content">
+                                            <span class="dropdown-item-title">Update Offers</span>
+                                            <span class="dropdown-item-desc">Sync to current base campaign</span>
+                                        </div>
+                                    </button>
+                                    <button class="dropdown-item" type="button" onclick="openCustomerHistory('${escapeHtml(m.phone)}'); closeAllCustomerDropdowns();">
+                                        <span class="dropdown-item-icon">📜</span>
+                                        <div class="dropdown-item-content">
+                                            <span class="dropdown-item-title">Offer History (${(m.offersHistory || []).length})</span>
+                                            <span class="dropdown-item-desc">Audit versioned offer changes</span>
+                                        </div>
+                                    </button>
+                                    <div class="dropdown-divider"></div>
+                                    ${isBanned ? `
+                                        <button class="dropdown-item item-unban" type="button" onclick="toggleCustomerBan('${escapeHtml(m.phone)}', false); closeAllCustomerDropdowns();">
+                                            <span class="dropdown-item-icon">✅</span>
+                                            <div class="dropdown-item-content">
+                                                <span class="dropdown-item-title">Unban Customer</span>
+                                                <span class="dropdown-item-desc">Restore loyalty pass access</span>
+                                            </div>
+                                        </button>
+                                    ` : `
+                                        <button class="dropdown-item item-ban" type="button" onclick="toggleCustomerBan('${escapeHtml(m.phone)}', true); closeAllCustomerDropdowns();">
+                                            <span class="dropdown-item-icon">⛔</span>
+                                            <div class="dropdown-item-content">
+                                                <span class="dropdown-item-title">Ban Customer</span>
+                                                <span class="dropdown-item-desc">Block pass and phone number</span>
+                                            </div>
+                                        </button>
+                                    `}
+                                    <button class="dropdown-item item-delete" type="button" onclick="promptDeleteCustomer('${escapeHtml(m.phone)}', '${escapeHtml(m.name || 'Customer')}'); closeAllCustomerDropdowns();">
+                                        <span class="dropdown-item-icon">🗑️</span>
+                                        <div class="dropdown-item-content">
+                                            <span class="dropdown-item-title">Delete Customer</span>
+                                            <span class="dropdown-item-desc">Permanently remove records</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Stamps Grid -->
+                    <div class="stamps-barista-grid">
+                        ${stampsHtml}
+                    </div>
+
+                    <!-- Expandable Activity Timeline Drawer -->
+                    <div class="member-timeline-drawer" id="timeline-drawer-${escapeHtml(m.phone)}">
+                        <div class="timeline-drawer-header">
+                            <span>⏱️ Customer Journey & Activity Audit Trail</span>
+                            <span style="font-weight: 500; font-size: .75rem; color: var(--text-muted);">${escapeHtml(m.name || 'Guest')} • ${escapeHtml(m.phone || '')}</span>
+                        </div>
+                        <div class="timeline-track">
+                            <!-- Milestone 1: Quiz Finished -->
+                            <div class="timeline-node done">
+                                <div class="timeline-title">
+                                    <span>🏁 Quiz Completed & Personalized Match Unlocked</span>
+                                    <span class="stamp-status-badge badge-available" style="font-size: .65rem; padding: .1rem .4rem;">COMPLETED</span>
+                                </div>
+                                <div class="timeline-time">
+                                    Finished on: <strong>${escapeHtml(quizFinishedFormatted)}</strong> • Quiz Match: <em>${escapeHtml(m.matchedDrinkName || 'Specialty Drink')}</em>
+                                </div>
+                            </div>
+
+                            <!-- Milestone 2: Pass Activated -->
+                            <div class="timeline-node ${m.cardActive ? 'done' : 'pending'}">
+                                <div class="timeline-title">
+                                    <span>⚡ Digital Loyalty Pass Activation</span>
+                                    ${m.cardActive ? '<span class="stamp-status-badge badge-available" style="font-size: .65rem; padding: .1rem .4rem;">ACTIVE</span>' : '<span class="stamp-status-badge badge-locked" style="font-size: .65rem; padding: .1rem .4rem;">PENDING</span>'}
+                                </div>
+                                <div class="timeline-time">
+                                    ${m.cardActive ? `Activated on: <strong>${escapeHtml(activatedAtFormatted)}</strong>` : 'Pass not activated yet (Customer has not clicked Activate Pass on screen).'}
+                                </div>
+                            </div>
+
+                            <!-- Milestones 3..N: Stamps Unlock and Redeem events -->
+                            ${timelineStampsHtml}
+                        </div>
+                    </div>
+
+                    <div class="member-footer-actions">
+                        <div style="display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;">
+                            <button class="btn-quick-stamp" onclick="quickAdvance('${escapeHtml(m.phone)}')">
+                                <span>+ Stamp Next Visit Offer</span>
+                            </button>
+                            <button class="btn-toggle-timeline" type="button" onclick="toggleCardTimeline('${escapeHtml(m.phone)}')">
+                                ⏱️ Activity Timeline ▾
+                            </button>
+                        </div>
+                        <button class="btn-view-card" onclick="window.open('/card?phone=${encodeURIComponent(m.phone || '')}', '_blank')">
+                            Open Customer Live Pass Screen →
+                        </button>
+                    </div>
+                `;
+
+                membersList.appendChild(card);
+            });
+        };
+
+        // Customer Ban / Unban Handler
+        window.toggleCustomerBan = async (phone, shouldBan) => {
+            const actionText = shouldBan ? 'BAN' : 'UNBAN';
+            const confirmMsg = shouldBan
+                ? `Are you sure you want to BAN customer ${phone}?\nThey will be blocked from entering their mobile number in the system again.`
+                : `Are you sure you want to UNBAN customer ${phone}?\nTheir access to the loyalty program will be restored.`;
+
+            if (!confirm(confirmMsg)) return;
+
+            try {
+                const res = await fetch('/api/admin/customer/ban', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, action: shouldBan ? 'ban' : 'unban' })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(data.message);
+                    fetchMembers();
+                } else {
+                    alert(data.message || 'Error updating ban status');
+                }
+            } catch (err) {
+                alert('Connection error while updating ban status.');
+            }
+        };
+
+        // Customer Delete Modal Prompt
+        let pendingDeletePhone = null;
+        window.promptDeleteCustomer = (phone, name) => {
+            pendingDeletePhone = phone;
+            document.querySelector('#delete-modal-title').textContent = `Delete Customer ${name}?`;
+            document.querySelector('#delete-modal-desc').innerHTML = `
+                Are you sure you want to delete <strong>${escapeHtml(name)}</strong> (<code>${escapeHtml(phone)}</code>)?
+                <br><br>
+                Their card and rewards history will be completely removed from the database.
+                <br><br>
+                <strong style="color: #241711;">The customer will be free to retake the quiz and submit their phone number again.</strong>
+            `;
+            deleteModal.style.display = 'grid';
+        };
+
+        btnCancelDelete.addEventListener('click', () => {
+            deleteModal.style.display = 'none';
+            pendingDeletePhone = null;
+        });
+
+        btnConfirmDelete.addEventListener('click', async () => {
+            if (!pendingDeletePhone) return;
+            const phoneToDelete = pendingDeletePhone;
+            btnConfirmDelete.disabled = true;
+            btnConfirmDelete.textContent = 'Deleting...';
+
+            try {
+                const res = await fetch('/api/admin/customer/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: phoneToDelete })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    deleteModal.style.display = 'none';
+                    showToast(data.message);
+                    fetchMembers();
+                } else {
+                    alert(data.message || 'Error deleting customer');
+                }
+            } catch (err) {
+                alert('Connection error while deleting customer.');
+            } finally {
+                btnConfirmDelete.disabled = false;
+                btnConfirmDelete.textContent = 'Yes, Delete Customer';
+                pendingDeletePhone = null;
+            }
+        });
+
+        // Stamp action caller
+        window.updateStamp = async (phone, stampIndex, action) => {
+            try {
+                const res = await fetch('/api/admin/stamp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, stampIndex, action })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast(`Stamp #${stampIndex} successfully marked as ${action.toUpperCase()}!`);
+                    fetchMembers();
+                } else {
+                    alert(data.message || 'Error updating stamp');
+                }
+            } catch (err) {
+                alert('Connection error');
+            }
+        };
+
+        // Quick advance helper: unlocks next locked stamp
+        window.quickAdvance = async (phone) => {
+            const member = members.find((m) => m.phone === phone);
+            if (!member) return;
+
+            const stampKeys = Object.keys(member.stamps || {}).sort((a, b) => Number(a) - Number(b));
+            let targetStamp = null;
+
+            for (const k of stampKeys) {
+                const s = member.stamps?.[k];
+                if (s?.status === 'locked') {
+                    targetStamp = Number(k);
+                    break;
+                }
+            }
+
+            if (!targetStamp) {
+                alert('All loyalty stamps are already unlocked or redeemed for this member!');
+                return;
+            }
+
+            await window.updateStamp(phone, targetStamp, 'unlock');
+        };
+
+        // Search Input with Debounce & Clear Action
+        let searchTimer;
+        const searchClearBtn = document.querySelector('#search-clear-btn');
+        if (searchClearBtn) {
+            searchClearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                searchClearBtn.style.display = 'none';
+                searchInput.focus();
+                applyFiltersAndRender();
+            });
+        }
+
+        searchInput.addEventListener('input', () => {
+            if (searchClearBtn) {
+                searchClearBtn.style.display = searchInput.value.trim().length > 0 ? 'flex' : 'none';
+            }
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => {
+                applyFiltersAndRender();
+            }, 180);
+        });
+
+        // Status Filter Change
+        filterStatusSelect.addEventListener('change', () => {
+            applyFiltersAndRender();
+        });
+
+        // First Coffee Type / Drink Filter Change
+        if (filterDrinkSelect) {
+            filterDrinkSelect.addEventListener('change', () => {
+                applyFiltersAndRender();
+            });
+        }
+
+        // Collapsible Customer Activity Timeline Drawer Toggle
+        window.toggleCardTimeline = (phone) => {
+            const drawer = document.getElementById(`timeline-drawer-${phone}`);
+            if (!drawer) return;
+            const isOpen = drawer.classList.toggle('is-open');
+            const card = drawer.closest('.member-card');
+            const btn = card?.querySelector('.btn-toggle-timeline');
+            if (btn) {
+                btn.innerHTML = isOpen ? '⏱️ Hide Activity Timeline ▴' : '⏱️ Activity Timeline ▾';
+            }
+        };
+
+        // Customer Actions Dropdown Handlers
+        window.toggleCustomerDropdown = (phone, event) => {
+            if (event) {
+                event.stopPropagation();
+            }
+            const menu = document.getElementById(`dropdown-menu-${phone}`);
+            const trigger = event?.currentTarget;
+            const isOpen = menu?.classList.contains('is-open');
+
+            // Close all open customer dropdowns first
+            window.closeAllCustomerDropdowns();
+
+            if (!isOpen && menu) {
+                menu.classList.add('is-open');
+                trigger?.classList.add('is-active');
+                trigger?.setAttribute('aria-expanded', 'true');
+            }
+        };
+
+        window.closeAllCustomerDropdowns = () => {
+            document.querySelectorAll('.customer-dropdown-menu.is-open').forEach((m) => m.classList.remove('is-open'));
+            document.querySelectorAll('.btn-customer-dropdown-trigger.is-active').forEach((b) => {
+                b.classList.remove('is-active');
+                b.setAttribute('aria-expanded', 'false');
+            });
+        };
+
+        // Close dropdowns on outside click or Escape key
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.customer-actions-dropdown')) {
+                window.closeAllCustomerDropdowns();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.closeAllCustomerDropdowns();
+            }
+        });
+
+        // ----------------------------------------------------
+        // Meta Ads / OIA Style Performance Date Range Picker Engine
+        // ----------------------------------------------------
+        let calPreset = 'maximum';
+        let calRange = { from: null, to: null };
+        let calBaseMonth = new Date();
+        calBaseMonth.setDate(1);
+        let calHoverDate = null;
+        let isCalOpen = false;
+
+        const subDays = (d, n) => {
+            const r = new Date(d);
+            r.setDate(r.getDate() - n);
+            return r;
+        };
+
+        const formatShortDate = (d) => {
+            if (!d) return '';
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+        };
+
+        const toIsoDateString = (d) => {
+            if (!d) return '';
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        const parseDateInput = (str) => {
+            if (!str) return null;
+            const parts = str.split('-');
+            if (parts.length !== 3) return null;
+            return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+        };
+
+        const calculatePresetDates = (preset) => {
+            const today = new Date();
+            today.setHours(23, 59, 59, 999);
+            const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+            switch (preset) {
+                case 'today':
+                    return { from: startOfToday, to: startOfToday };
+                case 'yesterday': {
+                    const y = subDays(startOfToday, 1);
+                    return { from: y, to: y };
+                }
+                case 'last7':
+                    return { from: subDays(startOfToday, 6), to: startOfToday };
+                case 'last30':
+                    return { from: subDays(startOfToday, 29), to: startOfToday };
+                case 'thisMonth': {
+                    const sm = new Date(today.getFullYear(), today.getMonth(), 1);
+                    return { from: sm, to: startOfToday };
+                }
+                case 'lastMonth': {
+                    const prevMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+                    const prevMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+                    return { from: prevMonthStart, to: prevMonthEnd };
+                }
+                case 'maximum':
+                default:
+                    return { from: null, to: null };
+            }
+        };
+
+        const updateTriggerDisplay = () => {
+            if (!perfCalendarLabel) return;
+            switch (calPreset) {
+                case 'today':
+                    perfCalendarLabel.textContent = 'Today';
+                    break;
+                case 'yesterday':
+                    perfCalendarLabel.textContent = 'Yesterday';
+                    break;
+                case 'last7':
+                    perfCalendarLabel.textContent = 'Last 7 Days';
+                    break;
+                case 'last30':
+                    perfCalendarLabel.textContent = 'Last 30 Days';
+                    break;
+                case 'thisMonth':
+                    perfCalendarLabel.textContent = 'This Month';
+                    break;
+                case 'lastMonth':
+                    perfCalendarLabel.textContent = 'Last Month';
+                    break;
+                case 'maximum':
+                    perfCalendarLabel.textContent = 'All Time (Maximum)';
+                    break;
+                case 'custom':
+                    if (calRange.from) {
+                        const fromStr = formatShortDate(calRange.from);
+                        const toStr = calRange.to ? formatShortDate(calRange.to) : fromStr;
+                        perfCalendarLabel.textContent = (fromStr === toStr) ? fromStr : `${fromStr} – ${toStr}`;
+                    } else {
+                        perfCalendarLabel.textContent = 'Custom Range';
+                    }
+                    break;
+                default:
+                    perfCalendarLabel.textContent = 'All Time (Maximum)';
+            }
+
+            if (perfCalendarReset) {
+                perfCalendarReset.style.display = (calPreset !== 'maximum' || filterDateFrom.value || filterDateTo.value) ? 'inline-flex' : 'none';
+            }
+        };
+
+        const updatePresetBtnsHighlight = () => {
+            if (perfPresetBtns) {
+                perfPresetBtns.forEach(btn => {
+                    btn.classList.toggle('is-active', btn.dataset.preset === calPreset);
+                });
+            }
+        };
+
+        const updateCalSummaryText = () => {
+            if (!perfCalSummary) return;
+            if (calPreset === 'maximum') {
+                perfCalSummary.textContent = 'Showing all activity dates (No restriction)';
+            } else if (calRange.from) {
+                const fromStr = formatShortDate(calRange.from);
+                const toStr = calRange.to ? formatShortDate(calRange.to) : fromStr;
+                perfCalSummary.textContent = (fromStr === toStr) ? `Selected: ${fromStr}` : `Selected: ${fromStr} – ${toStr}`;
+            } else {
+                perfCalSummary.textContent = 'Select start date and end date';
+            }
+        };
+
+        const renderPerfCalendar = () => {
+            if (!perfMonthsContainer) return;
+            perfMonthsContainer.innerHTML = '';
+
+            const isMobile = window.innerWidth <= 768;
+            const monthsCount = isMobile ? 1 : 2;
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const today = new Date();
+            const todayDateStr = toIsoDateString(today);
+
+            const activeFrom = calRange.from;
+            const activeTo = calRange.to;
+            const hoverTarget = (!activeTo && activeFrom && calHoverDate) ? calHoverDate : null;
+
+            for (let m = 0; m < monthsCount; m++) {
+                const targetMonthDate = new Date(calBaseMonth.getFullYear(), calBaseMonth.getMonth() + m, 1);
+                const year = targetMonthDate.getFullYear();
+                const monthIndex = targetMonthDate.getMonth();
+
+                const monthBlock = document.createElement('div');
+                monthBlock.className = 'perf-month-block';
+
+                const title = document.createElement('div');
+                title.className = 'perf-month-title';
+                title.textContent = `${monthNames[monthIndex]} ${year}`;
+                monthBlock.appendChild(title);
+
+                const weekdaysRow = document.createElement('div');
+                weekdaysRow.className = 'perf-weekdays-row';
+                ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].forEach(w => {
+                    const wCol = document.createElement('div');
+                    wCol.textContent = w;
+                    weekdaysRow.appendChild(wCol);
+                });
+                monthBlock.appendChild(weekdaysRow);
+
+                const daysGrid = document.createElement('div');
+                daysGrid.className = 'perf-days-grid';
+
+                const firstDayOfWeek = targetMonthDate.getDay();
+                const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+
+                // Leading blank days
+                for (let e = 0; e < firstDayOfWeek; e++) {
+                    const emptyCell = document.createElement('div');
+                    emptyCell.className = 'perf-day-cell other-month';
+                    daysGrid.appendChild(emptyCell);
+                }
+
+                // Days of the month
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const cellDate = new Date(year, monthIndex, d);
+                    const cellDateStr = toIsoDateString(cellDate);
+                    const isFuture = cellDateStr > todayDateStr;
+
+                    const cell = document.createElement('div');
+                    cell.className = 'perf-day-cell';
+                    cell.textContent = d;
+                    cell.dataset.date = cellDateStr;
+
+                    if (cellDateStr === todayDateStr) {
+                        cell.classList.add('today-marker');
+                    }
+
+                    if (isFuture) {
+                        cell.classList.add('disabled');
+                    } else {
+                        // Check range highlights
+                        const cellTime = cellDate.getTime();
+                        const fromTime = activeFrom ? new Date(activeFrom.getFullYear(), activeFrom.getMonth(), activeFrom.getDate()).getTime() : null;
+                        const toTime = activeTo ? new Date(activeTo.getFullYear(), activeTo.getMonth(), activeTo.getDate()).getTime() : null;
+                        const hoverTime = hoverTarget ? new Date(hoverTarget.getFullYear(), hoverTarget.getMonth(), hoverTarget.getDate()).getTime() : null;
+
+                        if (fromTime && toTime) {
+                            if (fromTime === toTime && cellTime === fromTime) {
+                                cell.classList.add('range-single');
+                            } else if (cellTime === fromTime) {
+                                cell.classList.add('range-start');
+                            } else if (cellTime === toTime) {
+                                cell.classList.add('range-end');
+                            } else if (cellTime > fromTime && cellTime < toTime) {
+                                cell.classList.add('range-mid');
+                            }
+                        } else if (fromTime && !toTime) {
+                            if (cellTime === fromTime) {
+                                if (hoverTime && hoverTime === fromTime) {
+                                    cell.classList.add('range-single');
+                                } else if (hoverTime && hoverTime > fromTime) {
+                                    cell.classList.add('range-start');
+                                } else if (hoverTime && hoverTime < fromTime) {
+                                    cell.classList.add('range-end');
+                                } else {
+                                    cell.classList.add('range-single');
+                                }
+                            } else if (hoverTime) {
+                                const minT = Math.min(fromTime, hoverTime);
+                                const maxT = Math.max(fromTime, hoverTime);
+                                if (cellTime === hoverTime) {
+                                    if (hoverTime > fromTime) cell.classList.add('range-end');
+                                    else cell.classList.add('range-start');
+                                } else if (cellTime > minT && cellTime < maxT) {
+                                    cell.classList.add('range-mid');
+                                }
+                            }
+                        }
+
+                        // Hover preview event
+                        cell.addEventListener('mouseenter', () => {
+                            if (calRange.from && !calRange.to) {
+                                calHoverDate = cellDate;
+                                renderPerfCalendar();
+                            }
+                        });
+
+                        // Date selection click event
+                        cell.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            if (!calRange.from || (calRange.from && calRange.to)) {
+                                calRange.from = cellDate;
+                                calRange.to = null;
+                                calHoverDate = null;
+                                calPreset = 'custom';
+                                updatePresetBtnsHighlight();
+                                updateCalSummaryText();
+                                renderPerfCalendar();
+                            } else if (calRange.from && !calRange.to) {
+                                if (cellDate < calRange.from) {
+                                    calRange.to = calRange.from;
+                                    calRange.from = cellDate;
+                                } else {
+                                    calRange.to = cellDate;
+                                }
+                                calHoverDate = null;
+                                calPreset = 'custom';
+                                updatePresetBtnsHighlight();
+                                updateCalSummaryText();
+                                renderPerfCalendar();
+                            }
+                        });
+                    }
+
+                    daysGrid.appendChild(cell);
+                }
+
+                monthBlock.appendChild(daysGrid);
+                perfMonthsContainer.appendChild(monthBlock);
+            }
+
+            updateCalSummaryText();
+        };
+
+        // Open / Close Popover
+        if (perfCalendarTrigger) {
+            perfCalendarTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isCalOpen = !isCalOpen;
+                perfCalendarPopover.style.display = isCalOpen ? 'flex' : 'none';
+                perfCalendarTrigger.classList.toggle('is-open', isCalOpen);
+                perfCalendarTrigger.setAttribute('aria-expanded', isCalOpen);
+
+                if (isCalOpen) {
+                    const currentFromStr = filterDateFrom.value;
+                    const currentToStr = filterDateTo.value;
+                    if (currentFromStr && currentToStr) {
+                        calRange.from = parseDateInput(currentFromStr);
+                        calRange.to = parseDateInput(currentToStr);
+                        if (calRange.to) {
+                            calBaseMonth = new Date(calRange.to.getFullYear(), calRange.to.getMonth() - (window.innerWidth <= 768 ? 0 : 1), 1);
+                        }
+                    } else if (!currentFromStr && !currentToStr) {
+                        calRange = { from: null, to: null };
+                        calPreset = 'maximum';
+                        const now = new Date();
+                        calBaseMonth = new Date(now.getFullYear(), now.getMonth() - (window.innerWidth <= 768 ? 0 : 1), 1);
+                    }
+                    updatePresetBtnsHighlight();
+                    renderPerfCalendar();
+                }
+            });
+        }
+
+        // Prev & Next Month Navigation
+        if (perfCalPrev) {
+            perfCalPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                calBaseMonth = new Date(calBaseMonth.getFullYear(), calBaseMonth.getMonth() - 1, 1);
+                renderPerfCalendar();
+            });
+        }
+
+        if (perfCalNext) {
+            perfCalNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                calBaseMonth = new Date(calBaseMonth.getFullYear(), calBaseMonth.getMonth() + 1, 1);
+                renderPerfCalendar();
+            });
+        }
+
+        // Preset Buttons Click Handler
+        if (perfPresetBtns) {
+            perfPresetBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const preset = btn.dataset.preset;
+                    calPreset = preset;
+                    const calculated = calculatePresetDates(preset);
+                    calRange = calculated;
+                    calHoverDate = null;
+
+                    if (preset !== 'maximum' && calRange.to) {
+                        const isMobile = window.innerWidth <= 768;
+                        calBaseMonth = new Date(calRange.to.getFullYear(), calRange.to.getMonth() - (isMobile ? 0 : 1), 1);
+                    }
+
+                    updatePresetBtnsHighlight();
+                    updateCalSummaryText();
+                    renderPerfCalendar();
+                });
+            });
+        }
+
+        // Cancel Button
+        if (perfCalCancel) {
+            perfCalCancel.addEventListener('click', (e) => {
+                e.stopPropagation();
+                isCalOpen = false;
+                perfCalendarPopover.style.display = 'none';
+                perfCalendarTrigger.classList.remove('is-open');
+                perfCalendarTrigger.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        // Apply Button
+        if (perfCalApply) {
+            perfCalApply.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (calPreset === 'maximum') {
+                    filterDateFrom.value = '';
+                    filterDateTo.value = '';
+                } else if (calRange.from) {
+                    const fromD = calRange.from;
+                    const toD = calRange.to || calRange.from;
+                    filterDateFrom.value = toIsoDateString(fromD);
+                    filterDateTo.value = toIsoDateString(toD);
+                }
+
+                updateTriggerDisplay();
+                isCalOpen = false;
+                perfCalendarPopover.style.display = 'none';
+                perfCalendarTrigger.classList.remove('is-open');
+                perfCalendarTrigger.setAttribute('aria-expanded', 'false');
+
+                applyFiltersAndRender();
+            });
+        }
+
+        // Quick Reset Button on trigger capsule
+        if (perfCalendarReset) {
+            perfCalendarReset.addEventListener('click', (e) => {
+                e.stopPropagation();
+                calPreset = 'maximum';
+                calRange = { from: null, to: null };
+                filterDateFrom.value = '';
+                filterDateTo.value = '';
+                updateTriggerDisplay();
+                updatePresetBtnsHighlight();
+                applyFiltersAndRender();
+            });
+        }
+
+        // Close Popover on Outside Click
+        document.addEventListener('click', (e) => {
+            if (isCalOpen && perfCalendarWrapper && !perfCalendarWrapper.contains(e.target)) {
+                isCalOpen = false;
+                perfCalendarPopover.style.display = 'none';
+                perfCalendarTrigger.classList.remove('is-open');
+                perfCalendarTrigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Calendar Date Range Inputs Change (Programmatic or Fallback)
+        filterDateFrom.addEventListener('change', () => {
+            calPreset = 'custom';
+            calRange.from = parseDateInput(filterDateFrom.value);
+            updateTriggerDisplay();
+            updatePresetBtnsHighlight();
+            applyFiltersAndRender();
+        });
+
+        filterDateTo.addEventListener('change', () => {
+            calPreset = 'custom';
+            calRange.to = parseDateInput(filterDateTo.value);
+            updateTriggerDisplay();
+            updatePresetBtnsHighlight();
+            applyFiltersAndRender();
+        });
+
+        // Clear Filters Button
+        btnClearFilters.addEventListener('click', () => {
+            searchInput.value = '';
+            filterStatusSelect.value = 'all';
+            if (filterDrinkSelect) filterDrinkSelect.value = 'all';
+            filterDateFrom.value = '';
+            filterDateTo.value = '';
+            calPreset = 'maximum';
+            calRange = { from: null, to: null };
+            updateTriggerDisplay();
+            updatePresetBtnsHighlight();
+            applyFiltersAndRender();
+            showToast('All filters have been reset.');
+        });
+
+        // ----------------------------------------------------
+        // Multi-Selection & Bulk Actions
+        // ----------------------------------------------------
+        window.updateSelectedCount = () => {
+            const checked = Array.from(document.querySelectorAll('.customer-chk:checked')).map(el => el.value);
+            if (checked.length > 0) {
+                bulkSelectedCount.textContent = `${checked.length} Selected`;
+                bulkActionsBar.style.display = 'flex';
+            } else {
+                bulkActionsBar.style.display = 'none';
+            }
+        };
+
+        btnBulkDeselect.addEventListener('click', () => {
+            document.querySelectorAll('.customer-chk').forEach(el => el.checked = false);
+            updateSelectedCount();
+        });
+
+        // ----------------------------------------------------
+        // Customer Offers Upgrade (Single & Bulk)
+        // ----------------------------------------------------
+        let pendingUpdatePhones = [];
+
+        window.promptUpdateCustomerOffers = (phone, name) => {
+            pendingUpdatePhones = [phone];
+            updateModalTitle.textContent = `Upgrade Offers for ${name}?`;
+            updateModalDesc.innerHTML = `
+                Are you sure you want to upgrade <strong>${escapeHtml(name)}</strong> (<code>${escapeHtml(phone)}</code>) to the currently active campaign offers?
+                <br><br>
+                <strong>What will happen:</strong>
+                <br>
+                1. Their current offers and stamps will be permanently preserved in their <strong>Offers History</strong>.
+                <br>
+                2. Their pass will be upgraded to the active campaign rewards, keeping their personalized quiz free drink on Deal #1.
+            `;
+            updateOffersModal.style.display = 'grid';
+        };
+
+        btnBulkUpgradeAction.addEventListener('click', () => {
+            const checked = Array.from(document.querySelectorAll('.customer-chk:checked')).map(el => el.value);
+            if (checked.length === 0) return;
+            pendingUpdatePhones = checked;
+            updateModalTitle.textContent = `Upgrade Offers for ${checked.length} Customers?`;
+            updateModalDesc.innerHTML = `
+                Are you sure you want to upgrade <strong>${checked.length} selected customer(s)</strong> to the active campaign offers?
+                <br><br>
+                <strong>What will happen:</strong>
+                <br>
+                1. Current stamps and perk states for all selected customers will be saved to their <strong>Offers History</strong>.
+                <br>
+                2. Their loyalty passes will be updated to the latest active campaign rewards.
+            `;
+            updateOffersModal.style.display = 'grid';
+        });
+
+        btnCancelUpdateOffers.addEventListener('click', () => {
+            updateOffersModal.style.display = 'none';
+            pendingUpdatePhones = [];
+        });
+
+        btnConfirmUpdateOffers.addEventListener('click', async () => {
+            if (!pendingUpdatePhones || pendingUpdatePhones.length === 0) return;
+            btnConfirmUpdateOffers.disabled = true;
+            btnConfirmUpdateOffers.textContent = 'Upgrading...';
+
+            try {
+                const res = await fetch('/api/admin/customer/update-offers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        phones: pendingUpdatePhones,
+                        reason: 'Admin manual upgrade to active campaign'
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    updateOffersModal.style.display = 'none';
+                    showToast(`🎉 ${data.message}`);
+                    pendingUpdatePhones = [];
+                    bulkActionsBar.style.display = 'none';
+                    fetchMembers(searchInput ? searchInput.value.trim() : '');
+                } else {
+                    alert(data.message || 'Error updating offers');
+                }
+            } catch (err) {
+                alert('Connection error while updating customer offers.');
+            } finally {
+                btnConfirmUpdateOffers.disabled = false;
+                btnConfirmUpdateOffers.textContent = 'Yes, Upgrade Offers';
+            }
+        });
+
+        // ----------------------------------------------------
+        // Offers History Modal Viewer
+        // ----------------------------------------------------
+        window.openCustomerHistory = async (phone) => {
+            try {
+                const res = await fetch(`/api/admin/customer/history?phone=${encodeURIComponent(phone)}`);
+                const data = await res.json();
+                if (!data.success) {
+                    alert(data.message || 'Error loading history');
+                    return;
+                }
+
+                historyCustomerTitle.textContent = `Offers History — ${data.name || 'Customer'} (${data.phone})`;
+                const historyList = data.history || [];
+
+                let html = '';
+
+                // 1. Current Active Stamps
+                html += `
+                    <div>
+                        <div class="history-section-title">⚡ Current Active Card Offers</div>
+                        <div class="history-stamps-grid">
+                `;
+                const currStamps = data.currentStamps || {};
+                const keys = Object.keys(currStamps).sort((a,b) => Number(a)-Number(b));
+                keys.forEach(k => {
+                    const st = currStamps[k];
+                    const statusColor = st.status === 'redeemed' ? 'var(--red)' : (st.status === 'available' ? 'var(--green)' : 'var(--text-muted)');
+                    html += `
+                        <div class="history-stamp-row">
+                            <div class="history-stamp-left">
+                                <span class="history-stamp-icon">${escapeHtml(st.icon || '☕')}</span>
+                                <strong>#${k} ${escapeHtml(st.title || 'Reward')}</strong>
+                                <small style="color: var(--text-muted);">${escapeHtml(st.desc || '')}</small>
+                            </div>
+                            <span style="font-weight: 700; color: ${statusColor}; text-transform: uppercase; font-size: .75rem;">
+                                ● ${escapeHtml(st.status || 'locked')}
+                            </span>
+                        </div>
+                    `;
+                });
+                html += `</div></div>`;
+
+                // 2. Archived Versions
+                html += `<div><div class="history-section-title">📜 Previous Offers Versions (${historyList.length})</div>`;
+
+                if (historyList.length === 0) {
+                    html += `
+                        <div style="background: #faf8f5; border: 1px dashed #dcd3ca; border-radius: 10px; padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: .88rem;">
+                            ℹ️ This customer is currently on their <strong>original signup campaign offers</strong>.<br>
+                            No previous versions have been archived yet.
+                        </div>
+                    `;
+                } else {
+                    historyList.slice().reverse().forEach((ver, vIdx) => {
+                        const verNum = historyList.length - vIdx;
+                        const dateFormatted = formatMemberDate(ver.archivedAt);
+                        html += `
+                            <div class="history-version-card" style="margin-bottom: 1rem;">
+                                <div class="history-version-header">
+                                    <div style="display: flex; align-items: center; gap: .6rem;">
+                                        <span class="history-version-tag">Version #${verNum}</span>
+                                        <strong style="font-size: .88rem; color: #241711;">${escapeHtml(ver.reason || 'Archived Snapshot')}</strong>
+                                    </div>
+                                    <span style="font-size: .78rem; color: #766; font-weight: 600;">📅 ${escapeHtml(dateFormatted)}</span>
+                                </div>
+                                <div class="history-stamps-grid">
+                        `;
+                        const vStamps = ver.stamps || {};
+                        const vKeys = Object.keys(vStamps).sort((a,b) => Number(a)-Number(b));
+                        vKeys.forEach(k => {
+                            const st = vStamps[k];
+                            const statusColor = st.status === 'redeemed' ? 'var(--red)' : (st.status === 'available' ? 'var(--green)' : 'var(--text-muted)');
+                            html += `
+                                <div class="history-stamp-row">
+                                    <div class="history-stamp-left">
+                                        <span class="history-stamp-icon">${escapeHtml(st.icon || '☕')}</span>
+                                        <strong>#${k} ${escapeHtml(st.title || 'Reward')}</strong>
+                                        <small style="color: var(--text-muted);">${escapeHtml(st.desc || '')}</small>
+                                    </div>
+                                    <span style="font-weight: 700; color: ${statusColor}; text-transform: uppercase; font-size: .75rem;">
+                                        ● ${escapeHtml(st.status || 'locked')}
+                                    </span>
+                                </div>
+                            `;
+                        });
+                        html += `</div></div>`;
+                    });
+                }
+
+                html += `</div>`;
+                historyModalContent.innerHTML = html;
+                historyModal.style.display = 'grid';
+            } catch (err) {
+                alert('Connection error loading customer history.');
+            }
+        };
+
+        btnCloseHistory.addEventListener('click', () => {
+            historyModal.style.display = 'none';
+        });
+
+        // Initial Load
+        fetchMembers();
+        fetchBaseOffers();
+
+        // Background Sync (Every 5 seconds if not currently typing or filtering)
+        setInterval(() => {
+            const hasActiveFilters = Boolean(
+                searchInput.value.trim() ||
+                filterStatusSelect.value !== 'all' ||
+                (filterDrinkSelect && filterDrinkSelect.value !== 'all') ||
+                filterDateFrom.value ||
+                filterDateTo.value
+            );
+            if (!document.hidden && !hasActiveFilters && viewPos.style.display !== 'none') {
+                fetchMembers();
+            }
+        }, 5000);
+
+    })();
+    </script>
+</body>
+</html>

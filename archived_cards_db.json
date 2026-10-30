@@ -1,0 +1,150 @@
+{
+  "01055551234": {
+    "phone": "01055551234",
+    "name": "E2E Test User Returning",
+    "passId": "STP-0196-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "redeemed",
+        "unlockedAt": "2026-10-30T06:24:11.916948",
+        "redeemedAt": "2026-10-30T06:24:11.918640"
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "available",
+        "unlockedAt": "2026-10-30T06:24:11.919927",
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "5": {
+        "title": "Free Drink + VIP Status",
+        "desc": "Grand Loyalty Reward",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T06:24:11.916948",
+    "quizFinishedAt": "2026-10-30T06:24:11.916948",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T06:24:11.922696",
+    "ip": "127.0.0.1",
+    "deletedAt": "2026-10-30T06:24:11.924059",
+    "restoredAt": "2026-10-30T06:24:11.922696"
+  },
+  "01077182998": {
+    "phone": "01077182998",
+    "name": "Re-registered User",
+    "passId": "STP-D5CE-26",
+    "matchedDrink": "passionfruit_mojito",
+    "matchedDrinkName": "Passionfruit Mojito",
+    "matchedDrinkDesc": "Zesty passionfruit, crushed mint and sparkling fruit soda with crisp citrus notes.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Passionfruit Mojito",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍹",
+        "status": "available",
+        "unlockedAt": "2026-10-30T06:23:40.950270",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T06:23:40.950270",
+    "quizFinishedAt": "2026-10-30T06:23:40.950270",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.823906",
+    "ip": "127.0.0.1",
+    "deletedAt": "2026-10-30T07:09:17.825090",
+    "restoredAt": "2026-10-30T07:09:17.823906"
+  },
+  "01088776655": {
+    "phone": "01088776655",
+    "name": "Loyal Returning Guest",
+    "passId": "STP-82CB-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "redeemed",
+        "unlockedAt": "2026-10-30T06:23:40.955676",
+        "redeemedAt": "2026-10-30T07:09:17.828387"
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.829446",
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T06:23:40.955676",
+    "quizFinishedAt": "2026-10-30T06:23:40.955676",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.832152",
+    "ip": "127.0.0.1",
+    "deletedAt": "2026-10-30T07:09:17.833657",
+    "restoredAt": "2026-10-30T07:09:17.832152"
+  }
+}

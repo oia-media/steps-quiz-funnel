@@ -1,0 +1,1147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Access your STEPS Specialty Coffee Bar Digital Loyalty Card. First order includes free coffee!">
+    <title>My Digital Loyalty Card | STEPS Specialty Coffee Bar</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <style>
+        /* ========================================================
+           STEPS SPECIALTY COFFEE BAR - PURE WHITE VIP LOYALTY CARD
+           ======================================================== */
+        :root {
+            --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --serif: Georgia, "Times New Roman", serif;
+        }
+
+        .card-view-page {
+            min-height: 100svh;
+            overflow-x: hidden;
+            background: #ffffff !important;
+            color: #1e140f;
+            padding: 1.25rem 1rem 4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: var(--sans);
+        }
+
+        .card-page-header {
+            width: min(100%, 540px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: .85rem;
+            border-bottom: 1px solid rgba(46, 32, 25, 0.08);
+        }
+
+        .card-page-logo {
+            height: 36px;
+            width: auto;
+            max-width: 120px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .card-nav-link {
+            color: #8b6f3a;
+            text-decoration: none;
+            font-size: .82rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .35rem .85rem;
+            border-radius: 99px;
+            background: #faf7f2;
+            border: 1px solid #ece4da;
+            transition: all 200ms ease;
+        }
+
+        .card-nav-link:hover {
+            background: #f3ede4;
+            border-color: #c5a059;
+        }
+
+        /* Lookup Card Modal */
+        .card-lookup-card {
+            width: min(100%, 480px);
+            background: #ffffff;
+            border: 1.5px solid #ece4da;
+            border-radius: 20px;
+            padding: 2.2rem 1.8rem;
+            box-shadow: 0 12px 36px rgba(46, 32, 25, 0.06);
+            text-align: center;
+            margin-top: 2rem;
+            animation: enter 350ms ease both;
+        }
+
+        .card-lookup-card h1 {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 5.5vw, 2.3rem);
+            color: #1e140f;
+            margin-bottom: .6rem;
+            font-weight: 400;
+        }
+
+        .card-lookup-card p {
+            color: #6f6259;
+            font-size: .95rem;
+            margin: 0 0 1.8rem;
+        }
+
+        .card-lookup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            text-align: left;
+        }
+
+        .card-lookup-form label {
+            font-size: .82rem;
+            font-weight: 600;
+            color: #1e140f;
+            display: block;
+            margin-bottom: .4rem;
+        }
+
+        .card-lookup-form input {
+            width: 100%;
+            height: 54px;
+            padding: .8rem 1rem .8rem 3rem;
+            border: 1.5px solid #ece4da;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #1e140f;
+            font-size: 1.05rem;
+            letter-spacing: .04em;
+            transition: all 200ms ease;
+        }
+
+        .card-lookup-form input:focus {
+            outline: none;
+            border-color: #c5a059;
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+        }
+
+        .btn-gold {
+            width: 100%;
+            min-height: 52px;
+            background: #241711;
+            color: #ffffff;
+            border: 1.5px solid #dfba73;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: .95rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(36, 23, 17, 0.2);
+            transition: transform 200ms ease, box-shadow 200ms ease;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            background: #3d2a20;
+            box-shadow: 0 12px 30px rgba(36, 23, 17, 0.3);
+        }
+
+        .lookup-error {
+            min-height: 1.2rem;
+            color: #c93b2b;
+            font-size: .82rem;
+            margin: -.3rem 0 .4rem;
+        }
+
+        .lookup-quiz-link {
+            display: block;
+            margin-top: 1.5rem;
+            font-size: .86rem;
+            color: #6f6259;
+            text-decoration: none;
+        }
+
+        .lookup-quiz-link span {
+            color: #8b6f3a;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 150ms ease;
+        }
+
+        .lookup-quiz-link:hover span {
+            color: var(--espresso);
+            text-decoration: none;
+        }
+
+        /* Live Card Canvas */
+        .live-card-container {
+            width: min(100%, 540px);
+            animation: enter 400ms ease both;
+        }
+
+        /* Real-Time Live Sync Indicator */
+        .live-sync-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .3rem .75rem;
+            border-radius: 99px;
+            background: #faf7f2;
+            border: 1px solid #ece4da;
+            font-size: .72rem;
+            color: #6f6259;
+            margin-bottom: 1rem;
+        }
+
+        .live-pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #2b7a4b;
+            box-shadow: 0 0 8px rgba(43, 122, 75, 0.5);
+            animation: liveBlink 2s infinite ease-in-out;
+        }
+
+        @keyframes liveBlink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .4; transform: scale(0.85); }
+        }
+
+        /* Match Banner on Card */
+        .card-match-banner {
+            display: flex;
+            align-items: center;
+            gap: .85rem;
+            padding: .85rem 1.15rem;
+            border-radius: 14px;
+            background: #faf7f2;
+            border: 1.5px solid #ece4da;
+            margin-bottom: 1.25rem;
+        }
+
+        .match-cup-icon {
+            font-size: 1.6rem;
+        }
+
+        .match-details strong {
+            display: block;
+            color: #1e140f;
+            font-size: .95rem;
+            font-family: var(--serif);
+            font-weight: 700;
+        }
+
+        .match-details small {
+            color: #6f6259;
+            font-size: .78rem;
+        }
+
+        /* Stamp Card States */
+        .stamp-slot.is-redeemed {
+            background: rgba(0, 0, 0, 0.35);
+            border-color: rgba(255, 255, 255, 0.1);
+            opacity: .85;
+        }
+
+        .stamp-slot.is-redeemed .stamp-badge {
+            background: #241912;
+            border-color: #554133;
+            color: #776657;
+        }
+
+        .stamp-slot.is-redeemed .stamp-status-tag {
+            background: #403025;
+            color: #a89585;
+            text-decoration: line-through;
+        }
+
+        .redeem-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-18deg);
+            border: 1.5px solid #ff7e67;
+            color: #ff7e67;
+            padding: .15rem .4rem;
+            border-radius: 4px;
+            font-size: .62rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            background: rgba(23, 14, 10, 0.85);
+            box-shadow: 0 0 10px rgba(255, 126, 103, 0.3);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* Notification Toast */
+        .sync-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #dfba73;
+            color: #170e0a;
+            padding: .75rem 1.4rem;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: .88rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .sync-toast.is-visible {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ==========================================================================
+           Phone-Optimized Single Unified 5-Milestone Rewards Board
+           ========================================================================== */
+        .loyalty-stamps-section {
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(223, 186, 115, 0.2);
+            border-radius: 18px;
+            padding: 1.1rem 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .stamps-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: .85rem;
+            padding-bottom: .55rem;
+            border-bottom: 1px solid rgba(223, 186, 115, 0.15);
+        }
+
+        .stamps-title {
+            font-size: .74rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            color: #dfba73;
+            text-transform: uppercase;
+        }
+
+        .stamps-count {
+            font-size: .74rem;
+            font-weight: 700;
+            color: #cfbeaf;
+        }
+
+        /* Detailed Perks Breakdown (Phone-Optimized, 0 Ellipsis) */
+        .stamps-perks-list {
+            display: flex;
+            flex-direction: column;
+            gap: .55rem;
+            width: 100%;
+        }
+
+        .perk-card-row {
+            display: flex;
+            align-items: center;
+            gap: .85rem;
+            padding: .75rem .95rem;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .perk-card-row.is-active-reward {
+            background: rgba(223, 186, 115, 0.12);
+            border: 1.5px solid rgba(223, 186, 115, 0.5);
+            box-shadow: 0 4px 20px rgba(223, 186, 115, 0.15);
+        }
+
+        .perk-card-row.is-redeemed-reward {
+            opacity: .6;
+            background: rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .perk-icon-seal {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(223, 186, 115, 0.12);
+            border: 1px solid rgba(223, 186, 115, 0.3);
+            display: grid;
+            place-items: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .perk-card-row.is-active-reward .perk-icon-seal {
+            background: #dfba73;
+            border-color: #dfba73;
+            box-shadow: 0 0 12px rgba(223, 186, 115, 0.5);
+        }
+
+        .perk-card-row.is-active-reward .perk-icon-seal span {
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
+        }
+
+        .perk-order-badge {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #170e0a;
+            border: 1px solid #dfba73;
+            color: #dfba73;
+            font-size: .56rem;
+            font-weight: 800;
+            display: grid;
+            place-items: center;
+        }
+
+        .perk-text-block {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: .15rem;
+        }
+
+        .perk-title-text {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+            word-break: break-word;
+        }
+
+        .perk-desc-text {
+            font-size: .78rem;
+            color: #b5a498;
+            line-height: 1.25;
+            word-break: break-word;
+        }
+
+        .perk-action-pill {
+            font-size: .72rem;
+            font-weight: 700;
+            padding: .3rem .65rem;
+            border-radius: 99px;
+            white-space: nowrap;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        .perk-action-pill.ready {
+            background: var(--gold-gradient);
+            color: #170e0a;
+            font-weight: 800;
+            box-shadow: 0 4px 14px rgba(223, 186, 115, 0.4);
+        }
+
+        .perk-action-pill.locked {
+            background: rgba(255, 255, 255, 0.06);
+            color: #a49488;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .perk-action-pill.redeemed {
+            background: #2b1f18;
+            color: #8c7a6e;
+            text-decoration: line-through;
+        }
+
+        /* Mobile Viewport Optimizations */
+        @media (max-width: 600px) {
+            .card-view-page {
+                padding: .6rem .5rem 3rem !important;
+            }
+            .card-page-header {
+                padding: .4rem .6rem !important;
+                margin-bottom: .85rem !important;
+            }
+            .card-page-logo {
+                height: 28px !important;
+            }
+            .live-card-container {
+                width: 100% !important;
+            }
+            .loyalty-card {
+                padding: 1.25rem .95rem !important;
+                border-radius: 20px !important;
+            }
+            .loyalty-card-top {
+                margin-bottom: .9rem !important;
+                padding-bottom: .75rem !important;
+            }
+            .loyalty-brand .loyalty-subbrand {
+                font-size: .62rem !important;
+            }
+            .loyalty-status-badge {
+                font-size: .7rem !important;
+                padding: .25rem .6rem !important;
+            }
+            .loyalty-member-info .member-name {
+                font-size: 1.15rem !important;
+            }
+            .loyalty-member-id .member-pass {
+                font-size: .84rem !important;
+                padding: .25rem .55rem !important;
+            }
+            .loyalty-stamps-section {
+                padding: .85rem .75rem !important;
+                border-radius: 16px !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .perk-card-row {
+                padding: .65rem .75rem;
+                gap: .65rem;
+                border-radius: 12px;
+            }
+            .perk-icon-seal {
+                width: 34px;
+                height: 34px;
+                font-size: 1.1rem;
+            }
+            .perk-title-text {
+                font-size: .84rem;
+            }
+            .perk-desc-text {
+                font-size: .72rem;
+            }
+            .perk-action-pill {
+                font-size: .65rem;
+                padding: .22rem .5rem;
+            }
+            .barcode-visual {
+                height: 52px !important;
+            }
+            .barcode-code span {
+                font-size: 1.1rem !important;
+            }
+            .card-wallet-actions {
+                gap: .55rem !important;
+            }
+            .wallet-btn {
+                min-height: 48px !important;
+                font-size: .85rem !important;
+                padding: .55rem .75rem !important;
+            }
+            .thanks-instructions {
+                margin-top: 1.25rem !important;
+                gap: .6rem !important;
+            }
+            .instruction-item {
+                padding: .85rem 1rem !important;
+                gap: .75rem !important;
+            }
+            .card-lookup-form input {
+                font-size: 16px !important; /* Prevents iOS auto-zoom */
+            }
+        }
+    </style>
+</head>
+<body class="card-view-page">
+
+    <!-- Top Header -->
+    <header class="card-page-header">
+        <a href="/" title="Back to STEPS Coffee Bar">
+            <img class="card-page-logo" src="assets/images/steps-logo-brown.webp" alt="STEPS Coffee">
+        </a>
+        <span class="card-nav-link" style="color: #dfba73; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;">
+            <span>Digital Member Pass</span> 💳
+        </span>
+    </header>
+
+    <!-- 1. LOOKUP SCREEN (When no card is loaded) -->
+    <div class="card-lookup-card" id="lookup-view">
+        <div style="font-size: 2.4rem; margin-bottom: .6rem;">☕</div>
+        <h1>Digital Loyalty Pass</h1>
+        <p>Enter your registered Egyptian mobile number to access your STEPS card and redeem your free coffee.</p>
+
+        <form class="card-lookup-form" id="lookup-form" novalidate>
+            <div>
+                <label for="lookup-phone">Mobile Number</label>
+                <div class="input-wrap">
+                    <span aria-hidden="true" style="color: #dfba73;">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h3l1.5 4-2 1.5a14 14 0 0 0 6 6l1.5-2L21 14v3a4 4 0 0 1-4 4C9.3 20.5 3.5 14.7 3 7a4 4 0 0 1 4-4Z"/></svg>
+                    </span>
+                    <input id="lookup-phone" type="tel" inputmode="tel" required placeholder="010 1234 5678" maxlength="15">
+                </div>
+            </div>
+
+            <div class="lookup-error" id="lookup-error" role="alert" aria-live="polite"></div>
+
+            <button class="btn-gold" type="submit">
+                Open My Loyalty Card →
+            </button>
+        </form>
+
+        <a href="/" class="lookup-quiz-link">
+            Don't have a card yet? <span>Take the 3-question quiz</span>
+        </a>
+    </div>
+
+    <!-- 2. LIVE CARD SCREEN (Displayed when card is loaded) -->
+    <div class="live-card-container" id="card-view" hidden>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="live-sync-pill">
+                <span class="live-pulse-dot"></span>
+                <span>Live Barista Sync Active</span>
+            </div>
+            <button id="btn-switch-account" type="button" style="background: none; border: none; color: #a49488; font-size: .78rem; text-decoration: none; cursor: pointer; font-weight: 600;">
+                Switch Number
+            </button>
+        </div>
+
+        <!-- Matched Drink Barista Note -->
+        <div class="card-match-banner">
+            <span class="match-cup-icon">☕</span>
+            <div class="match-details">
+                <strong>Your Signature Match: <span id="card-drink-name">Iced Spanish Latte</span></strong>
+                <small id="card-drink-desc">Silky espresso combined with sweet condensed milk, served over chilled ice.</small>
+            </div>
+        </div>
+
+        <!-- THE PHYSICAL-STYLE DIGITAL PASS -->
+        <div class="loyalty-card" id="active-card-element">
+            <!-- Card Header -->
+            <div class="loyalty-card-top">
+                <div class="loyalty-brand">
+                    <img class="loyalty-logo" src="assets/images/steps-logo-brown.webp" alt="STEPS">
+                    <span class="loyalty-subbrand">SPECIALTY COFFEE BAR</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: .65rem;">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#dfba73" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="opacity: .85;"><path d="M7 6a10 10 0 0 1 0 12M11 8a6 6 0 0 1 0 8M15 10a2 2 0 0 1 0 4"/></svg>
+                    <div class="loyalty-status-badge" id="card-pill">
+                        <span class="status-dot"></span>
+                        <span id="card-status-label">Pending Activation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cardholder Info -->
+            <div class="loyalty-card-middle">
+                <div class="loyalty-member-info">
+                    <span class="member-label">CARDHOLDER</span>
+                    <strong class="member-name" id="display-name">Omar Yahia</strong>
+                </div>
+                <div class="loyalty-member-id">
+                    <span class="member-label">PASS ID</span>
+                    <strong class="member-pass" id="display-pass-id">STP-4892-26</strong>
+                </div>
+            </div>
+
+            <!-- 5-Milestone Digital Punch Board (Phone-Optimized, ZERO Ellipsis, Single Track) -->
+            <div class="loyalty-stamps-section">
+                <div class="stamps-header">
+                    <span class="stamps-title" id="display-track-title">5-VISIT REWARDS TRACK</span>
+                    <span class="stamps-count" id="display-stamps-count">1 Ready / 5 Total</span>
+                </div>
+                <!-- Unified Luxury Rewards Board -->
+                <div class="stamps-perks-list" id="card-stamps-list"></div>
+            </div>
+
+            <!-- Activation Box (Shown before activation) -->
+            <div class="loyalty-card-activation" id="card-activation-box">
+                <p class="activation-teaser">
+                    <span class="lock-pulse">🔒</span>
+                    Your 1st stamp (<span id="activation-drink-name">Free Coffee</span>) is ready! Tap below to activate your digital card and reveal all rewards.
+                </p>
+                <button class="button-activate" id="btn-activate-card" type="button">
+                    <span class="btn-sparkle">✨</span>
+                    Activate Digital Loyalty Card
+                    <span class="btn-arrow">→</span>
+                </button>
+            </div>
+
+            <!-- Barcode & Barista Scan Area (Shown after activation) -->
+            <div class="loyalty-card-barcode-wrap" id="card-barcode-box" style="padding-top: .8rem;" hidden>
+                <div class="barcode-visual" aria-hidden="true">
+                    <div class="barcode-bars"></div>
+                </div>
+                <div class="barcode-code">
+                    <span id="display-barcode-num">STP-4892-26</span>
+                </div>
+                <div class="card-wallet-actions">
+                    <button class="wallet-btn" id="btn-save-pass" type="button">
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        Save to Phone
+                    </button>
+                    <button class="wallet-btn secondary" id="btn-share-pass" type="button">
+                        <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                        Share Card
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Redemption Guide -->
+        <div class="thanks-instructions" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: .75rem; width: 100%;">
+            <div class="instruction-item" style="display: flex; align-items: flex-start; gap: .85rem; padding: .85rem 1rem; border-radius: 14px; background: #faf7f2; border: 1.5px solid #ece4da; color: #1e140f;">
+                <span class="inst-num" style="width: 24px; height: 24px; border-radius: 50%; background: #241711; color: #dfba73; display: grid; place-items: center; font-size: .75rem; font-weight: 800; flex-shrink: 0;">1</span>
+                <p style="margin: 0; color: #4b382d; font-size: .84rem; line-height: 1.45;">Show this pass to your barista when ordering at STEPS to claim your <strong>Free Coffee</strong>.</p>
+            </div>
+            <div class="instruction-item" style="display: flex; align-items: flex-start; gap: .85rem; padding: .85rem 1rem; border-radius: 14px; background: #faf7f2; border: 1.5px solid #ece4da; color: #1e140f;">
+                <span class="inst-num" style="width: 24px; height: 24px; border-radius: 50%; background: #241711; color: #dfba73; display: grid; place-items: center; font-size: .75rem; font-weight: 800; flex-shrink: 0;">2</span>
+                <p style="margin: 0; color: #4b382d; font-size: .84rem; line-height: 1.45;">Each visit unlocks subsequent offers: 20% off bakery, size upgrades, and BOGO drinks!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas for Confetti -->
+    <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+    <!-- Live Toast Message -->
+    <div class="sync-toast" id="sync-toast">
+        <span id="toast-icon">✨</span>
+        <span id="toast-text">Your card was updated by the barista!</span>
+    </div>
+
+    <script>
+    (() => {
+        'use strict';
+
+        const lookupView = document.querySelector('#lookup-view');
+        const cardView = document.querySelector('#card-view');
+        const lookupForm = document.querySelector('#lookup-form');
+        const lookupPhone = document.querySelector('#lookup-phone');
+        const lookupError = document.querySelector('#lookup-error');
+        const toast = document.querySelector('#sync-toast');
+        const btnSwitchAccount = document.querySelector('#btn-switch-account');
+
+        let currentCard = null;
+        let pollTimer = null;
+        let activePhone = '';
+
+        // Helper: Clean Egypt Mobile
+        const normalizePhone = (val) => {
+            let clean = val.trim().replace(/[\s\-()._]/g, '');
+            if (clean.startsWith('+20')) clean = '0' + clean.slice(3);
+            else if (clean.startsWith('0020')) clean = '0' + clean.slice(4);
+            else if (clean.startsWith('20') && clean.length === 12) clean = '0' + clean.slice(2);
+            else if (/^1[0125][0-9]{8}$/.test(clean)) clean = '0' + clean;
+            return clean;
+        };
+
+        const escapeHtml = (str) => {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        };
+
+        // Show toast
+        const showToast = (msg, icon = '✨') => {
+            document.querySelector('#toast-icon').textContent = icon;
+            document.querySelector('#toast-text').textContent = msg;
+            toast.classList.add('is-visible');
+            setTimeout(() => { toast.classList.remove('is-visible'); }, 3800);
+        };
+
+        // Confetti Engine
+        const confettiCanvas = document.querySelector('#confetti-canvas');
+        const triggerConfetti = () => {
+            if (!confettiCanvas) return;
+            const ctx = confettiCanvas.getContext('2d');
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+
+            const colors = ['#dfba73', '#c5a059', '#2e2019', '#f7e7c4', '#ffffff', '#e6a23c'];
+            const particles = [];
+            const count = 90;
+
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: window.innerWidth * (0.35 + Math.random() * 0.3),
+                    y: window.innerHeight * 0.45,
+                    w: 6 + Math.random() * 8,
+                    h: 4 + Math.random() * 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: (Math.random() - 0.5) * 14,
+                    vy: -(Math.random() * 12 + 6),
+                    gravity: 0.35 + Math.random() * 0.2,
+                    rotation: Math.random() * 360,
+                    vRot: (Math.random() - 0.5) * 10,
+                    opacity: 1
+                });
+            }
+
+            const render = () => {
+                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                let activeParticles = 0;
+
+                particles.forEach((p) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += p.gravity;
+                    p.rotation += p.vRot;
+                    p.vx *= 0.98;
+                    p.opacity -= 0.009;
+
+                    if (p.opacity > 0 && p.y < confettiCanvas.height) {
+                        activeParticles++;
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate((p.rotation * Math.PI) / 180);
+                        ctx.fillStyle = p.color;
+                        ctx.globalAlpha = Math.max(0, p.opacity);
+                        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                        ctx.restore();
+                    }
+                });
+
+                if (activeParticles > 0) {
+                    requestAnimationFrame(render);
+                } else {
+                    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                }
+            };
+            requestAnimationFrame(render);
+        };
+
+        // Render stamps: Single Unified Luxury 5-Milestone Pass (Phone-Optimized, ZERO Ellipses)
+        const renderStamps = (stamps, isActivated) => {
+            const list = document.querySelector('#card-stamps-list');
+            if (!list) return;
+
+            list.innerHTML = '';
+
+            let availableCount = 0;
+            let redeemedCount = 0;
+
+            const tierLabels = {
+                '1': '1st Order Welcome',
+                '2': 'Visit #2',
+                '3': 'Visit #3',
+                '4': 'Visit #4',
+                '5': 'Visit #5 • VIP'
+            };
+
+            const stampKeys = Object.keys(stamps).sort((a, b) => Number(a) - Number(b));
+            const totalStamps = stampKeys.length;
+
+            const trackTitleEl = document.querySelector('#display-track-title');
+            if (trackTitleEl) {
+                trackTitleEl.textContent = `${totalStamps}-VISIT REWARDS TRACK`;
+            }
+
+            const drinkIcons = {
+                'iced_spanish_latte': '☕',
+                'strawberry_matcha': '🍵',
+                'passionfruit_mojito': '🍹',
+                'mocha_frappe': '🥤'
+            };
+
+            stampKeys.forEach((key) => {
+                const idx = Number(key);
+                const s = stamps[key];
+                if (!s) return;
+
+                const isRedeemed = s.status === 'redeemed';
+                const isAvailable = s.status === 'available';
+                const isLocked = s.status === 'locked';
+
+                if (isRedeemed) redeemedCount++;
+                if (isAvailable) availableCount++;
+
+                // Deal #1 is ALWAYS the free drink the customer matched with in the quiz
+                let titleDisplay = s.title || '';
+                let descDisplay = s.desc || '';
+                let iconDisplay = s.icon || '☕';
+
+                if (idx === 1 && currentCard && currentCard.matchedDrinkName) {
+                    titleDisplay = `Free ${currentCard.matchedDrinkName}`;
+                    descDisplay = 'Your Quiz Signature Match • 100% Free Drink';
+                    if (currentCard.matchedDrink && drinkIcons[currentCard.matchedDrink]) {
+                        iconDisplay = drinkIcons[currentCard.matchedDrink];
+                    }
+                }
+
+                // Single Unified Luxury Perk Row
+                let rowClass = 'perk-card-row';
+                let pillClass = 'perk-action-pill';
+                let pillText = 'Locked';
+
+                if (isRedeemed) {
+                    rowClass += ' is-redeemed-reward';
+                    pillClass += ' redeemed';
+                    pillText = 'Redeemed ✓';
+                } else if (isAvailable) {
+                    rowClass += ' is-active-reward';
+                    pillClass += ' ready';
+                    pillText = '● Ready to Redeem';
+                } else {
+                    pillClass += ' locked';
+                    if (!isActivated) {
+                        pillText = 'Activate to Unlock';
+                    } else {
+                        pillText = idx === totalStamps ? (tierLabels[String(idx)] || 'Grand VIP') : (tierLabels[String(idx)] || `Visit #${idx}`);
+                    }
+                }
+
+                const perkRow = document.createElement('div');
+                perkRow.className = rowClass;
+                perkRow.innerHTML = `
+                    <div class="perk-icon-seal">
+                        <span>${escapeHtml(iconDisplay)}</span>
+                        <span class="perk-order-badge">${idx}</span>
+                    </div>
+                    <div class="perk-text-block">
+                        <strong class="perk-title-text">${escapeHtml(titleDisplay)}</strong>
+                        <small class="perk-desc-text">${escapeHtml(descDisplay)}</small>
+                    </div>
+                    <span class="${pillClass}">${escapeHtml(pillText)}</span>
+                `;
+                list.appendChild(perkRow);
+            });
+
+            const countEl = document.querySelector('#display-stamps-count');
+            if (countEl) {
+                countEl.textContent = `${availableCount} Ready • ${redeemedCount} Used • ${totalStamps} Total`;
+            }
+        };
+
+        // Render Card Data
+        const displayCard = (card) => {
+            currentCard = card;
+            activePhone = card.phone;
+
+            const isActivated = Boolean(card.cardActive);
+            const cardEl = document.querySelector('#active-card-element');
+            const pill = document.querySelector('#card-pill');
+            const statusLabel = document.querySelector('#card-status-label');
+            const activationBox = document.querySelector('#card-activation-box');
+            const barcodeBox = document.querySelector('#card-barcode-box');
+
+            if (isActivated) {
+                cardEl.classList.add('is-activated');
+                pill.className = 'loyalty-status-badge active';
+                statusLabel.textContent = 'Active VIP Member';
+                if (activationBox) activationBox.hidden = true;
+                if (barcodeBox) barcodeBox.hidden = false;
+            } else {
+                cardEl.classList.remove('is-activated');
+                pill.className = 'loyalty-status-badge';
+                statusLabel.textContent = 'Pending Activation';
+                if (activationBox) activationBox.hidden = false;
+                if (barcodeBox) barcodeBox.hidden = true;
+            }
+
+            const drinkIcons = {
+                'iced_spanish_latte': '☕',
+                'strawberry_matcha': '🍵',
+                'passionfruit_mojito': '🍹',
+                'mocha_frappe': '🥤'
+            };
+
+            document.querySelector('#card-drink-name').textContent = card.matchedDrinkName || 'Signature Coffee';
+            document.querySelector('#card-drink-desc').textContent = card.matchedDrinkDesc || '';
+
+            const bannerIconEl = document.querySelector('.match-cup-icon');
+            if (bannerIconEl && card.matchedDrink && drinkIcons[card.matchedDrink]) {
+                bannerIconEl.textContent = drinkIcons[card.matchedDrink];
+            }
+
+            const activationDrinkEl = document.querySelector('#activation-drink-name');
+            if (activationDrinkEl) {
+                activationDrinkEl.textContent = `Free ${card.matchedDrinkName || 'Coffee'}`;
+            }
+
+            document.querySelector('#display-name').textContent = card.name || 'Valued Guest';
+            document.querySelector('#display-pass-id').textContent = card.passId;
+            document.querySelector('#display-barcode-num').textContent = card.passId;
+
+            renderStamps(card.stamps || {}, isActivated);
+
+            lookupView.hidden = true;
+            cardView.hidden = false;
+
+            startLiveSync();
+        };
+
+        // Card Activation Button Handler
+        const btnActivate = document.querySelector('#btn-activate-card');
+        if (btnActivate) {
+            btnActivate.addEventListener('click', async () => {
+                if (!activePhone) return;
+                btnActivate.disabled = true;
+                btnActivate.innerHTML = 'Activating Card...';
+
+                try {
+                    const res = await fetch('/api/card/activate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ phone: activePhone })
+                    });
+                    const data = await res.json();
+                    if (data.success && data.card) {
+                        currentCard = data.card;
+                        displayCard(data.card);
+                        triggerConfetti();
+                        showToast('🎉 Digital Loyalty Card Activated! All rewards are now active.', '☕');
+                    } else {
+                        btnActivate.disabled = false;
+                        btnActivate.innerHTML = '✨ Activate Digital Loyalty Card →';
+                        showToast(data.message || 'Error activating card.', '⚠️');
+                    }
+                } catch (err) {
+                    btnActivate.disabled = false;
+                    btnActivate.innerHTML = '✨ Activate Digital Loyalty Card →';
+                    showToast('Connection error. Please try again.', '⚠️');
+                }
+            });
+        }
+
+        // Fetch card from API
+        const fetchCard = async (phone, isInitial = false) => {
+            const clean = normalizePhone(phone);
+            try {
+                const res = await fetch(`/api/card?phone=${encodeURIComponent(clean)}`, {
+                    headers: { 'Accept': 'application/json' }
+                });
+                const data = await res.json();
+
+                if (!res.ok || !data.success || !data.card) {
+                    if (isInitial) {
+                        lookupError.textContent = data.message || 'No loyalty card found. Please take the quiz first.';
+                        lookupView.hidden = false;
+                        cardView.hidden = true;
+                    }
+                    return;
+                }
+
+                // If already displaying, check if stamps changed
+                if (currentCard && JSON.stringify(currentCard.stamps) !== JSON.stringify(data.card.stamps)) {
+                    showToast('🎉 Your loyalty card was updated by the barista!', '☕');
+                }
+
+                displayCard(data.card);
+                try {
+                    localStorage.setItem('steps_saved_phone', clean);
+                } catch (_) {}
+            } catch (err) {
+                if (isInitial) {
+                    lookupError.textContent = 'Could not load your card. Please check your connection.';
+                }
+            }
+        };
+
+        // Live polling every 3 seconds
+        const startLiveSync = () => {
+            clearInterval(pollTimer);
+            pollTimer = setInterval(() => {
+                if (activePhone) {
+                    fetchCard(activePhone, false);
+                }
+            }, 3000);
+        };
+
+        // Lookup Form Handler
+        lookupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            lookupError.textContent = '';
+            const phone = lookupPhone.value.trim();
+            const clean = normalizePhone(phone);
+
+            if (!/^01[0125][0-9]{8}$/.test(clean)) {
+                lookupError.textContent = 'Please enter a valid Egyptian mobile (11 digits: 010, 011, 012, or 015).';
+                return;
+            }
+
+            const suffix = clean.slice(3);
+            const seqs = ['01234567', '12345678', '23456789', '34567890', '45678901', '98765432', '87654321', '76543210'];
+            const isSequential = seqs.some(s => suffix.includes(s));
+            const isRepeated = /(\d)\1{4,}/.test(suffix) || new Set(suffix.split('')).size < 4;
+
+            if (isSequential || isRepeated) {
+                lookupError.textContent = `"${clean}" appears to be a dummy/test number. Please enter a genuine Egyptian mobile number.`;
+                return;
+            }
+
+            fetchCard(clean, true);
+        });
+
+        // Switch Account button
+        btnSwitchAccount.addEventListener('click', () => {
+            clearInterval(pollTimer);
+            activePhone = '';
+            currentCard = null;
+            try { localStorage.removeItem('steps_saved_phone'); } catch (_) {}
+            lookupPhone.value = '';
+            lookupError.textContent = '';
+            cardView.hidden = true;
+            lookupView.hidden = false;
+            lookupPhone.focus();
+        });
+
+        // Save Pass handler
+        document.querySelector('#btn-save-pass').addEventListener('click', () => {
+            if (!currentCard) return;
+            const passDetails = `STEPS SPECIALTY COFFEE BAR - DIGITAL LOYALTY PASS\n`
+                + `Cardholder: ${currentCard.name}\n`
+                + `Mobile: ${currentCard.phone}\n`
+                + `Pass ID: ${currentCard.passId}\n`
+                + `Signature Match: ${currentCard.matchedDrinkName}\n`
+                + `Stamp 1 Free Coffee: ${currentCard.stamps['1']?.status === 'redeemed' ? 'REDEEMED' : 'READY TO REDEEM'}\n`
+                + `Present this screen at STEPS counter to redeem.`;
+
+            const blob = new Blob([passDetails], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `STEPS-Pass-${currentCard.passId}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('Pass saved to your downloads!', '📲');
+        });
+
+        // Share Pass handler
+        document.querySelector('#btn-share-pass').addEventListener('click', async () => {
+            const url = `${window.location.origin}/card?phone=${activePhone}`;
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'My STEPS Loyalty Pass',
+                        text: `Check out my STEPS Coffee Loyalty Pass!`,
+                        url
+                    });
+                } catch (_) {}
+            } else if (navigator.clipboard) {
+                await navigator.clipboard.writeText(url);
+                showToast('Card link copied to clipboard!', '📋');
+            }
+        });
+
+        // Initial Page Load: Check URL params or localStorage
+        const params = new URLSearchParams(window.location.search);
+        const urlPhone = params.get('phone');
+        let savedPhone = '';
+        try { savedPhone = localStorage.getItem('steps_saved_phone') || ''; } catch (_) {}
+
+        const targetPhone = urlPhone || savedPhone;
+        if (targetPhone) {
+            lookupPhone.value = targetPhone;
+            fetchCard(targetPhone, true);
+        }
+    })();
+    </script>
+</body>
+</html>

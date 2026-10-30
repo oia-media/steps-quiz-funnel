@@ -1,0 +1,1105 @@
+{
+  "01015484767": {
+    "phone": "01015484767",
+    "name": "Omar",
+    "passId": "STP-5FAB-26",
+    "matchedDrink": "strawberry_matcha",
+    "matchedDrinkName": "Strawberry Matcha",
+    "matchedDrinkDesc": "Ceremonial Japanese green tea layered over sweet handcrafted strawberry puree.",
+    "cardActive": true,
+    "stamps": {
+      "1": {
+        "title": "Free Strawberry Matcha",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍵",
+        "status": "redeemed",
+        "unlockedAt": "2026-10-30T03:00:57.617230",
+        "redeemedAt": "2026-10-30T05:29:12.049334"
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T03:00:57.617230",
+    "updatedAt": "2026-10-30T05:29:12.049334",
+    "ip": "127.0.0.1",
+    "activatedAt": "2026-10-30T05:29:12.047847"
+  },
+  "01043142342": {
+    "phone": "01043142342",
+    "name": "omar",
+    "passId": "STP-9549-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": true,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "available",
+        "unlockedAt": "2026-10-30T03:07:12.287312",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "available",
+        "unlockedAt": "2026-10-30T03:08:27.439491",
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T03:07:12.287312",
+    "updatedAt": "2026-10-30T05:05:26.727000",
+    "ip": "127.0.0.1"
+  },
+  "01033345625": {
+    "phone": "01033345625",
+    "name": "omar",
+    "passId": "STP-C824-26",
+    "matchedDrink": "mocha_frappe",
+    "matchedDrinkName": "Mocha Frappe",
+    "matchedDrinkDesc": "Blended ice, rich espresso, and decadent dark chocolate topped with cold velvet cream.",
+    "cardActive": true,
+    "stamps": {
+      "1": {
+        "title": "Free Mocha Frappe",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🥤",
+        "status": "available",
+        "unlockedAt": "2026-10-30T03:17:54.025760",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T03:17:54.025760",
+    "updatedAt": "2026-10-30T05:05:26.727000",
+    "ip": "127.0.0.1"
+  },
+  "01098712349": {
+    "phone": "01098712349",
+    "name": "Youssef",
+    "passId": "STP-4889-26",
+    "matchedDrink": "mocha_frappe",
+    "matchedDrinkName": "Mocha Frappe",
+    "matchedDrinkDesc": "Blended ice, rich espresso, and decadent dark chocolate topped with cold velvet cream.",
+    "cardActive": false,
+    "stamps": {
+      "1": {
+        "title": "Free Mocha Frappe",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🥤",
+        "status": "available",
+        "unlockedAt": "2026-10-30T04:00:19.883484",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T04:00:19.883484",
+    "updatedAt": "2026-10-30T05:05:26.727000",
+    "ip": "127.0.0.1"
+  },
+  "01015485767": {
+    "phone": "01015485767",
+    "name": "عبوات",
+    "passId": "STP-B49D-26",
+    "matchedDrink": "passionfruit_mojito",
+    "matchedDrinkName": "Passionfruit Mojito",
+    "matchedDrinkDesc": "Zesty passionfruit, crushed mint and sparkling fruit soda with crisp citrus notes.",
+    "cardActive": true,
+    "stamps": {
+      "1": {
+        "title": "Free Passionfruit Mojito",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍹",
+        "status": "available",
+        "unlockedAt": "2026-10-30T04:53:34.180932",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T04:41:20.531981",
+    "updatedAt": "2026-10-30T05:05:26.727000",
+    "ip": "127.0.0.1"
+  },
+  "01092837461": {
+    "phone": "01092837461",
+    "name": "QA Vodafone Tester",
+    "passId": "STP-9251-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": true,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "redeemed",
+        "unlockedAt": "2026-10-30T07:09:17.778764",
+        "redeemedAt": "2026-10-30T07:09:17.809379"
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "5": {
+        "title": "Free Drink + VIP Status",
+        "desc": "Grand Loyalty Reward",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.778764",
+    "quizFinishedAt": "2026-10-30T07:09:17.778764",
+    "activatedAt": "2026-10-30T07:09:17.804625",
+    "updatedAt": "2026-10-30T07:09:17.845297",
+    "ip": "127.0.0.1",
+    "offersHistory": [
+      {
+        "historyId": "hist_1793333357839",
+        "archivedAt": "2026-10-30T07:09:17.839277",
+        "reason": "Test single customer upgrade",
+        "offersCount": 3,
+        "stamps": {
+          "1": {
+            "title": "Free Iced Spanish Latte",
+            "desc": "Your Quiz Signature Match • 100% Free Drink",
+            "icon": "☕",
+            "status": "redeemed",
+            "unlockedAt": "2026-10-30T07:09:17.778764",
+            "redeemedAt": "2026-10-30T07:09:17.809379"
+          },
+          "2": {
+            "title": "Brand New 50% Off Perk",
+            "desc": "Special",
+            "icon": "🥐",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          },
+          "3": {
+            "title": "Brand New VIP Gift",
+            "desc": "VIP",
+            "icon": "🌟",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          }
+        },
+        "summary": [
+          "#1: Free Iced Spanish Latte [redeemed]",
+          "#2: Brand New 50% Off Perk [locked]",
+          "#3: Brand New VIP Gift [locked]"
+        ]
+      },
+      {
+        "historyId": "hist_1793333357845",
+        "archivedAt": "2026-10-30T07:09:17.845297",
+        "reason": "Second upgrade milestone",
+        "offersCount": 5,
+        "stamps": {
+          "1": {
+            "title": "Free Iced Spanish Latte",
+            "desc": "Your Quiz Signature Match • 100% Free Drink",
+            "icon": "☕",
+            "status": "redeemed",
+            "unlockedAt": "2026-10-30T07:09:17.778764",
+            "redeemedAt": "2026-10-30T07:09:17.809379"
+          },
+          "2": {
+            "title": "25% Off Artisan Pastry",
+            "desc": "Fresh bakery treat",
+            "icon": "🥐",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          },
+          "3": {
+            "title": "Free Size Upgrade",
+            "desc": "Coffee or Specialty Drink",
+            "icon": "🥛",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          },
+          "4": {
+            "title": "Buy 1 Get 1 Free",
+            "desc": "Signature Drinks",
+            "icon": "🎁",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          },
+          "5": {
+            "title": "Free Drink + VIP Status",
+            "desc": "Grand Loyalty Reward",
+            "icon": "🌟",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          }
+        },
+        "summary": [
+          "#1: Free Iced Spanish Latte [redeemed]",
+          "#2: 25% Off Artisan Pastry [locked]",
+          "#3: Free Size Upgrade [locked]",
+          "#4: Buy 1 Get 1 Free [locked]",
+          "#5: Free Drink + VIP Status [locked]"
+        ]
+      }
+    ]
+  },
+  "01283746192": {
+    "phone": "01283746192",
+    "name": "QA Orange Tester",
+    "passId": "STP-3345-26",
+    "matchedDrink": "strawberry_matcha",
+    "matchedDrinkName": "Strawberry Matcha",
+    "matchedDrinkDesc": "Ceremonial Japanese green tea layered over sweet handcrafted strawberry puree.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Strawberry Matcha",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍵",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.782003",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "25% Off Artisan Pastry",
+        "desc": "Fresh bakery treat",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "5": {
+        "title": "Free Drink + VIP Status",
+        "desc": "Grand Loyalty Reward",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.782003",
+    "quizFinishedAt": "2026-10-30T07:09:17.782003",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.841664",
+    "ip": "127.0.0.1",
+    "offersHistory": [
+      {
+        "historyId": "hist_1793333357841",
+        "archivedAt": "2026-10-30T07:09:17.841664",
+        "reason": "Batch upgrade test",
+        "offersCount": 3,
+        "stamps": {
+          "1": {
+            "title": "Free Strawberry Matcha",
+            "desc": "Your Quiz Signature Match • 100% Free Drink",
+            "icon": "🍵",
+            "status": "available",
+            "unlockedAt": "2026-10-30T07:09:17.782003",
+            "redeemedAt": null
+          },
+          "2": {
+            "title": "Brand New 50% Off Perk",
+            "desc": "Special",
+            "icon": "🥐",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          },
+          "3": {
+            "title": "Brand New VIP Gift",
+            "desc": "VIP",
+            "icon": "🌟",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          }
+        },
+        "summary": [
+          "#1: Free Strawberry Matcha [available]",
+          "#2: Brand New 50% Off Perk [locked]",
+          "#3: Brand New VIP Gift [locked]"
+        ]
+      }
+    ]
+  },
+  "01183746291": {
+    "phone": "01183746291",
+    "name": "QA Etisalat Tester",
+    "passId": "STP-AD3D-26",
+    "matchedDrink": "passionfruit_mojito",
+    "matchedDrinkName": "Passionfruit Mojito",
+    "matchedDrinkDesc": "Zesty passionfruit, crushed mint and sparkling fruit soda with crisp citrus notes.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Passionfruit Mojito",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍹",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.782986",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "25% Off Artisan Pastry",
+        "desc": "Fresh bakery treat",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "5": {
+        "title": "Free Drink + VIP Status",
+        "desc": "Grand Loyalty Reward",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.782986",
+    "quizFinishedAt": "2026-10-30T07:09:17.782986",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.841724",
+    "ip": "127.0.0.1",
+    "offersHistory": [
+      {
+        "historyId": "hist_1793333357841",
+        "archivedAt": "2026-10-30T07:09:17.841724",
+        "reason": "Batch upgrade test",
+        "offersCount": 3,
+        "stamps": {
+          "1": {
+            "title": "Free Passionfruit Mojito",
+            "desc": "Your Quiz Signature Match • 100% Free Drink",
+            "icon": "🍹",
+            "status": "available",
+            "unlockedAt": "2026-10-30T07:09:17.782986",
+            "redeemedAt": null
+          },
+          "2": {
+            "title": "Brand New 50% Off Perk",
+            "desc": "Special",
+            "icon": "🥐",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          },
+          "3": {
+            "title": "Brand New VIP Gift",
+            "desc": "VIP",
+            "icon": "🌟",
+            "status": "locked",
+            "unlockedAt": null,
+            "redeemedAt": null
+          }
+        },
+        "summary": [
+          "#1: Free Passionfruit Mojito [available]",
+          "#2: Brand New 50% Off Perk [locked]",
+          "#3: Brand New VIP Gift [locked]"
+        ]
+      }
+    ]
+  },
+  "01583746291": {
+    "phone": "01583746291",
+    "name": "QA WE Tester",
+    "passId": "STP-8092-26",
+    "matchedDrink": "mocha_frappe",
+    "matchedDrinkName": "Mocha Frappe",
+    "matchedDrinkDesc": "Blended ice, rich espresso, and decadent dark chocolate topped with cold velvet cream.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Mocha Frappe",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🥤",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.783947",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "Brand New 50% Off Perk",
+        "desc": "Special",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Brand New VIP Gift",
+        "desc": "VIP",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.783947",
+    "quizFinishedAt": "2026-10-30T07:09:17.783947",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.783947",
+    "ip": "127.0.0.1"
+  },
+  "01093847561": {
+    "phone": "01093847561",
+    "name": "QA International +20",
+    "passId": "STP-59BE-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.785056",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "Brand New 50% Off Perk",
+        "desc": "Special",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Brand New VIP Gift",
+        "desc": "VIP",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.785056",
+    "quizFinishedAt": "2026-10-30T07:09:17.785056",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.785056",
+    "ip": "127.0.0.1"
+  },
+  "01093847562": {
+    "phone": "01093847562",
+    "name": "QA International 0020",
+    "passId": "STP-F086-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.786116",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "Brand New 50% Off Perk",
+        "desc": "Special",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Brand New VIP Gift",
+        "desc": "VIP",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.786116",
+    "quizFinishedAt": "2026-10-30T07:09:17.786116",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.786116",
+    "ip": "127.0.0.1"
+  },
+  "01093847563": {
+    "phone": "01093847563",
+    "name": "QA 10 Digits Missing Zero",
+    "passId": "STP-31A4-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.787750",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "Brand New 50% Off Perk",
+        "desc": "Special",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Brand New VIP Gift",
+        "desc": "VIP",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.787750",
+    "quizFinishedAt": "2026-10-30T07:09:17.787750",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.787750",
+    "ip": "127.0.0.1"
+  },
+  "01093847564": {
+    "phone": "01093847564",
+    "name": "QA Stamp Milestone Verification",
+    "passId": "STP-B103-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.788796",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "Brand New 50% Off Perk",
+        "desc": "Special",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Brand New VIP Gift",
+        "desc": "VIP",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.788796",
+    "quizFinishedAt": "2026-10-30T07:09:17.788796",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.788796",
+    "ip": "127.0.0.1"
+  },
+  "01077182934": {
+    "phone": "01077182934",
+    "name": "Quiz Mojito Tester",
+    "passId": "STP-41EB-26",
+    "matchedDrink": "passionfruit_mojito",
+    "matchedDrinkName": "Passionfruit Mojito",
+    "matchedDrinkDesc": "Zesty passionfruit, crushed mint and sparkling fruit soda with crisp citrus notes.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Passionfruit Mojito",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍹",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.790320",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "Brand New 50% Off Perk",
+        "desc": "Special",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Brand New VIP Gift",
+        "desc": "VIP",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.790320",
+    "quizFinishedAt": "2026-10-30T07:09:17.790320",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.790320",
+    "ip": "127.0.0.1"
+  },
+  "01077182935": {
+    "phone": "01077182935",
+    "name": "Quiz Matcha Tester",
+    "passId": "STP-9DF0-26",
+    "matchedDrink": "strawberry_matcha",
+    "matchedDrinkName": "Strawberry Matcha",
+    "matchedDrinkDesc": "Ceremonial Japanese green tea layered over sweet handcrafted strawberry puree.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Strawberry Matcha",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍵",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.791289",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "Brand New 50% Off Perk",
+        "desc": "Special",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Brand New VIP Gift",
+        "desc": "VIP",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.791289",
+    "quizFinishedAt": "2026-10-30T07:09:17.791289",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.791289",
+    "ip": "127.0.0.1"
+  },
+  "01099887766": {
+    "phone": "01099887766",
+    "name": "Activation Timestamp Tester",
+    "passId": "STP-76C1-26",
+    "matchedDrink": "iced_spanish_latte",
+    "matchedDrinkName": "Iced Spanish Latte",
+    "matchedDrinkDesc": "Silky espresso combined with sweet condensed milk, served over chilled ice.",
+    "cardActive": true,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Iced Spanish Latte",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "☕",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.850835",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "5": {
+        "title": "Free Drink + VIP Status",
+        "desc": "Grand Loyalty Reward",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.850835",
+    "quizFinishedAt": "2026-10-30T07:09:17.850835",
+    "activatedAt": "2026-10-30T07:09:17.852523",
+    "updatedAt": "2026-10-30T07:09:17.852523",
+    "ip": "127.0.0.1"
+  },
+  "01099887767": {
+    "phone": "01099887767",
+    "name": "Quiz Finished Timestamp Tester",
+    "passId": "STP-C0B5-26",
+    "matchedDrink": "mocha_frappe",
+    "matchedDrinkName": "Mocha Frappe",
+    "matchedDrinkDesc": "Blended ice, rich espresso, and decadent dark chocolate topped with cold velvet cream.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Mocha Frappe",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🥤",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.854743",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "5": {
+        "title": "Free Drink + VIP Status",
+        "desc": "Grand Loyalty Reward",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.854743",
+    "quizFinishedAt": "2026-10-30T07:09:17.854743",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.854743",
+    "ip": "127.0.0.1"
+  },
+  "01099887768": {
+    "phone": "01099887768",
+    "name": "Stamp Timestamps Tester",
+    "passId": "STP-8A00-26",
+    "matchedDrink": "strawberry_matcha",
+    "matchedDrinkName": "Strawberry Matcha",
+    "matchedDrinkDesc": "Ceremonial Japanese green tea layered over sweet handcrafted strawberry puree.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Strawberry Matcha",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍵",
+        "status": "redeemed",
+        "unlockedAt": "2026-10-30T07:09:17.856644",
+        "redeemedAt": "2026-10-30T07:09:17.858055"
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.859300",
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "5": {
+        "title": "Free Drink + VIP Status",
+        "desc": "Grand Loyalty Reward",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.856644",
+    "quizFinishedAt": "2026-10-30T07:09:17.856644",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.859300",
+    "ip": "127.0.0.1"
+  },
+  "01099887769": {
+    "phone": "01099887769",
+    "name": "Admin Timestamps & Date Filter Tester",
+    "passId": "STP-1DDF-26",
+    "matchedDrink": "passionfruit_mojito",
+    "matchedDrinkName": "Passionfruit Mojito",
+    "matchedDrinkDesc": "Zesty passionfruit, crushed mint and sparkling fruit soda with crisp citrus notes.",
+    "cardActive": false,
+    "isBanned": false,
+    "bannedAt": null,
+    "stamps": {
+      "1": {
+        "title": "Free Passionfruit Mojito",
+        "desc": "Your Quiz Signature Match • 100% Free Drink",
+        "icon": "🍹",
+        "status": "available",
+        "unlockedAt": "2026-10-30T07:09:17.860708",
+        "redeemedAt": null
+      },
+      "2": {
+        "title": "20% Off Pastry",
+        "desc": "Fresh Bakery Item",
+        "icon": "🥐",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "3": {
+        "title": "Free Size Upgrade",
+        "desc": "Coffee or Specialty Drink",
+        "icon": "🥛",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "4": {
+        "title": "Buy 1 Get 1 Free",
+        "desc": "Signature Drinks",
+        "icon": "🎁",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      },
+      "5": {
+        "title": "Free Drink + VIP Status",
+        "desc": "Grand Loyalty Reward",
+        "icon": "🌟",
+        "status": "locked",
+        "unlockedAt": null,
+        "redeemedAt": null
+      }
+    },
+    "createdAt": "2026-10-30T07:09:17.860708",
+    "quizFinishedAt": "2026-10-30T07:09:17.860708",
+    "activatedAt": null,
+    "updatedAt": "2026-10-30T07:09:17.860708",
+    "ip": "127.0.0.1"
+  }
+}

@@ -1,0 +1,1781 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="Discover your signature STEPS drink and claim your Digital Loyalty Card with your First Coffee Free.">
+    <title>Find Your Perfect Drink | STEPS Specialty Coffee Bar</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <style>
+        /* ========================================================
+           STEPS SPECIALTY COFFEE BAR - PURE WHITE LUXURY FUNNEL
+           ======================================================== */
+        :root {
+            --quiz-bg: #ffffff;
+            --quiz-surface: #ffffff;
+            --quiz-surface-hover: #fffdfa;
+            --quiz-card-border: #ece4da;
+            --quiz-card-border-selected: #c5a059;
+            --quiz-gold: #b38838;
+            --quiz-gold-light: #dfba73;
+            --quiz-gold-gradient: linear-gradient(135deg, #dfba73 0%, #c5a059 50%, #9e7a36 100%);
+            --quiz-espresso: #241711;
+            --quiz-espresso-soft: #3d2a20;
+            --quiz-text: #241711;
+            --quiz-text-sub: #6f6259;
+            --quiz-shadow: 0 4px 16px rgba(46, 32, 25, 0.05);
+            --quiz-shadow-hover: 0 10px 28px rgba(197, 160, 89, 0.16);
+            --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --serif: Georgia, "Times New Roman", serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body.quiz-redesign {
+            margin: 0;
+            background: #ffffff !important;
+            background-image: none !important;
+            color: var(--quiz-text);
+            min-height: 100svh;
+            overflow-x: hidden;
+            font-family: var(--sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .quiz-shell {
+            width: 100%;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: #ffffff;
+        }
+
+        /* Top Header */
+        .quiz-header {
+            position: relative;
+            z-index: 10;
+            width: min(100% - 2rem, 1100px);
+            margin: 0 auto;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(46, 32, 25, 0.08);
+            gap: 1rem;
+        }
+
+        .quiz-logo-wrap {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .quiz-logo {
+            height: 38px;
+            width: auto;
+            max-width: 120px;
+            object-fit: contain;
+            display: block;
+            transition: transform 200ms ease;
+        }
+
+        .quiz-logo:hover {
+            transform: scale(1.02);
+        }
+
+        /* Modern Step Progress Tracker */
+        .quiz-steps-tracker {
+            display: flex;
+            align-items: center;
+            gap: .55rem;
+            background: #ffffff;
+            border: 1.5px solid #ece4da;
+            padding: .35rem .85rem;
+            border-radius: 999px;
+            box-shadow: 0 4px 12px rgba(46, 32, 25, 0.04);
+        }
+
+        .step-pill {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--quiz-text-sub);
+            transition: all 250ms ease;
+        }
+
+        .step-pill .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #d8cec3;
+            transition: all 250ms ease;
+        }
+
+        .step-pill.is-active {
+            color: var(--quiz-espresso);
+            font-weight: 700;
+        }
+
+        .step-pill.is-active .dot {
+            background: var(--quiz-gold);
+            box-shadow: 0 0 8px rgba(179, 136, 56, 0.6);
+            transform: scale(1.25);
+        }
+
+        .step-pill.is-completed {
+            color: #2b7a4b;
+        }
+
+        .step-pill.is-completed .dot {
+            background: #2b7a4b;
+        }
+
+        .step-divider {
+            width: 14px;
+            height: 1px;
+            background: #e2d7ca;
+        }
+
+        .btn-header-pass {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .45rem .95rem;
+            border-radius: 99px;
+            background: #ffffff;
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            color: var(--quiz-espresso);
+            text-decoration: none;
+            font-size: .8rem;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(46, 32, 25, 0.04);
+            transition: all 200ms ease;
+        }
+
+        .btn-header-pass:hover {
+            border-color: var(--quiz-gold);
+            background: #fdfaf6;
+            transform: translateY(-1px);
+        }
+
+        /* Screens Stage Wrap */
+        .quiz-screen-wrap {
+            position: relative;
+            z-index: 5;
+            width: min(100% - 2.5rem, 1140px);
+            margin: 0 auto;
+            flex: 1;
+            padding: 1.5rem 0 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quiz-view {
+            display: none;
+            animation: quizFadeIn 320ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .quiz-view.is-active {
+            display: block;
+        }
+
+        @keyframes quizFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Screen Title & Eyebrow */
+        .quiz-eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: .5rem;
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .2em;
+            color: var(--quiz-gold);
+            text-transform: uppercase;
+            margin: 0 auto .65rem;
+        }
+
+        .quiz-title {
+            font-family: var(--serif);
+            font-size: clamp(1.9rem, 5.2vw, 3.2rem);
+            color: var(--quiz-espresso);
+            line-height: 1.12;
+            margin: 0 auto 1.8rem;
+            max-width: 820px;
+            letter-spacing: -.025em;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        /* Elevated Symmetrical 4-Option Cards Grid */
+        .quiz-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.15rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-card-option {
+            position: relative;
+            background: var(--quiz-surface);
+            border: 1.5px solid var(--quiz-card-border);
+            border-radius: 20px;
+            padding: 1.6rem 1.15rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: var(--quiz-shadow);
+            transition: all 240ms cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            box-sizing: border-box;
+        }
+
+        .quiz-card-option:hover {
+            transform: translateY(-3px);
+            background: var(--quiz-surface-hover);
+            border-color: var(--quiz-gold-light);
+            box-shadow: var(--quiz-shadow-hover);
+        }
+
+        .quiz-card-option.is-selected {
+            background: #fffdfa;
+            border: 2px solid var(--quiz-card-border-selected);
+            box-shadow: 0 12px 32px rgba(197, 160, 89, 0.28), 0 0 0 1px #c5a059;
+            transform: scale(1.02);
+        }
+
+        .quiz-card-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Halo Badge for Rich Emoji/Appetite Icons */
+        .card-icon-halo {
+            position: relative;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fdfbf7 0%, #f4ece1 100%);
+            border: 1.5px solid #dfba73;
+            display: grid;
+            place-items: center;
+            margin-bottom: 1rem;
+            transition: all 250ms ease;
+            box-shadow: 0 4px 12px rgba(46, 32, 25, 0.05);
+        }
+
+        .card-icon-halo .icon-emoji {
+            font-size: 1.85rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 4px rgba(46, 32, 25, 0.12));
+            transition: transform 200ms ease;
+        }
+
+        .quiz-card-option:hover .card-icon-halo {
+            border-color: var(--quiz-gold);
+            transform: scale(1.06);
+            box-shadow: 0 0 16px rgba(197, 160, 89, 0.3);
+        }
+
+        .quiz-card-option.is-selected .card-icon-halo {
+            background: var(--quiz-gold-gradient);
+            border-color: #c5a059;
+            box-shadow: 0 0 18px rgba(197, 160, 89, 0.45);
+        }
+
+        .card-drink-title {
+            font-family: var(--serif);
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--quiz-espresso);
+            margin-bottom: .3rem;
+            line-height: 1.25;
+        }
+
+        .card-drink-flavor {
+            font-size: .8rem;
+            color: var(--quiz-text-sub);
+            line-height: 1.35;
+        }
+
+        /* Check Indicator Pill */
+        .card-check-pill {
+            margin-top: auto;
+            padding-top: .75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            font-size: .72rem;
+            font-weight: 700;
+            color: #2b7a4b;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: all 200ms ease;
+        }
+
+        .quiz-card-option.is-selected .card-check-pill {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ergonomic Navigation Bar */
+        .quiz-nav-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .btn-quiz-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #f1eae0;
+            border: 1.5px solid #e0d4c5;
+            color: var(--quiz-espresso);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 200ms ease;
+        }
+
+        .btn-quiz-back:hover {
+            background: #e6dcce;
+            transform: translateX(-2px);
+        }
+
+        .btn-quiz-next {
+            display: inline-flex;
+            align-items: center;
+            gap: .65rem;
+            min-height: 52px;
+            padding: 0 2rem;
+            border-radius: 14px;
+            background: var(--quiz-espresso);
+            color: #ffffff;
+            font-size: .95rem;
+            font-weight: 700;
+            border: 1.5px solid var(--quiz-gold-light);
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(36, 23, 17, 0.2);
+            transition: all 200ms ease;
+        }
+
+        .btn-quiz-next:hover:not(:disabled) {
+            background: var(--quiz-espresso-soft);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(36, 23, 17, 0.3);
+        }
+
+        .btn-quiz-next:disabled {
+            background: #eee7de;
+            border-color: #e0d6c9;
+            color: #a39587;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.75;
+        }
+
+        /* ========================================================
+           ELEVATED CENTERED LANDING HERO (PHONE & DESKTOP)
+           ======================================================== */
+        .landing-grid-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 2.5rem 1rem 3.5rem;
+            width: 100%;
+        }
+
+        .landing-copy-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .landing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .45rem 1.15rem;
+            border-radius: 99px;
+            background: #faf7f2;
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            color: var(--quiz-gold);
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 2px 8px rgba(46, 32, 25, 0.04);
+        }
+
+        .landing-hero-h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 6.5vw, 4.6rem);
+            color: var(--quiz-espresso);
+            line-height: 1.06;
+            margin: 0 auto 1.25rem;
+            letter-spacing: -.03em;
+            font-weight: 400;
+            text-align: center;
+            max-width: 680px;
+        }
+
+        .landing-hero-p {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--quiz-text-sub);
+            margin: 0 auto 2.2rem;
+            max-width: 560px;
+            text-align: center;
+        }
+
+        .landing-hero-p strong {
+            color: var(--quiz-espresso);
+        }
+
+        .landing-perks-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: .85rem;
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto 2.4rem;
+        }
+
+        .landing-perk-pill {
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            padding: .75rem .9rem;
+            border-radius: 14px;
+            background: #ffffff;
+            border: 1px solid #ece4da;
+            box-shadow: 0 4px 12px rgba(46, 32, 25, 0.04);
+            text-align: left;
+        }
+
+        .landing-perk-pill span {
+            font-size: 1.3rem;
+        }
+
+        .landing-perk-pill strong {
+            display: block;
+            color: var(--quiz-espresso);
+            font-size: .84rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .landing-perk-pill small {
+            display: block;
+            color: var(--quiz-text-sub);
+            font-size: .72rem;
+            line-height: 1.2;
+        }
+
+        .landing-cta-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 1rem;
+            margin: 0 auto;
+        }
+
+        .btn-start-quiz {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .85rem;
+            min-height: 60px;
+            min-width: 290px;
+            padding: 0 2.8rem;
+            border-radius: 16px;
+            background: var(--quiz-espresso);
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: 1.5px solid var(--quiz-gold-light);
+            cursor: pointer;
+            box-shadow: 0 10px 28px rgba(36, 23, 17, 0.25);
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 0 auto;
+        }
+
+        .btn-start-quiz:hover {
+            background: var(--quiz-espresso-soft);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(36, 23, 17, 0.35);
+        }
+
+        .btn-start-quiz:active {
+            transform: scale(0.98);
+        }
+
+        .landing-member-link {
+            font-size: .88rem;
+            color: var(--quiz-text-sub);
+            margin: .25rem auto 0;
+            text-align: center;
+        }
+
+        .landing-member-link a {
+            color: var(--quiz-espresso);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 150ms ease, opacity 150ms ease;
+        }
+
+        .landing-member-link a:hover {
+            color: var(--quiz-gold);
+            text-decoration: none;
+        }
+
+        .landing-visual-col {
+            display: none !important;
+        }
+
+        .hero-image-frame {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            border-radius: 26px;
+            overflow: hidden;
+            border: 1.5px solid #ece4da;
+            box-shadow: 0 20px 48px rgba(46, 32, 25, 0.12);
+            background: #ffffff;
+        }
+
+        .hero-coffee-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 600ms ease;
+        }
+
+        .hero-image-frame:hover .hero-coffee-img {
+            transform: scale(1.02);
+        }
+
+        .hero-floating-badge {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            padding: .65rem 1rem;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 24px rgba(46, 32, 25, 0.12);
+        }
+
+        .hero-floating-badge.top-right {
+            top: 1.25rem;
+            right: 1.25rem;
+        }
+
+        .hero-floating-badge.bottom-left {
+            bottom: 1.25rem;
+            left: 1.25rem;
+        }
+
+        .hero-floating-badge span {
+            font-size: 1.3rem;
+        }
+
+        .hero-floating-badge strong {
+            display: block;
+            color: var(--quiz-espresso);
+            font-size: .8rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero-floating-badge small {
+            display: block;
+            color: var(--quiz-text-sub);
+            font-size: .68rem;
+            line-height: 1.2;
+        }
+
+        /* CALCULATING STATE */
+        .calculating-wrap {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .coffee-brewing-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.25rem;
+            animation: cupBounce 1.5s infinite ease-in-out;
+        }
+
+        @keyframes cupBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* CLAIM SCREEN */
+        .claim-card-box {
+            max-width: 540px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1.5px solid #ece4da;
+            border-radius: 24px;
+            padding: 2.4rem 2rem;
+            box-shadow: 0 16px 48px rgba(46, 32, 25, 0.08);
+        }
+
+        .perk-box-highlight {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            background: #fdfbf7;
+            border: 1.5px solid rgba(197, 160, 89, 0.45);
+            margin-bottom: 1.8rem;
+        }
+
+        .perk-box-highlight .icon {
+            font-size: 2rem;
+        }
+
+        .perk-box-highlight strong {
+            display: block;
+            color: var(--quiz-espresso);
+            font-size: .96rem;
+            font-weight: 700;
+        }
+
+        .perk-box-highlight small {
+            color: var(--quiz-text-sub);
+            font-size: .82rem;
+        }
+
+        .claim-input-group {
+            margin-bottom: 1.35rem;
+        }
+
+        .claim-input-group label {
+            display: block;
+            font-size: .84rem;
+            font-weight: 700;
+            color: var(--quiz-espresso);
+            margin-bottom: .45rem;
+        }
+
+        .phone-input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-flag-badge {
+            position: absolute;
+            left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--quiz-espresso);
+            pointer-events: none;
+        }
+
+        .claim-input-group input {
+            width: 100%;
+            height: 54px;
+            border-radius: 14px;
+            border: 1.5px solid #e0d4c5;
+            background: #fcfaf7;
+            color: var(--quiz-espresso);
+            font-size: 16px !important; /* Eliminates iOS auto-zoom */
+            padding: .8rem 1rem .8rem 4.5rem;
+            transition: all 200ms ease;
+        }
+
+        .claim-input-group.name-group input {
+            padding-left: 1.2rem;
+        }
+
+        .claim-input-group input:focus {
+            outline: none;
+            border-color: var(--quiz-gold);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.25);
+        }
+
+        .claim-input-group input[aria-invalid="true"] {
+            border-color: #8d2f23;
+            box-shadow: 0 0 0 3px rgba(141, 47, 35, 0.2);
+        }
+
+        .form-error-msg {
+            min-height: 1.4rem;
+            font-size: .82rem;
+            color: #8d2f23;
+            font-weight: 600;
+            margin: .4rem 0 1rem;
+            line-height: 1.35;
+        }
+
+        .btn-claim-submit {
+            width: 100%;
+            min-height: 56px;
+            border-radius: 14px;
+            background: var(--quiz-espresso);
+            color: #ffffff;
+            font-size: 1.02rem;
+            font-weight: 700;
+            border: 1.5px solid var(--quiz-gold-light);
+            cursor: pointer;
+            box-shadow: 0 10px 28px rgba(36, 23, 17, 0.25);
+            transition: all 220ms ease;
+        }
+
+        .btn-claim-submit:hover {
+            background: var(--quiz-espresso-soft);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 34px rgba(36, 23, 17, 0.35);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 900px) {
+            .landing-grid-hero {
+                padding: 1rem .5rem 2.5rem;
+                gap: 1.5rem;
+            }
+            .landing-hero-h1 {
+                font-size: clamp(2.4rem, 8vw, 3.4rem);
+            }
+            .landing-hero-p {
+                max-width: 100%;
+                font-size: 1.05rem;
+            }
+            .landing-perks-row {
+                grid-template-columns: 1fr;
+                gap: .65rem;
+                max-width: 360px;
+                margin: 0 auto 1.8rem;
+            }
+            .btn-start-quiz {
+                width: 100%;
+                max-width: 360px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quiz-header {
+                padding: .65rem .85rem;
+                height: auto;
+                min-height: 60px;
+                flex-wrap: wrap;
+                row-gap: .5rem;
+            }
+            .quiz-logo-wrap {
+                flex-shrink: 0;
+            }
+            .quiz-logo {
+                height: 34px;
+                width: auto;
+                max-width: 110px;
+                object-fit: contain;
+            }
+            .btn-header-pass {
+                padding: .4rem .75rem;
+                font-size: .78rem;
+                flex-shrink: 0;
+            }
+            .quiz-steps-tracker {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin: 0 auto;
+                padding: .3rem .85rem;
+                gap: .55rem;
+            }
+            .step-pill span:not(.dot) {
+                display: inline;
+                font-size: .72rem;
+            }
+            .step-divider {
+                width: 10px;
+            }
+            .quiz-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: .75rem;
+            }
+            .quiz-card-option {
+                padding: 1.15rem .75rem 1rem;
+                min-height: 135px;
+            }
+            .card-drink-title {
+                font-size: .95rem;
+            }
+            .card-drink-flavor {
+                font-size: .74rem;
+            }
+            .card-icon-halo {
+                width: 48px;
+                height: 48px;
+                margin-bottom: .65rem;
+            }
+            .card-icon-halo .icon-emoji {
+                font-size: 1.55rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quiz-screen-wrap {
+                padding: 1rem .65rem 3rem;
+                width: 100%;
+            }
+            .quiz-title {
+                font-size: 1.65rem;
+                margin-bottom: 1.25rem;
+            }
+            .quiz-eyebrow {
+                font-size: .72rem;
+            }
+            .quiz-cards-grid {
+                gap: .65rem;
+            }
+            .quiz-card-option {
+                padding: 1rem .6rem .85rem;
+                border-radius: 16px;
+            }
+            .card-drink-title {
+                font-size: .9rem;
+            }
+            .card-drink-flavor {
+                font-size: .7rem;
+            }
+            .card-check-pill {
+                font-size: .64rem;
+            }
+            .claim-card-box {
+                padding: 1.5rem 1.1rem;
+                border-radius: 20px;
+            }
+        }
+
+        /* ========================================================
+           Already Registered Modal Pop-Up (3-Second Direct)
+           ======================================================== */
+        .already-registered-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            animation: modalFadeIn 250ms ease forwards;
+        }
+
+        .already-registered-modal[hidden] {
+            display: none !important;
+        }
+
+        .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(36, 23, 17, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .modal-card {
+            position: relative;
+            z-index: 2;
+            width: min(100%, 460px);
+            background: #ffffff;
+            border: 1.5px solid rgba(197, 160, 89, 0.5);
+            border-radius: 24px;
+            padding: 2.2rem 1.8rem;
+            box-shadow: 0 24px 60px rgba(46, 32, 25, 0.25);
+            text-align: center;
+            animation: modalScaleUp 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalScaleUp {
+            from { opacity: 0; transform: scale(0.92) translateY(12px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-icon-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #fdfbf7;
+            border: 2px solid #dfba73;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 1.15rem;
+            font-size: 1.85rem;
+            box-shadow: 0 6px 18px rgba(197, 160, 89, 0.25);
+        }
+
+        .modal-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .25rem .75rem;
+            border-radius: 99px;
+            background: #eef7f0;
+            color: #2b7a4b;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-bottom: .85rem;
+        }
+
+        .modal-title {
+            font-family: var(--serif);
+            font-size: clamp(1.4rem, 4.5vw, 1.85rem);
+            line-height: 1.15;
+            margin: 0 0 .85rem;
+            font-weight: 400;
+        }
+
+        .modal-title-highlight {
+            color: var(--quiz-espresso);
+            font-weight: 700;
+            display: block;
+        }
+
+        .modal-desc {
+            color: var(--quiz-text-sub);
+            font-size: .92rem;
+            line-height: 1.5;
+            margin: 0 0 1.6rem;
+        }
+
+        .modal-desc strong {
+            color: var(--quiz-espresso);
+        }
+
+        .modal-timer-box {
+            background: #fcfaf7;
+            border: 1px solid #ece4da;
+            border-radius: 14px;
+            padding: .85rem 1rem;
+            margin-bottom: 1.35rem;
+        }
+
+        .timer-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: .82rem;
+            color: var(--quiz-espresso);
+            font-weight: 600;
+            margin-bottom: .55rem;
+        }
+
+        .timer-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--quiz-gold);
+            animation: pulseDot 1s infinite alternate;
+        }
+
+        @keyframes pulseDot {
+            from { opacity: 0.3; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1.15); }
+        }
+
+        .timer-progress-track {
+            width: 100%;
+            height: 6px;
+            border-radius: 99px;
+            background: #ece4da;
+            overflow: hidden;
+        }
+
+        .timer-progress-fill {
+            height: 100%;
+            width: 100%;
+            background: var(--quiz-gold-gradient);
+            border-radius: 99px;
+            transition: width 3000ms linear;
+        }
+
+        .btn-modal-direct {
+            width: 100%;
+            min-height: 52px;
+            border-radius: 12px;
+            background: var(--quiz-espresso);
+            color: #ffffff;
+            font-size: .98rem;
+            font-weight: 700;
+            border: 1.5px solid var(--quiz-gold-light);
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(36, 23, 17, 0.2);
+            transition: all 200ms ease;
+        }
+
+        .btn-modal-direct:hover {
+            background: var(--quiz-espresso-soft);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="quiz-redesign">
+
+    <div class="quiz-shell">
+        <!-- Top Navigation -->
+        <header class="quiz-header">
+            <a href="/" class="quiz-logo-wrap" title="STEPS Specialty Coffee Bar">
+                <img class="quiz-logo" src="assets/images/steps-logo-brown.webp" alt="STEPS Specialty Coffee Bar">
+            </a>
+
+            <!-- Modern Progress Tracker (Only shown on Q1, Q2, Q3) -->
+            <div class="quiz-steps-tracker" id="tracker-bar" style="display: none;">
+                <div class="step-pill is-active" id="pill-1">
+                    <span class="dot"></span>
+                    <span>1. Base</span>
+                </div>
+                <span class="step-divider"></span>
+                <div class="step-pill" id="pill-2">
+                    <span class="dot"></span>
+                    <span>2. Flavor</span>
+                </div>
+                <span class="step-divider"></span>
+                <div class="step-pill" id="pill-3">
+                    <span class="dot"></span>
+                    <span>3. Vibe</span>
+                </div>
+            </div>
+
+            <a href="/card" class="btn-header-pass">
+                <span>My Pass</span> 💳
+            </a>
+        </header>
+
+        <!-- Main Screen Stage -->
+        <main class="quiz-screen-wrap">
+
+            <!-- 1. LANDING SCREEN (Elevated 2-Column Showcase) -->
+            <div class="quiz-view is-active" data-view="landing">
+                <div class="landing-grid-hero">
+                    <!-- Left Column: Copy & Value Props -->
+                    <div class="landing-copy-col">
+                        <div class="landing-badge">
+                            <span>✨ SPECIALTY COFFEE EXPERIENCE</span>
+                        </div>
+                        <h1 class="landing-hero-h1">Find Your<br>Perfect Drink</h1>
+                        <p class="landing-hero-p">
+                            Answer 3 quick sensory questions to discover your signature barista match and unlock your <strong>Digital Loyalty Card</strong> with your <strong>First Coffee Free</strong>.
+                        </p>
+
+                        <!-- 3 Value Perks -->
+                        <div class="landing-perks-row">
+                            <div class="landing-perk-pill">
+                                <span id="landing-offer-1-icon">☕</span>
+                                <div>
+                                    <strong id="landing-offer-1-title">Free 1st Coffee</strong>
+                                    <small id="landing-offer-1-desc">Signature drink free</small>
+                                </div>
+                            </div>
+                            <div class="landing-perk-pill">
+                                <span>💳</span>
+                                <div>
+                                    <strong>Digital VIP Pass</strong>
+                                    <small id="landing-track-count">Multi-stamp reward track</small>
+                                </div>
+                            </div>
+                            <div class="landing-perk-pill">
+                                <span>⏱️</span>
+                                <div>
+                                    <strong>30-Sec Match</strong>
+                                    <small>Barista-curated sips</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="landing-cta-block">
+                            <button class="btn-start-quiz" id="btn-start" type="button">
+                                Start the 3-Question Quiz <span>→</span>
+                            </button>
+                            <p class="landing-member-link">
+                                Already registered? <a href="/card">Open Your Digital Pass →</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Hero Coffee Visual -->
+                    <div class="landing-visual-col">
+                        <div class="hero-image-frame">
+                            <img src="assets/images/hero-bg.webp" alt="STEPS Signature Specialty Coffee" class="hero-coffee-img">
+                            <div class="hero-floating-badge top-right">
+                                <span>🏆</span>
+                                <div>
+                                    <strong>1st Drink Complimentary</strong>
+                                    <small>On your first visit</small>
+                                </div>
+                            </div>
+                            <div class="hero-floating-badge bottom-left">
+                                <span>✨</span>
+                                <div>
+                                    <strong>STEPS Specialty Bar</strong>
+                                    <small>Ceremonial & Handcrafted</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. QUESTION 1: THE BASE -->
+            <div class="quiz-view" data-view="q1">
+                <p class="quiz-eyebrow">STEP 01 / 03 — THE FOUNDATION</p>
+                <h2 class="quiz-title">What are you in the mood for?</h2>
+
+                <div class="quiz-cards-grid">
+                    <div class="quiz-card-option" data-option="iced_spanish_latte">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">☕</span>
+                        </div>
+                        <strong class="card-drink-title">Iced Espresso</strong>
+                        <small class="card-drink-flavor">Bold, rich & freshly pulled</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="strawberry_matcha">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">🍵</span>
+                        </div>
+                        <strong class="card-drink-title">Japanese Green Tea</strong>
+                        <small class="card-drink-flavor">Ceremonial grade matcha</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="passionfruit_mojito">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">🍹</span>
+                        </div>
+                        <strong class="card-drink-title">Fizzy Fruit Soda</strong>
+                        <small class="card-drink-flavor">Bubbly, crisp & refreshing</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="mocha_frappe">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">🥤</span>
+                        </div>
+                        <strong class="card-drink-title">Blended Frappe</strong>
+                        <small class="card-drink-flavor">Frosty, thick & decadent</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+                </div>
+
+                <div class="quiz-nav-row">
+                    <button class="btn-quiz-back" data-action="back" type="button" aria-label="Back">←</button>
+                    <button class="btn-quiz-next" id="next-q1" type="button" disabled>Next Step →</button>
+                </div>
+            </div>
+
+            <!-- 3. QUESTION 2: FLAVOR PAIRING -->
+            <div class="quiz-view" data-view="q2">
+                <p class="quiz-eyebrow">STEP 02 / 03 — FLAVOR HARMONY</p>
+                <h2 class="quiz-title">What flavor do you want to pair with it?</h2>
+
+                <div class="quiz-cards-grid">
+                    <div class="quiz-card-option" data-option="iced_spanish_latte">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">🥛</span>
+                        </div>
+                        <strong class="card-drink-title">Condensed Milk</strong>
+                        <small class="card-drink-flavor">Silky, sweet & velvety</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="strawberry_matcha">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">🍓</span>
+                        </div>
+                        <strong class="card-drink-title">Sweet Strawberry</strong>
+                        <small class="card-drink-flavor">Fresh fruit puree swirl</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="passionfruit_mojito">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">🍋</span>
+                        </div>
+                        <strong class="card-drink-title">Passionfruit & Mint</strong>
+                        <small class="card-drink-flavor">Zesty tropical burst</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="mocha_frappe">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">🍫</span>
+                        </div>
+                        <strong class="card-drink-title">Dark Chocolate</strong>
+                        <small class="card-drink-flavor">Rich roasted cocoa melt</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+                </div>
+
+                <div class="quiz-nav-row">
+                    <button class="btn-quiz-back" data-action="back" type="button" aria-label="Back">←</button>
+                    <button class="btn-quiz-next" id="next-q2" type="button" disabled>Next Step →</button>
+                </div>
+            </div>
+
+            <!-- 4. QUESTION 3: THE VIBE -->
+            <div class="quiz-view" data-view="q3">
+                <p class="quiz-eyebrow">STEP 03 / 03 — YOUR MOOD</p>
+                <h2 class="quiz-title">What is your vibe today?</h2>
+
+                <div class="quiz-cards-grid">
+                    <div class="quiz-card-option" data-option="iced_spanish_latte">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">👑</span>
+                        </div>
+                        <strong class="card-drink-title">Classic Favorite</strong>
+                        <small class="card-drink-flavor">Proven, beloved & timeless</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="strawberry_matcha">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">⚡</span>
+                        </div>
+                        <strong class="card-drink-title">Trendy & Aesthetic</strong>
+                        <small class="card-drink-flavor">Vibrant layered beauty</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="passionfruit_mojito">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">🌴</span>
+                        </div>
+                        <strong class="card-drink-title">Tropical & Chill</strong>
+                        <small class="card-drink-flavor">Relaxed summer breeze</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+
+                    <div class="quiz-card-option" data-option="mocha_frappe">
+                        <div class="card-icon-halo">
+                            <span class="icon-emoji">✨</span>
+                        </div>
+                        <strong class="card-drink-title">Pure Indulgence</strong>
+                        <small class="card-drink-flavor">Dessert-level sweetness</small>
+                        <span class="card-check-pill">✓ Selected</span>
+                    </div>
+                </div>
+
+                <div class="quiz-nav-row">
+                    <button class="btn-quiz-back" data-action="back" type="button" aria-label="Back">←</button>
+                    <button class="btn-quiz-next" id="next-q3" type="button" disabled>Find My Drink →</button>
+                </div>
+            </div>
+
+            <!-- 5. CALCULATING STATE -->
+            <div class="quiz-view" data-view="calculating">
+                <div class="calculating-wrap">
+                    <div class="coffee-brewing-icon">☕</div>
+                    <p class="quiz-eyebrow">STEPS TASTE LAB</p>
+                    <h2 class="quiz-title" style="margin: 0 auto 1rem;">Crafting your match...</h2>
+                    <p style="color: var(--quiz-text-sub); font-size: 1.05rem;">Pairing your flavor choices with our signature specialty bar.</p>
+                </div>
+            </div>
+
+            <!-- 6. CLAIM SCREEN (Lead Capture with strict Egyptian Mobile check) -->
+            <div class="quiz-view" data-view="claim">
+                <div class="claim-card-box">
+                    <p class="quiz-eyebrow">ONE LAST STEP</p>
+                    <h2 class="quiz-title" style="font-size: 2.2rem; margin-bottom: .6rem;">Your Coffee Pass is Ready</h2>
+                    <p style="color: var(--quiz-text-sub); margin-bottom: 1.5rem; font-size: .95rem;">
+                        Enter your details to generate your digital card and activate your free drink.
+                    </p>
+
+                    <div class="perk-box-highlight">
+                        <span class="icon" id="claim-offer-icon">☕</span>
+                        <div>
+                            <strong id="claim-offer-title">First Order: Free Coffee Included</strong>
+                            <small id="claim-matched-name">Enjoy your signature match on the house</small>
+                        </div>
+                    </div>
+
+                    <form id="quiz-claim-form" novalidate>
+                        <div class="claim-input-group name-group">
+                            <label for="input-name">Full Name</label>
+                            <input id="input-name" type="text" maxlength="120" required placeholder="Enter your full name">
+                        </div>
+
+                        <div class="claim-input-group">
+                            <label for="input-phone">Egyptian Mobile Number</label>
+                            <div class="phone-input-wrap">
+                                <span class="phone-flag-badge">🇪🇬 +20</span>
+                                <input id="input-phone" type="tel" inputmode="tel" maxlength="15" required placeholder="010 1234 5678">
+                            </div>
+                        </div>
+
+                        <div class="form-error-msg" id="claim-error-msg" role="alert" aria-live="polite"></div>
+
+                        <button class="btn-claim-submit" id="btn-submit-claim" type="submit">
+                            Reveal My Loyalty Card & Free Coffee →
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Already Completed Quiz Pop-Up Modal (3-Second Direct) -->
+    <div class="already-registered-modal" id="already-registered-modal" role="dialog" aria-modal="true" aria-labelledby="modal-registered-title" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+            <div class="modal-icon-badge">
+                <span>💳</span>
+            </div>
+            
+            <div class="modal-tag">
+                <span>● Active VIP Pass Found</span>
+            </div>
+
+            <h3 class="modal-title" id="modal-registered-title">
+                <span class="modal-title-highlight">You Already Completed the Quiz!</span>
+            </h3>
+
+            <p class="modal-desc">
+                Your mobile number is already linked to your official <strong>STEPS Digital Loyalty Card</strong>. Each member receives 1 quiz attempt and 1 permanent card.
+            </p>
+
+            <div class="modal-timer-box">
+                <div class="timer-label">
+                    <span>Directing to your card in <strong id="modal-countdown">3</strong>s</span>
+                    <span class="timer-dot"></span>
+                </div>
+                <div class="timer-progress-track">
+                    <div class="timer-progress-fill" id="modal-progress-fill"></div>
+                </div>
+            </div>
+
+            <button class="btn-modal-direct" id="btn-modal-open-now" type="button">
+                Open My Card Now →
+            </button>
+        </div>
+    </div>
+
+    <script>
+    (() => {
+        'use strict';
+
+        const views = [...document.querySelectorAll('[data-view]')];
+        const trackerPills = [
+            document.querySelector('#pill-1'),
+            document.querySelector('#pill-2'),
+            document.querySelector('#pill-3')
+        ];
+
+        const answers = { q1: null, q2: null, q3: null };
+        let activeView = 'landing';
+        let autoAdvanceTimer = null;
+
+        // Fetch & Sync Configured Base Offers
+        const loadDynamicOffers = async () => {
+            try {
+                const res = await fetch('/api/offers');
+                const data = await res.json();
+                if (data.success && data.offers && data.offers.length > 0) {
+                    const offers = data.offers;
+                    const count = offers.length;
+                    const welcome = offers[0];
+
+                    const iconEl = document.querySelector('#landing-offer-1-icon');
+                    const titleEl = document.querySelector('#landing-offer-1-title');
+                    const descEl = document.querySelector('#landing-offer-1-desc');
+                    const trackEl = document.querySelector('#landing-track-count');
+                    const claimIconEl = document.querySelector('#claim-offer-icon');
+                    const claimTitleEl = document.querySelector('#claim-offer-title');
+
+                    if (iconEl) iconEl.textContent = welcome.icon || '☕';
+                    if (titleEl) titleEl.textContent = welcome.title || 'Free 1st Coffee';
+                    if (descEl && welcome.desc) descEl.textContent = welcome.desc;
+                    if (trackEl) trackEl.textContent = 'Multi-stamp reward track';
+                    if (claimIconEl) claimIconEl.textContent = welcome.icon || '☕';
+                    if (claimTitleEl) claimTitleEl.textContent = 'First Order: Free Coffee Included';
+                }
+            } catch (_) {}
+        };
+        loadDynamicOffers();
+
+        // Anti-Fake Egyptian Mobile Engine
+        const cleanEgyptMobile = (val) => {
+            let clean = val.trim().replace(/[\s\-()._]/g, '');
+            if (clean.startsWith('+20')) clean = '0' + clean.slice(3);
+            else if (clean.startsWith('0020')) clean = '0' + clean.slice(4);
+            else if (clean.startsWith('20') && clean.length === 12) clean = '0' + clean.slice(2);
+            else if (/^1[0125][0-9]{8}$/.test(clean)) clean = '0' + clean;
+            return clean;
+        };
+
+        const checkFakeEgyptMobile = (num) => {
+            if (!/^01[0125][0-9]{8}$/.test(num)) {
+                return { isFake: true, message: 'Please enter a valid Egyptian mobile (11 digits: 010, 011, 012, or 015).' };
+            }
+
+            const suffix = num.slice(3);
+
+            // Repeated digits (e.g. 00000000)
+            if (/(\d)\1{4,}/.test(suffix)) {
+                return { isFake: true, message: 'Number contains unrealistic repeated digits. Please enter an active mobile.' };
+            }
+
+            // Sequential ascending or descending (e.g. 34567890, 12345678)
+            const seqs = ['01234567', '12345678', '23456789', '34567890', '45678901', '98765432', '87654321', '76543210'];
+            for (const s of seqs) {
+                if (suffix.includes(s)) {
+                    return { isFake: true, message: `"${num}" is an invalid sequential test number. Please enter a genuine active mobile.` };
+                }
+            }
+
+            // Repetitive chunks (e.g. 12121212)
+            if (/^(\d{2})\1{3}$/.test(suffix) || /^(\d{4})\1$/.test(suffix)) {
+                return { isFake: true, message: 'Repetitive pattern detected. Please enter a genuine Egyptian mobile.' };
+            }
+
+            // Low entropy
+            if (new Set(suffix.split('')).size < 4) {
+                return { isFake: true, message: 'Number lacks realistic digit variation. Please enter a genuine mobile number.' };
+            }
+
+            return { isFake: false };
+        };
+
+        // Determine Winner with 1-1-1 Anchor Rule
+        const calculateWinner = () => {
+            const scores = { iced_spanish_latte: 0, strawberry_matcha: 0, passionfruit_mojito: 0, mocha_frappe: 0 };
+            ['q1', 'q2', 'q3'].forEach(q => {
+                if (answers[q] && scores[answers[q]] !== undefined) scores[answers[q]] += 1;
+            });
+
+            // Majority
+            for (const [k, v] of Object.entries(scores)) {
+                if (v >= 2) return k;
+            }
+
+            // 1-1-1 Tie Rule -> Q1 Anchor Decider
+            return answers.q1 || 'iced_spanish_latte';
+        };
+
+        const showView = (name) => {
+            activeView = name;
+            views.forEach(v => {
+                const match = v.dataset.view === name;
+                v.classList.toggle('is-active', match);
+            });
+
+            // Update Progress Tracker (Only show for Q1, Q2, Q3)
+            const trackerBar = document.querySelector('#tracker-bar');
+            if (trackerBar) {
+                const isQuestion = ['q1', 'q2', 'q3'].includes(name);
+                trackerBar.style.display = isQuestion ? 'flex' : 'none';
+            }
+
+            const stepMap = { q1: 1, q2: 2, q3: 3 };
+            const currentStep = stepMap[name] || 0;
+
+            trackerPills.forEach((pill, idx) => {
+                const stepNum = idx + 1;
+                pill.classList.toggle('is-active', stepNum === currentStep);
+                pill.classList.toggle('is-completed', stepNum < currentStep);
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // Start Quiz -> Directly opens Question 1
+        document.querySelector('#btn-start').addEventListener('click', () => {
+            showView('q1');
+        });
+
+        // Option Cards Selection Handler
+        document.querySelectorAll('.quiz-view[data-view^="q"]').forEach(screen => {
+            const qKey = screen.dataset.view;
+            const options = screen.querySelectorAll('.quiz-card-option');
+            const nextBtn = screen.querySelector('.btn-quiz-next');
+
+            options.forEach(card => {
+                card.addEventListener('click', () => {
+                    options.forEach(c => c.classList.remove('is-selected'));
+                    card.classList.add('is-selected');
+
+                    answers[qKey] = card.dataset.option;
+                    if (nextBtn) nextBtn.disabled = false;
+
+                    // 320ms Smooth Auto-Advance
+                    clearTimeout(autoAdvanceTimer);
+                    autoAdvanceTimer = setTimeout(() => {
+                        advanceFrom(qKey);
+                    }, 320);
+                });
+            });
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    clearTimeout(autoAdvanceTimer);
+                    advanceFrom(qKey);
+                });
+            }
+        });
+
+        // Navigation Advance
+        const advanceFrom = (currentQ) => {
+            if (currentQ === 'q1') {
+                showView('q2');
+            } else if (currentQ === 'q2') {
+                showView('q3');
+            } else if (currentQ === 'q3') {
+                showView('calculating');
+                const winnerKey = calculateWinner();
+                const drinkNames = {
+                    iced_spanish_latte: 'Iced Spanish Latte',
+                    strawberry_matcha: 'Strawberry Matcha',
+                    passionfruit_mojito: 'Passionfruit Mojito',
+                    mocha_frappe: 'Mocha Frappe'
+                };
+                const drinkIcons = {
+                    iced_spanish_latte: '☕',
+                    strawberry_matcha: '🍵',
+                    passionfruit_mojito: '🍹',
+                    mocha_frappe: '🥤'
+                };
+                const winnerName = drinkNames[winnerKey] || 'Specialty Drink';
+                const winnerIcon = drinkIcons[winnerKey] || '☕';
+
+                const claimIcon = document.querySelector('#claim-offer-icon');
+                const claimTitle = document.querySelector('#claim-offer-title');
+                const claimMatched = document.querySelector('#claim-matched-name');
+                const btnSubmitClaim = document.querySelector('#btn-submit-claim');
+
+                if (claimIcon) claimIcon.textContent = winnerIcon;
+                if (claimTitle) claimTitle.textContent = `Deal #1: Free ${winnerName}`;
+                if (claimMatched) claimMatched.textContent = `Your Quiz Signature Match • 100% Free Drink`;
+                if (btnSubmitClaim) btnSubmitClaim.textContent = `Claim My Free ${winnerName} & Digital Pass →`;
+
+                setTimeout(() => {
+                    showView('claim');
+                    document.querySelector('#input-name').focus();
+                }, 900);
+            }
+        };
+
+        // Back Buttons
+        document.querySelectorAll('[data-action="back"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                clearTimeout(autoAdvanceTimer);
+                if (activeView === 'q2') showView('q1');
+                else if (activeView === 'q3') showView('q2');
+                else if (activeView === 'claim') showView('q3');
+                else showView('landing');
+            });
+        });
+
+        // Real-Time Live Phone Validation
+        const phoneInput = document.querySelector('#input-phone');
+        const errorMsg = document.querySelector('#claim-error-msg');
+
+        phoneInput.addEventListener('input', () => {
+            const raw = phoneInput.value.trim().replace(/[\s\-()._]/g, '');
+            if (!raw) {
+                phoneInput.removeAttribute('aria-invalid');
+                errorMsg.textContent = '';
+                return;
+            }
+
+            // Catch invalid network prefix (e.g. 013, 014)
+            if (raw.startsWith('01') && raw.length >= 3) {
+                if (!['0', '1', '2', '5'].includes(raw.charAt(2))) {
+                    phoneInput.setAttribute('aria-invalid', 'true');
+                    errorMsg.textContent = 'Invalid Egyptian network. Must start with 010, 011, 012, or 015.';
+                    return;
+                }
+            }
+
+            const clean = cleanEgyptMobile(raw);
+            if (clean.length === 11) {
+                const fake = checkFakeEgyptMobile(clean);
+                if (fake.isFake) {
+                    phoneInput.setAttribute('aria-invalid', 'true');
+                    errorMsg.textContent = fake.message;
+                    return;
+                }
+            }
+
+            phoneInput.removeAttribute('aria-invalid');
+            errorMsg.textContent = '';
+        });
+
+        // Modal Elements
+        const modal = document.querySelector('#already-registered-modal');
+        const modalCountdown = document.querySelector('#modal-countdown');
+        const modalProgressFill = document.querySelector('#modal-progress-fill');
+        const btnModalOpenNow = document.querySelector('#btn-modal-open-now');
+
+        let modalTimer = null;
+        let countdownInterval = null;
+
+        const showAlreadyRegisteredModal = (cleanPhone) => {
+            if (!modal) {
+                window.location.href = `/card?phone=${encodeURIComponent(cleanPhone)}`;
+                return;
+            }
+
+            modal.hidden = false;
+            let secondsLeft = 3;
+            modalCountdown.textContent = secondsLeft;
+            modalProgressFill.style.width = '100%';
+
+            setTimeout(() => {
+                modalProgressFill.style.width = '0%';
+            }, 50);
+
+            btnModalOpenNow.onclick = () => {
+                clearInterval(countdownInterval);
+                clearTimeout(modalTimer);
+                window.location.href = `/card?phone=${encodeURIComponent(cleanPhone)}`;
+            };
+
+            countdownInterval = setInterval(() => {
+                secondsLeft -= 1;
+                if (secondsLeft > 0) {
+                    modalCountdown.textContent = secondsLeft;
+                } else {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+
+            modalTimer = setTimeout(() => {
+                window.location.href = `/card?phone=${encodeURIComponent(cleanPhone)}`;
+            }, 3000);
+        };
+
+        // Form Submit
+        const form = document.querySelector('#quiz-claim-form');
+        const submitBtn = document.querySelector('#btn-submit-claim');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorMsg.textContent = '';
+
+            const name = document.querySelector('#input-name').value.trim();
+            const phoneRaw = phoneInput.value.trim();
+
+            if (name.length < 2) {
+                errorMsg.textContent = 'Please provide your full name.';
+                document.querySelector('#input-name').focus();
+                return;
+            }
+
+            const cleanPhone = cleanEgyptMobile(phoneRaw);
+            const fakeCheck = checkFakeEgyptMobile(cleanPhone);
+            if (fakeCheck.isFake) {
+                phoneInput.setAttribute('aria-invalid', 'true');
+                errorMsg.textContent = fakeCheck.message;
+                phoneInput.focus();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Connecting with Barista... <span aria-hidden="true">☕</span>';
+
+            try {
+                const winnerDrink = calculateWinner();
+                const res = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        mobile: cleanPhone,
+                        matchedDrink: winnerDrink,
+                        answers
+                    })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok && !data.alreadyRegistered) {
+                    phoneInput.setAttribute('aria-invalid', 'true');
+                    errorMsg.textContent = data.message || 'Validation error occurred.';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Reveal My Loyalty Card & Free Coffee →';
+                    return;
+                }
+
+                if (data.alreadyRegistered) {
+                    submitBtn.textContent = 'Member Found!';
+                    showAlreadyRegisteredModal(cleanPhone);
+                    return;
+                }
+
+                // New card created -> direct immediately to /card
+                submitBtn.textContent = 'Card Unlocked! Opening Pass...';
+                window.location.href = `/card?phone=${encodeURIComponent(cleanPhone)}`;
+
+            } catch (err) {
+                errorMsg.textContent = 'Connection error. Please try again.';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Reveal My Loyalty Card & Free Coffee →';
+            }
+        });
+
+    })();
+    </script>
+</body>
+</html>

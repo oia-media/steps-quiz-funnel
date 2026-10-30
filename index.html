@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fbf9f6">
+    <meta name="description" content="Discover your perfect STEPS drink, claim your Digital Loyalty Card, and enjoy your first coffee free!">
+    <title>Find Your Perfect Drink | STEPS Loyalty Card</title>
+    <meta property="og:title" content="Find Your Perfect Drink | STEPS">
+    <meta property="og:description" content="Take the 3-question quiz, discover your matched drink, and get a digital loyalty card with your first coffee free!">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/banner-desktop.webp">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="preload" href="assets/images/steps-logo-brown.webp" as="image" type="image/webp">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script>
+        window.STEPS_QUIZ = {
+            submitUrl: "api/submit.php",
+            totalQuestions: 3
+        };
+    </script>
+    <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+<noscript><div class="noscript">Please enable JavaScript to take the quiz.</div></noscript>
+
+<main class="app-shell" id="quiz-app">
+    <!-- Header -->
+    <header class="site-header" aria-label="STEPS Specialty Coffee Bar">
+        <a href="#" class="brand-link" data-action="reset" aria-label="Go to start">
+            <img class="brand-logo" src="assets/images/steps-logo-brown.webp" width="562" height="245" alt="STEPS Specialty Coffee Bar">
+        </a>
+        <div class="header-progress" id="header-progress" hidden>
+            <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
+            <span class="progress-count" id="progress-count">01 / 03</span>
+        </div>
+        <div class="header-nav-right" id="header-nav-right">
+            <a href="/card" class="header-card-btn">
+                <span>My Card</span> 💳
+            </a>
+        </div>
+    </header>
+
+    <!-- SCREEN 1: Landing -->
+    <section class="screen landing-screen is-active" data-screen="landing" aria-labelledby="landing-title">
+        <p class="landing-strapline">
+            <span class="landing-strapline-mobile">GOOD COFFEE FINDS GOOD PEOPLE</span>
+            <span class="landing-strapline-desktop">GOOD COFFEE / GOOD PEOPLE</span>
+        </p>
+        <div class="landing-copy">
+            <h1 id="landing-title">Find Your<br> Perfect Drink</h1>
+            <p class="landing-subhead">Answer 3 quick questions to discover your signature match and unlock a <strong>Digital Loyalty Card</strong> with your <strong>First Coffee Free</strong>.</p>
+            <button class="button button-primary" type="button" data-action="start">
+                Start the 3-Question Quiz <span aria-hidden="true">→</span>
+            </button>
+            <p class="landing-existing-member">
+                Already registered? <a href="/card">Open Your Digital Pass →</a>
+            </p>
+        </div>
+        <div class="landing-visual" aria-hidden="true">
+            <picture>
+                <source media="(min-width: 900px)" srcset="assets/images/hero-bg.webp" type="image/webp">
+                <img src="assets/images/mobile-bg.webp" width="941" height="1672" alt="STEPS Coffee">
+            </picture>
+        </div>
+    </section>
+
+    <!-- SCREEN 2: Question 1 (The Base) -->
+    <section class="screen question-screen" data-screen="question" data-step="1" aria-labelledby="q1-title" hidden>
+        <form class="question-form" data-question="q1">
+            <fieldset>
+                <legend class="visually-hidden">What are you in the mood for?</legend>
+                <p class="eyebrow">Q1 — THE BASE</p>
+                <h2 id="q1-title">What are you in the mood for?</h2>
+                <div class="option-grid option-grid-4">
+                    <label class="option-card">
+                        <input type="radio" name="q1" value="iced_spanish_latte">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8ZM6 2v3M10 2v3M14 2v3"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Iced espresso coffee</strong>
+                            <small>Bold, rich & freshly pulled</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q1" value="strawberry_matcha">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.5 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Japanese green tea</strong>
+                            <small>Ceremonial grade matcha</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q1" value="passionfruit_mojito">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2h8l2 16a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3L8 2ZM6 6h12M12 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM10 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2ZM14 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Fizzy fruit soda</strong>
+                            <small>Bubbly, crisp & thirst-quenching</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q1" value="mocha_frappe">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9h14l-2 12H7L5 9ZM7 9a5 5 0 0 1 10 0M12 2l2 4"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Blended ice & coffee</strong>
+                            <small>Thick, frosty & decadent</small>
+                        </span>
+                    </label>
+                </div>
+            </fieldset>
+            <div class="screen-actions">
+                <button class="back-button" type="button" data-action="back" aria-label="Go back">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M9 12h10"/></svg>
+                </button>
+                <button class="button button-primary next-button" type="submit" disabled>Next <span aria-hidden="true">→</span></button>
+            </div>
+        </form>
+    </section>
+
+    <!-- SCREEN 3: Question 2 (Flavor Addition) -->
+    <section class="screen question-screen" data-screen="question" data-step="2" aria-labelledby="q2-title" hidden>
+        <form class="question-form" data-question="q2">
+            <fieldset>
+                <legend class="visually-hidden">What flavor do you want to pair with it?</legend>
+                <p class="eyebrow">Q2 — FLAVOR ADDITION</p>
+                <h2 id="q2-title">What flavor do you want to pair with it?</h2>
+                <div class="option-grid option-grid-4">
+                    <label class="option-card">
+                        <input type="radio" name="q2" value="iced_spanish_latte">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><path d="M8 14c1.5 1.5 3 2 4.5 1"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Sweet condensed milk</strong>
+                            <small>With velvety espresso</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q2" value="strawberry_matcha">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3c0 .3.05.6.14.88C6.1 7.2 4 10.2 4 14a8 8 0 0 0 16 0c0-3.8-2.1-6.8-5.14-8.12.09-.28.14-.58.14-.88a3 3 0 0 0-3-3Z"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><circle cx="12" cy="16" r="1"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Sweet strawberry</strong>
+                            <small>With vibrant green tea</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q2" value="passionfruit_mojito">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 0 0 9-9c0-4.97-4.03-9-9-9-2.5 0-4.5 1-6 2.5L12 12l-6 6c1.5 1.5 3.5 3 6 3Z"/><circle cx="12" cy="12" r="2"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Passionfruit & mint</strong>
+                            <small>With sparkling soda</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q2" value="mocha_frappe">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Dark chocolate</strong>
+                            <small>With blended roast coffee</small>
+                        </span>
+                    </label>
+                </div>
+            </fieldset>
+            <div class="screen-actions">
+                <button class="back-button" type="button" data-action="back" aria-label="Go back">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M9 12h10"/></svg>
+                </button>
+                <button class="button button-primary next-button" type="submit" disabled>Next <span aria-hidden="true">→</span></button>
+            </div>
+        </form>
+    </section>
+
+    <!-- SCREEN 4: Question 3 (The Vibe) -->
+    <section class="screen question-screen" data-screen="question" data-step="3" aria-labelledby="q3-title" hidden>
+        <form class="question-form" data-question="q3">
+            <fieldset>
+                <legend class="visually-hidden">What is your vibe today?</legend>
+                <p class="eyebrow">Q3 — THE VIBE</p>
+                <h2 id="q3-title">What is your vibe today?</h2>
+                <div class="option-grid option-grid-4">
+                    <label class="option-card">
+                        <input type="radio" name="q3" value="iced_spanish_latte">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>The classic favorite</strong>
+                            <small>Timeless, proven & beloved</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q3" value="strawberry_matcha">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Trendy & aesthetic</strong>
+                            <small>Vibrant layers & modern vibes</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q3" value="passionfruit_mojito">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Tropical & chill</strong>
+                            <small>Relaxing sunshine energy</small>
+                        </span>
+                    </label>
+
+                    <label class="option-card">
+                        <input type="radio" name="q3" value="mocha_frappe">
+                        <span class="option-check" aria-hidden="true"></span>
+                        <span class="option-icon">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </span>
+                        <span class="option-text">
+                            <strong>Pure indulgence</strong>
+                            <small>Rich, dessert-like satisfaction</small>
+                        </span>
+                    </label>
+                </div>
+            </fieldset>
+            <div class="screen-actions">
+                <button class="back-button" type="button" data-action="back" aria-label="Go back">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M9 12h10"/></svg>
+                </button>
+                <button class="button button-primary next-button" type="submit" disabled>Find My Drink <span aria-hidden="true">→</span></button>
+            </div>
+        </form>
+    </section>
+
+    <!-- SCREEN 5: Calculating Interstitial -->
+    <section class="screen calculating-screen" data-screen="calculating" hidden>
+        <div class="calculating-mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </div>
+        <p class="eyebrow">STEPS TASTE LAB</p>
+        <h2>Finding your perfect match...</h2>
+        <p>Analyzing your flavor profile and pairing with our specialty barista bar.</p>
+    </section>
+
+    <!-- SCREEN 6: Claim / Lead Capture -->
+    <section class="screen claim-screen" data-screen="claim" aria-labelledby="claim-title" hidden>
+        <div class="claim-layout">
+            <div class="claim-intro">
+                <p class="eyebrow">ONE LAST STEP</p>
+                <h2 id="claim-title">Your reward is ready.</h2>
+                <p>Enter your details to reveal your matched drink and activate your <strong>STEPS Digital Loyalty Card</strong>.</p>
+                <div class="claim-perk-badge">
+                    <span class="perk-icon">☕</span>
+                    <div class="perk-text">
+                        <strong>First Order: Free Coffee Included</strong>
+                        <small>Enjoy your matched drink free upon visit</small>
+                    </div>
+                </div>
+            </div>
+            <form class="claim-form" id="claim-form" novalidate>
+                <label for="full-name">Full Name</label>
+                <div class="input-wrap">
+                    <span aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 19v-2a5 5 0 0 1 10 0v2M12 19v-2a5 5 0 0 1 10 0v2"/></svg>
+                    </span>
+                    <input id="full-name" name="name" type="text" autocomplete="name" maxlength="120" required placeholder="Enter your full name">
+                </div>
+
+                <label for="mobile">Mobile Number <span class="label-hint">(11 digits: 010, 011, 012, or 015)</span></label>
+                <div class="input-wrap">
+                    <span aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M7 3h3l1.5 4-2 1.5a14 14 0 0 0 6 6l1.5-2L21 14v3a4 4 0 0 1-4 4C9.3 20.5 3.5 14.7 3 7a4 4 0 0 1 4-4Z"/></svg>
+                    </span>
+                    <input id="mobile" name="mobile" type="tel" autocomplete="tel" inputmode="tel" maxlength="15" required placeholder="010 1234 5678">
+                </div>
+
+                <p class="form-message" id="form-message" role="alert" aria-live="polite"></p>
+
+                <div class="screen-actions">
+                    <button class="back-button" type="button" data-action="back" aria-label="Go back">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M9 12h10"/></svg>
+                    </button>
+                    <button class="button button-primary" type="submit">Reveal My Loyalty Card <span aria-hidden="true">→</span></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- SCREEN 7: Thanks / Loyalty Card Prize -->
+    <section class="screen thanks-screen" data-screen="thanks" aria-labelledby="thanks-title" hidden>
+        <p class="eyebrow">CONGRATULATIONS</p>
+        <h2 id="thanks-title">Your perfect match is</h2>
+        
+        <div class="thanks-drink-wrap">
+            <p class="thanks-drink">
+                <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M4 8h12v7a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8Z"/><path d="M16 10h2a3 3 0 0 1 0 6h-2M7 4v2M11 4v2M15 4v2"/></svg>
+                <span id="thanks-drink">Iced Spanish Latte</span>
+            </p>
+            <p class="thanks-drink-desc" id="thanks-drink-desc">Silky espresso combined with sweet condensed milk, served ice-cold.</p>
+        </div>
+
+        <!-- Reward Header -->
+        <div class="thanks-reward">
+            <p class="thanks-reward-prefix">YOU HAVE UNLOCKED</p>
+            <p class="thanks-discount">STEPS DIGITAL LOYALTY CARD</p>
+            <p class="thanks-reward-sub">Your 1st Stamp is ready: <strong>Free Coffee on your first order!</strong></p>
+        </div>
+
+        <!-- DIGITAL LOYALTY CARD CONTAINER -->
+        <div class="loyalty-card-wrapper">
+            <div class="loyalty-card" id="loyalty-card">
+                <!-- Card Header -->
+                <div class="loyalty-card-top">
+                    <div class="loyalty-brand">
+                        <img class="loyalty-logo" src="assets/images/steps-logo-brown.webp" alt="STEPS">
+                        <span class="loyalty-subbrand">SPECIALTY COFFEE BAR</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: .65rem;">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#dfba73" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="opacity: .85;"><path d="M7 6a10 10 0 0 1 0 12M11 8a6 6 0 0 1 0 8M15 10a2 2 0 0 1 0 4"/></svg>
+                        <div class="loyalty-status-badge" id="card-status-pill">
+                            <span class="status-dot"></span>
+                            <span id="card-status-text">Pending Activation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cardholder Info -->
+                <div class="loyalty-card-middle">
+                    <div class="loyalty-member-info">
+                        <span class="member-label">CARDHOLDER</span>
+                        <strong class="member-name" id="card-holder-name">Special Guest</strong>
+                    </div>
+                    <div class="loyalty-member-id">
+                        <span class="member-label">MEMBERSHIP PASS</span>
+                        <strong class="member-pass" id="card-pass-id">STP-8924-EXP</strong>
+                    </div>
+                </div>
+
+                <!-- 5-Stamp Reward Track -->
+                <div class="loyalty-stamps-section">
+                    <div class="stamps-header">
+                        <span class="stamps-title">LOYALTY REWARDS LADDER</span>
+                        <span class="stamps-count" id="stamps-count-label">Stamp 1 of 5 Ready</span>
+                    </div>
+                    <div class="stamps-grid" id="stamps-grid">
+                        <!-- Stamp 1: Unlocked Free Coffee -->
+                        <div class="stamp-slot is-unlocked is-active-reward" data-stamp="1">
+                            <div class="stamp-badge">
+                                <span class="stamp-icon">☕</span>
+                                <span class="stamp-number">1</span>
+                            </div>
+                            <div class="stamp-meta">
+                                <strong>Free Coffee</strong>
+                                <small>1st Order Reward</small>
+                            </div>
+                            <span class="stamp-status-tag">Ready!</span>
+                        </div>
+
+                        <!-- Stamp 2: Locked -->
+                        <div class="stamp-slot is-locked" data-stamp="2">
+                            <div class="stamp-badge">
+                                <span class="stamp-icon">🔒</span>
+                                <span class="stamp-number">2</span>
+                            </div>
+                            <div class="stamp-meta">
+                                <strong class="stamp-title">20% Off Pastry</strong>
+                                <small class="stamp-desc">Locked</small>
+                            </div>
+                            <span class="stamp-status-tag">Locked</span>
+                        </div>
+
+                        <!-- Stamp 3: Locked -->
+                        <div class="stamp-slot is-locked" data-stamp="3">
+                            <div class="stamp-badge">
+                                <span class="stamp-icon">🔒</span>
+                                <span class="stamp-number">3</span>
+                            </div>
+                            <div class="stamp-meta">
+                                <strong class="stamp-title">Free Size Upgrade</strong>
+                                <small class="stamp-desc">Locked</small>
+                            </div>
+                            <span class="stamp-status-tag">Locked</span>
+                        </div>
+
+                        <!-- Stamp 4: Locked -->
+                        <div class="stamp-slot is-locked" data-stamp="4">
+                            <div class="stamp-badge">
+                                <span class="stamp-icon">🔒</span>
+                                <span class="stamp-number">4</span>
+                            </div>
+                            <div class="stamp-meta">
+                                <strong class="stamp-title">Buy 1 Get 1 Free</strong>
+                                <small class="stamp-desc">Locked</small>
+                            </div>
+                            <span class="stamp-status-tag">Locked</span>
+                        </div>
+
+                        <!-- Stamp 5: Locked -->
+                        <div class="stamp-slot is-locked is-grand-prize" data-stamp="5">
+                            <div class="stamp-badge">
+                                <span class="stamp-icon">🔒</span>
+                                <span class="stamp-number">5</span>
+                            </div>
+                            <div class="stamp-meta">
+                                <strong class="stamp-title">Free Drink + VIP</strong>
+                                <small class="stamp-desc">Locked</small>
+                            </div>
+                            <span class="stamp-status-tag">Grand Prize</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activation / Card Actions -->
+                <div class="loyalty-card-activation" id="card-activation-box">
+                    <p class="activation-teaser">
+                        <span class="lock-pulse">🔒</span>
+                        The rest of your loyalty perks will appear once you activate your digital card!
+                    </p>
+                    <button class="button button-activate" id="btn-activate-card" type="button">
+                        <span class="btn-sparkle">✨</span>
+                        Activate Digital Loyalty Card
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+
+                <!-- Active Card Footer (Hidden until activated) -->
+                <div class="loyalty-card-barcode-wrap" id="card-barcode-box" hidden>
+                    <div class="barcode-visual" aria-hidden="true">
+                        <div class="barcode-bars"></div>
+                    </div>
+                    <div class="barcode-code">
+                        <span id="barcode-display">STP-8924-EXP</span>
+                    </div>
+                    <div class="card-wallet-actions">
+                        <button class="wallet-btn" id="btn-save-pass" type="button">
+                            <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                            Save Pass to Device
+                        </button>
+                        <button class="wallet-btn secondary" id="btn-share-pass" type="button">
+                            <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                            Share Card
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Redemption Guide -->
+        <div class="thanks-instructions">
+            <div class="instruction-item">
+                <span class="inst-num">1</span>
+                <p>Present this digital card to your barista when visiting <strong>STEPS</strong>.</p>
+            </div>
+            <div class="instruction-item">
+                <span class="inst-num">2</span>
+                <p>Order your matched drink & enjoy your <strong>first coffee completely free</strong>.</p>
+            </div>
+            <div class="instruction-item">
+                <span class="inst-num">3</span>
+                <p>Scan your card on each return visit to unlock stamps 2, 3, 4, and 5!</p>
+            </div>
+        </div>
+
+        <p class="thanks-signoff">See you at STEPS.</p>
+        <div style="margin-top: 1.8rem; display: flex; flex-direction: column; align-items: center; gap: .85rem; width: 100%;">
+            <a href="/card" id="btn-open-dedicated-card" class="button-activate" style="max-width: 380px; text-decoration: none;">
+                <span>View Dedicated Pass (/card)</span> →
+            </a>
+        </div>
+    </section>
+
+    <!-- Canvas for Confetti -->
+    <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+    <!-- Already Completed Quiz Pop-Up Modal (3-Second Direct) -->
+    <div class="already-registered-modal" id="already-registered-modal" role="dialog" aria-modal="true" aria-labelledby="modal-registered-title" hidden>
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+            <div class="modal-icon-badge">
+                <span>💳</span>
+            </div>
+            
+            <div class="modal-tag">
+                <span>● Active VIP Pass Found</span>
+            </div>
+
+            <h3 class="modal-title" id="modal-registered-title">
+                <span class="modal-title-highlight">You Already Completed the Quiz!</span>
+            </h3>
+
+            <p class="modal-desc">
+                Your mobile number is already linked to your official <strong>STEPS Digital Loyalty Card</strong>. Each member receives 1 quiz attempt and 1 permanent card.
+            </p>
+
+            <div class="modal-timer-box">
+                <div class="timer-label">
+                    <span>Directing to your card in <strong id="modal-countdown">3</strong>s</span>
+                    <span class="timer-dot"></span>
+                </div>
+                <div class="timer-progress-track">
+                    <div class="timer-progress-fill" id="modal-progress-fill"></div>
+                </div>
+            </div>
+
+            <button class="btn-modal-direct" id="btn-modal-open-now" type="button">
+                Open My Card Now →
+            </button>
+        </div>
+    </div>
+
+    <div class="sr-status" id="sr-status" aria-live="polite"></div>
+</main>
+</body>
+</html>

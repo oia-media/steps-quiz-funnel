@@ -1,0 +1,32 @@
+[
+  {
+    "index": 1,
+    "title": "Free 1st Coffee",
+    "desc": "Signature drink free",
+    "icon": "☕"
+  },
+  {
+    "index": 2,
+    "title": "20% Off Pastry",
+    "desc": "Fresh Bakery Item",
+    "icon": "🥐"
+  },
+  {
+    "index": 3,
+    "title": "Free Size Upgrade",
+    "desc": "Coffee or Specialty Drink",
+    "icon": "🥛"
+  },
+  {
+    "index": 4,
+    "title": "Buy 1 Get 1 Free",
+    "desc": "Signature Drinks",
+    "icon": "🎁"
+  },
+  {
+    "index": 5,
+    "title": "Free Drink + VIP Status",
+    "desc": "Grand Loyalty Reward",
+    "icon": "🌟"
+  }
+]
